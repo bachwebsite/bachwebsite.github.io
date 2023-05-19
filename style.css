@@ -1,8 +1,8 @@
 .head1 {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   position: absolute;
-  top: 35%;
-  left: 40%;
+  top: 50%;
+  left: 50%;
   margin-top: -50px;
   margin-left: -50px;
   width: 100px;
@@ -21,8 +21,8 @@
   margin: 4px 2px;
   cursor: pointer;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .button5 {
