@@ -1,7 +1,6 @@
 .head1 {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 100vh;
