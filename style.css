@@ -7,6 +7,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: width 1s;
+}
+.center:hover {
+	font-size: 75px;
 }
 .button {
   background-color: #4CAF50; /* Green */
