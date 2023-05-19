@@ -1,10 +1,11 @@
 .head1 {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   position: absolute;
-  top: 20%;
+  top: 35%;
   left: 50%;
   margin-top: -50px;
   margin-left: -50px;
   width: 100px;
   height: 100px;
+  font-size: 50px;
 }
