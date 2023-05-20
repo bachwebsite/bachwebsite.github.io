@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: width 0.3s ease-in-out;
+  transition:0.3s ease-in-out;
 }
 .center:hover {
 	font-size: 75px;
