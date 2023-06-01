@@ -2,16 +2,52 @@
 
 <label for="gsearch">Search Games:</label>
 <input type="search" id="gsearch" name="gsearch" class="center head1">
+<body onload="sortList()">
+<ul id="id1">
+<li><a href="/games/1v1-lol" class="center head1">1v1.lol</a></li></li>
+<li><a href="/mc" class="center head1">Minecraft 1.5.2</a></li></li>
+<li><a href="/games/basketball-stars" class="center head1">Basketball Stars</a></li></li>
+<li><a href="/games/chatgpt" class="center head1">ChatGPT Clone</a></li></li>
+<li><a href="/games/basket-random" class="center head1">Basket Random</a></li</li>>
+<li><a href="/games/hex-gl" class="center head1">HexGL</a></li></li>
+<li><a href="/games/slope" class="center head1">Slope</a></li></li>
+<li><a href="/games/dadish" class="center head1">Dadish</a></li>
+<li><a href="/games/cookie-clicker" class="center head1">Cookie Clicker</a></li>
+<li><a href="/games/rooftop-snipers" class="center head1">Rooftop Snipers</a></li>
+<li><a href="/games/subway-surfers" class="center head1">Subway Surfers</a></li>
+<li><a href="/games/stickman-hook" class="center head1">Stickman Hook</a></li>
+<li><a href="/games/dadish-2/" class="center head1">Dadish 2</a></li>
+</ul>
 
-<a href="/games/1v1-lol" class="center head1">1v1.lol</a>
-<a href="/mc" class="center head1">Minecraft 1.5.2</a>
-<a href="/games/basketball-stars" class="center head1">Basketball Stars</a>
-<a href="/games/chatgpt" class="center head1">ChatGPT Clone</a>
-<a href="/games/basket-random" class="center head1">Basket Random</a>
-<a href="/games/hex-gl" class="center head1">HexGL</a>
-<a href="/games/slope" class="center head1">Slope</a>
-<a href="/games/dadish" class="center head1">Dadish</a>
-<a href="/games/cookie-clicker" class="center head1">Cookie Clicker</a>
-<a href="/games/rooftop-snipers" class="center head1">Rooftop Snipers</a>
-<a href="/games/subway-surfers" class="center head1">Subway Surfers</a>
-<a href="/games/stickman-hook" class="center head1">Stickman Hook</a>
+<script>
+function sortList() {
+  var list, i, switching, b, shouldSwitch;
+  list = document.getElementById("id1");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByTagName("LI");
+    // Loop through all list items:
+    for (i = 0; i < (b.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Check if the next item should
+      switch place with the current item: */
+      if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+        /* If next item is alphabetically lower than current item,
+        mark as a switch and break the loop: */
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+</body>
