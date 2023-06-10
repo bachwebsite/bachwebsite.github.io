@@ -1,64 +1,68 @@
-<link rel="stylesheet" href="/style.css">
-<body onload="sortList()">
-<ul id="id1">
-<li><a href="/games/1v1-lol" class="center head1">1v1.lol</a></li></li>
-<li><a href="/mc" class="center head1">Minecraft 1.5.2</a></li></li>
-<li><a href="/games/basketball-stars" class="center head1">Basketball Stars</a></li></li>
-<li><a href="/games/chatgpt" class="center head1">Ch&tGPT Clone</a></li></li>
-<li><a href="/games/basket-random" class="center head1">Basket Random</a></li</li>>
-<li><a href="/games/hex-gl" class="center head1">HexGL</a></li></li>
-<li><a href="/games/slope" class="center head1">Slope</a></li></li>
-<li><a href="/games/dadish" class="center head1">Dadish</a></li>
-<li><a href="/games/cookie-clicker" class="center head1">Cook1e Cl!cker</a></li>
-<li><a href="/games/rooftop-snipers" class="center head1">Rooftop Snipers</a></li>
-<li><a href="/games/subway-surfers" class="center head1">Subway Surfers</a></li>
-<li><a href="/games/stickman-hook" class="center head1">Stickman Hook</a></li>
-<li><a href="/games/dadish-2/" class="center head1">Dadish 2</a></li>
-<li><a href="/games/clicker-heroes/" class="center head1">Clicker Heroes</a></li>
-<li><a href="/games/shellshock/" class="center head1">Shell Shockers</a></li>
-<li><a href="/games/gons/" class="center head1">Gons</a></li>
-<li><a href="/games/yohoho/" class="center head1">Yohoho</a></li>
-<li><a href="/games/tunnel-rush/" class="center head1">Tunnel Rush</a></li>
-<li><a href="/games/tiny-fishing/" class="center head1">Tiny Fishing</a></li>
-<li><a href="/games/there-is-no-game/" class="center head1">There Is No Game</a></li>
-<li><a href="/games/mario/" class="center head1">Mario Hack (from monkeygg2)</a></li>
-<li><a href="/games/ngon/" class="center head1">N-gon</a></li>
-<li><a href="/games/doodle-jump/" class="center head1">Doodle Jump</a></li>
-<li><a href="/games/impossible-quiz/" class="center head1">The Impossible Quiz</a></li>
-<li><a href="/games/ssf/" class="center head1">Super Smash Flash</a></li>
-<li><a href="/games/ssf2/" class="center head1">Super Smash Flash 2</a></li>
-<li><a href="/games/dbzd/" class="center head1">Dragon Ball Z Devolution</a></li>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
 
-<script>
-function sortList() {
-  var list, i, switching, b, shouldSwitch;
-  list = document.getElementById("id1");
-  switching = true;
-  /* Make a loop that will continue until
-  no switching has been done: */
-  while (switching) {
-    // Start by saying: no switching is done:
-    switching = false;
-    b = list.getElementsByTagName("LI");
-    // Loop through all list items:
-    for (i = 0; i < (b.length - 1); i++) {
-      // Start by saying there should be no switching:
-      shouldSwitch = false;
-      /* Check if the next item should
-      switch place with the current item: */
-      if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-        /* If next item is alphabetically lower than current item,
-        mark as a switch and break the loop: */
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      b[i].parentNode.insertBefore(b[i + 1], b[i]);
-      switching = true;
-    }
-  }
-}
-</script>
+<title>breads2de</title>
+<!--
+Code and graphics copyright Orteil, 2013-2023
+Feel free to alter this code to your liking, but please do not re-host it, do not profit from it and do not present it as your own.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#140202" />
+<meta name="msapplication-navbutton-color" content="#140202" />
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="shortcut icon" sizes="192x192" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png">
+
+<link href="/ortsite/style.css?v=2" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="anchor">
+		<div id="firstBox">
+			<div id="head">Games</div><br>
+			<a id="back" href="https://breads2de.netlify.app">&laquo; back to breads2de</a><br>
+			<div class="window" id="Wabout">
+				<div class="title">About</div>
+				<div class="desc" style="padding-top:4px;"><p><b>Breadside</b> games.</p><div id="dudes"><div id="dudesHi">sup</div></div></div>
+			</div>
+		</div>
+		<div class="window" id="Wgames">
+			<div class="title">Games</div>
+			<div class="desc" style="text-align:right;">Games</div>
+			<div class="inner">
+				<div class="li"><a href="1v1-lol"><img src="1v1.png"/>1v1.lol<div><p><b>1v1.lol</b></p><p>Discover 1v1, the online building simulator & third person shooting game. Battle royale, build fight, box fight, zone wars and more game modes to enjoy!</p><p>Request new games in the Discord.</p></div></a></div>
+				<div class="li"><a href="/mc"><img src="mc.png"/>Minecraft 1.5.2<p><b>Minecraft</b></p><p>In Minecraft, players explore a blocky, procedurally generated, three-dimensional world with virtually infinite terrain and may discover and extract raw materials, craft tools and items, and build structures, earthworks, and machines.</p><p></p></div></a></div>
+                		<div class="li"><a href="/games/basketball-stars"><img src="bskt.png"/>Basketball Stars</a></div>
+				<div class="li"><a href="/games/chatgpt"><img src="gpt.png"/>Ch&tGPT Clone</a></div>
+				<div class="li"><a href="/games/basket-random"><img src="rndm.png"/>Basket Random</a></div>
+				<div class="li"><a href="/games/hex-gl"><img src="hexgl.png"/>HexGL</a></div>
+				<div class="li"><a href="/games/slope"><img src="slope.png"/>Slope</a></div>
+				<div class="li"><a href="/games/dadish"><img src="ddsh.png"/>Dadish</a></div>
+				<div class="li"><a href="/games/cookie-clicker"><img src="cc.png"/>Cookie Cl1cker</a></div>
+				<div class="li"><a href="/games/rooftop-snipers"><img src="rs.png"/>Rooftop Snipers</a></div>
+				<div class="li"><a href="/games/subway-surfers"><img src="ss.png"/>Subway Surfers</a></div>
+				<div class="li"><a href="/games/stickman-hook"><img src="sh.png"/>Stickman Hook</a></div>
+				<div class="li"><a href="/games/dadish-2/"><img src="ddsh2.png"/>Dadish 2</a></div>
+				<div class="li"><a href="/games/clicker-heroes/"><img src="ch.png"/>Clicker Heroes</a></div>
+				<div class="li"><a href="/games/gons/"><img src="gons.png"/>Gons</a></div>
+				<div class="li"><a href="/games/yohoho/"><img src="yoho.png"/>Yohoho</a></div>
+				<div class="li"><a href="/games/tunnel-rush/"><img src="tr.png"/>Tunnel Rush</a></div>
+				<div class="li"><a href="/games/tiny-fishing/"><img src="tf.png"/>Tiny Fishing</a></div>
+				<div class="li"><a href="/games/there-is-no-game/"><img src="ting.png"/>There Is No Game</a></div>
+				<div class="li"><a href="/games/mario/"><img src="mario.png"/>Mario Hack (from monkeygg2)</a></div>
+				<div class="li"><a href="/games/ngon/"><img src="ngon.png"/>N-gon</a></div>
+				<div class="li"><a href="/games/doodle-jump/"><img src="dj.png"/>Doodle Jump</a></div>
+				<div class="li"><a href="/games/impossible-quiz/"><img src="tiq.png"/>The Impossible Quiz</a></div>
+				<div class="li"><a href="/games/ssf/"><img src="ssf.png"/>Super Smash Flash</a></div>
+				<div class="li"><a href="/games/ssf2/"><img src="ssf2.png"/>Super Smash Flash 2</a></div>
+				<div class="li"><a href="/games/dbzd/"><img src="dbzd.png"/>Dragon Ball Z Devolution</a></div>
+			</div>
+		</div>	
+	</div>
+</div>
+
 </body>
+</html>
