@@ -17,18 +17,10 @@
 
 <div id="wrapper">
 	<div id="anchor">
-		<div id="firstBox">
-			<div id="head">Games</div><br>
-			<a id="back" href="https://breads2de.netlify.app">&laquo; back to breads2de</a><br>
-			<div class="window" id="Wabout">
-				<div class="title">About</div>
-				<div class="desc" style="padding-top:4px;"><p><b>Breadside</b> games.</p><div id="dudes"><div id="dudesHi">sup</div></div></div>
-			</div>
-		</div>
 		<div class="window" id="Wgames">
 			<div class="title">Games</div>
-			<div class="desc" style="text-align:right;">Games</div>
-			<div class="inner">
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="🔎">
+			<div class="inner" id="myUL">
 				<div class="li"><a href="1v1-lol"><img src="1v1.png"/>1v1.lol<div><p><b></b></p><p>Discover 1v1, the online building simulator & third person shooting game. Battle royale, build fight, box fight, zone wars and more game modes to enjoy!</p><p>Request new games in the Discord.</p></div></a></div>
 				<div class="li"><a href="/mc"><img src="mc.png"/>Minecraft 1.5.2</a></div>
                 		<div class="li"><a href="/games/basketball-stars"><img src="bskt.png"/>Basketball Stars</a></div>
@@ -37,13 +29,6 @@
 				<div class="li"><a href="/games/hex-gl"><img src="hexgl.png"/>HexGL</a></div>
 				<div class="li"><a href="/games/slope"><img src="slope.png"/>Slope</a></div>
 				<div class="li"><a href="/games/a-dark-room"><img src="adr.png"/>A Dark Room</a></div>
-
-			</div>
-		</div>	
-		<div class="window" id="Wlinks">
-			<div class="title">More</div>
-			<div class="desc" style="text-align:right;">More Games</div>
-			<div class="inner">
 				<div class="li"><a href="/games/dadish"><img src="ddsh.png"/>Dadish</a></div>
 				<div class="li"><a href="/games/cookie-clicker"><img src="cc.png"/>Cookie Cl1cker</a></div>
 				<div class="li"><a href="/games/rooftop-snipers"><img src="rs.png"/>Rooftop Snipers</a></div>
@@ -53,12 +38,6 @@
 				<div class="li"><a href="/games/clicker-heroes/"><img src="ch.png"/>Clicker Heroes</a></div>
 				<div class="li"><a href="/games/gons/"><img src="gons.png"/>Gons</a></div>
 				<div class="li"><a href="/games/yohoho/"><img src="yoho.png"/>Yohoho</a></div>
-			</div>
-		</div>	
-		<div class="window" id="Wtoys">
-			<div class="title">More</div>
-			<div class="desc" style="text-align:right;">More Games</div>
-			<div class="inner">
 				<div class="li"><a href="/games/tunnel-rush/"><img src="tr.png"/>Tunnel Rush</a></div>
 				<div class="li"><a href="/games/tiny-fishing/"><img src="tf.png"/>Tiny Fishing</a></div>
 				<div class="li"><a href="/games/there-is-no-game/"><img src="ting.png"/>There Is No Game</a></div>
@@ -73,6 +52,26 @@
 		</div>	
 	</div>
 </div>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByClassName('li');
 
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
 </body>
 </html>
