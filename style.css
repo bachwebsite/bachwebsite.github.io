@@ -41,3 +41,18 @@ body {
 a {
 	text-decoration: none;
 }
+#line{
+  position:absolute;
+  width:2px;
+  background-color:yellow;
+}  
+#line2{
+  position:absolute;
+  width:2px;
+  background-color:yellow;
+}
+#line3{
+  position:absolute;
+  width:2px;
+  background-color:yellow;
+}  
