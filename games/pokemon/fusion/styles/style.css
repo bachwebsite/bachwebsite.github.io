@@ -1,0 +1,22 @@
+html {
+	background-color : rgb(35, 39, 41);
+}
+
+canvas {
+	background-color : rgb(250, 250, 250);
+}
+
+#browseButton {
+	color: silver;
+	font-size: 13px;
+}
+
+button {
+	margin-top: 2px;
+}
+
+label {
+	color: silver;
+	font-family: Arial;
+	font-size: 13px;
+}

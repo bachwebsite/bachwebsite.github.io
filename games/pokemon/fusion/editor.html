@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pokemon Editor</title>
+		<link rel="stylesheet" type="text/css" href="styles/style.css"/>
+	</head>
+	
+	<body>
+	  <div align="center">
+	    <canvas id="mainCanvas" width="400" height="400"></canvas>
+	  </div>
+	  <div align="center">
+	  </div>
+	  <div align="center">
+		<a href="index.html"><button id="toIndex">Return</button></a>
+		<button id="clearButton">Clear</button>
+		
+		<!-- Keep the browseButton on the right side -->
+		<input id="browseButton" type="file" accept="image/*"></button>
+	  </div>
+	  <div align="center">
+		<button id="prevLayer">Layer Below</button>
+		<button id="nextLayer">Layer Above</button>
+		<button id="addLayer">Add Layer</button>
+		<button id="deleteLayer">Delete Layer</button>
+		<label id="currentLayer">Current Layer: 0</button>
+	  </div>
+	  <div align="center">
+		<button id="moveImage">Move Image: On</button>
+	  </div>
+	</body>
+	
+	<script src="scripts/setUpPokemon.js"></script>
+	<script src="scripts/editor.js"></script>
+</html>
