@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>breads2de</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#140202" />
+<meta name="msapplication-navbutton-color" content="#140202" />
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="shortcut icon" sizes="192x192" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png">
+
+<link href="/ortsite/style.css?v=2" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="anchor">
+		<div class="window" id="Wgames">
+			<div class="title">Games</div>
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="🔎">
+			<div class="inner" id="myUL">
+				<div class="li"><a href="fusion"><img src="fusion.png"/>Fusion</a></div>
+		</div>	
+	</div>
+</div>
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByClassName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function sort() {
+          
+            // Declaring Variables
+            var geek_list, i, run, li, stop;
+          
+            // Taking content of list as input
+            geek_list = document.getElementById("myUL");
+          
+            run = true;
+          
+            while (run) {
+                run = false;
+                li = geek_list.getElementsByClassName("li");
+          
+                // Loop traversing through all the list items
+                for (i = 0; i < (li.length - 1); i++) {
+                    stop = false;
+                    if (li[i].innerHTML.toLowerCase() > 
+                        li[i + 1].innerHTML.toLowerCase()) {
+                        stop = true;
+                        break;
+                    }
+                }
+          
+                /* If the current item is smaller than 
+                   the next item then adding it after 
+                   it using insertBefore() method */
+                if (stop) {
+                    li[i].parentNode.insertBefore(
+                            li[i + 1], li[i]);
+          
+                    run = true;
+                }
+            }
+        }
+</script>
+<style>
+#myInput {
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  border: 1px solid #ddd; /* Add a grey border */
+  length: 20px;
+  height:20px;
+  text-align:center;
+}
+</style>
+</body>
+</html>
