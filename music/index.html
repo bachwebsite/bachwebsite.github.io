@@ -8,35 +8,33 @@
   }
 </style>
 <link rel="stylesheet" href="/style.css">
+<script>
+function change_audio_file()
+{
+  var file_list = document.getElementById('audio_list') ;
+  var file_to_play = file_list.options[ file_list.selectedIndex ].value ;
+  var player = document.getElementById('audio_player');
+  player.src = file_to_play ;
+}
+</script>
+<form>
+<label for="audio_list">
+Select an audio clip to load into the player. Then click the Play button on the player to start it.
+</label>
+<select onchange="change_audio_file();" id="audio_list">
+<option selected value="christmaskids.mp3">Christmas Kids</option>
+<option value="i-cant.mp3">I Can't</option>
+<option value="metamorphosis.mp3">Metamorphosis</option>
+</select>
+</form>
+<div id="audio_container">
+<audio controls id="audio_player" src="audio/demo.mp3">
+<div style="border: 1px solid black ; padding: 8px ;">
+  
+</div>
+</audio>
+</div>
 <div>
 <p>Christmas Kids</p>
 <audio src="/music/christmas-kids.mp3" controls>
-</div>
-<div>
-<p>I Can't</p>
-<audio src="/music/i-cant.mp3" controls>
-</div>
-<div>
-<p>moment</p>
-<audio src="/music/moment.mp3" controls>
-</div>
-<div>
-<p>SPIT IN MY FACE!</p>
-<audio src="/music/spit-in-my-face.mp3" controls>
-</div>
-<div>
-<p>Tek It</p>
-<audio src="/music/tek-it.mp3" controls>
-</div>
-<div>
-<p>METAMORPHOSIS</p>
-<audio src="/music/metamorphosis.mp3" controls>
-</div>
-<div>
-<p>nuts</p>
-<audio src="/music/nuts.mp3" controls>
-</div>
-<div>
-<p>Ain't Gonna Answer</p>
-<audio src="/music/aintgonnaanswer.mp3" controls>
 </div>
