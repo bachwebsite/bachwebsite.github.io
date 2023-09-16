@@ -42,11 +42,6 @@
 <div class="navbar-left">
 <a class="navbar-brand" href="https://spotisongdownloader.com" title="Spotify Song Downloader">Spotify<span>Downloader</span></a>
 </div>
-<div class="navbar-right">
-<div class="nav-item dropdown">
-<a href="/spotify-album-downloader/"> Spotify album downloader</a><a href="/users/login.php"> Login</a></div>
-</div>
-</div>
 </nav>
 </header>
 <main id="main">
@@ -297,7 +292,7 @@ However, if you want to put the downloaded content to any other use you have to 
 "https://visual.ly/users/spotifydownloader/portfolio",
 "https://devpost.com/contact222",
 "https://linktr.ee/spotifysongdownloader"]}</script>
-<script src="/js/rocket-loader.min.js" data-cf-settings="8a88a23ff8ef11a68c9bee1e-|49" defer=""></script>
+<script src="js/rocket-loader.min.js" data-cf-settings="8a88a23ff8ef11a68c9bee1e-|49" defer=""></script>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -336,7 +331,7 @@ var current_progress = 0;
 if(i.includes('playlist')) {
 //alert("album");
   $.ajax({
-        url: '/api/composer/spotify/playlist_info.php',
+        url: 'api/composer/spotify/playlist_info.php',
         type: 'get',
         dataType: 'JSON',
         data: {url: i},
@@ -376,7 +371,7 @@ $("#ytsaver").show();
     }); 
 } else if (i.includes('track')) {
     $.ajax({ 
-        url: '/api/composer/spotify/single_track.php',
+        url: 'api/composer/spotify/single_track.php',
         type: 'get',
         dataType: 'JSON',
         data: {url: i},
@@ -406,7 +401,7 @@ $("#ytsaver").show();
     })
 } else if (i.includes('album')) {
     $.ajax({ 
-        url: '/api/composer/spotify/album.php',
+        url: 'api/composer/spotify/album.php',
         type: 'get',
         dataType: 'JSON',
         data: {url: i},
@@ -444,7 +439,7 @@ $("#ytsaver").show();
     })
 } else if (i.includes('artist')) {
     $.ajax({ 
-        url: '/api/composer/spotify/artist_albums.php',
+        url: 'api/composer/spotify/artist_albums.php',
         type: 'get',
         dataType: 'JSON',
         data: {url: i},
@@ -623,6 +618,6 @@ Use the Spotify track/playlist link in correct format."
 }
 </script>
 <script src="https://kit.fontawesome.com/4a16f57855.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/css/all.min.css?v=1.286">
+<link rel="stylesheet" href="css/all.min.css?v=1.286">
 </body>
 </html>
