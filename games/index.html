@@ -14,16 +14,7 @@
 <link href="/ortsite/style.css?v=2" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- begin wwww.htmlcommentbox.com -->
-<div class="window" id="Wgames" style="text-align:center; margin-left:50%;">
-<div class="inner">
-<h1>What games should I add?</h1>
- <div id="HCB_comment_box">Loading comments...</div>
- <link rel="stylesheet" type="text/css" href="quitter-bootstrap.css" />
- <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24kAshrrO7iemUgHfsgS%2Fkx1"+"&opts=16798&num=10&ts=1695085833273");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
-</div>
-</div>
-	<!-- end www.htmlcommentbox.com -->
+
 <div id="wrapper">
 	<div id="anchor">
 		<div class="window" id="Wgames">
@@ -196,6 +187,16 @@
 		</div>	
 	</div>
 </div>
+<!-- begin wwww.htmlcommentbox.com -->
+<div class="window" id="Wgames" style="text-align:center; margin-left:50%;">
+<div class="inner">
+<h1>What games should I add?</h1>
+ <div id="HCB_comment_box">Loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="quitter-bootstrap.css" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24kAshrrO7iemUgHfsgS%2Fkx1"+"&opts=16798&num=10&ts=1695085833273");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+</div>
+</div>
+<!-- end www.htmlcommentbox.com -->
 <script>
 function myFunction() {
   // Declare variables
@@ -251,6 +252,41 @@ function sort() {
                 }
             }
         }
+
+</script>
+<script>
+function sortList() {
+  var list, i, switching, b, shouldSwitch;
+  list = document.getElementById("myUL");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByClassName("li");
+    // Loop through all list-items:
+    for (i = 0; i < (b.length - 1); i++) {
+      // start by saying there should be no switching:
+      shouldSwitch = false;
+      /* check if the next item should
+      switch place with the current item: */
+      if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+        /* if next item is alphabetically
+        lower than current item, mark as a switch
+        and break the loop: */
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}
 </script>
 <style>
 #myInput {
