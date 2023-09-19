@@ -58,33 +58,7 @@
 				<div class="li"><a href="/games/motox3m/"><img src="mx3m.png"/>Moto X3M</a></div>
 				<div class="li"><a href="/games/slope2/"><img src="slope.png"/>Slope 2</a></div>
 				<div class="li"><a href="/games/slope-3/"><img src="slope.png"/>Slope 3</a></div>
-
-				<div class="li"><a href="/games/flappy-bird"><img src=""/>Flappy Bird</a></div>
-				<div class="li"><a href="/games/friday-night-funkin"><img src=""/>Friday Night Funkin</a></div>
-				<div class="li"><a href="/games/getaway-shootout"><img src=""/>Getaway Shootout</a></div>
-				<div class="li"><a href="/games/gunspin"><img src=""/>Gvnspin</a></div>
-				<div class="li"><a href="/games/idle-breakout"><img src=""/>Idle Breakout</a></div>
-				<div class="li"><a href="/games/incremancer"><img src=""/>Incremancer</a></div>
-				<div class="li"><a href="/games/maptroid"><img src=""/>Maptroid</a></div>
-				<div class="li"><a href="/games/monkey-mart"><img src=""/>Monkey Mart</a></div>
-				<div class="li"><a href="/games/vex-7"><img src=""/>Vex 7</a></div>
-				<div class="li"><a href="/games/ages-of-confict"><img src=""/>Ages of Conflict</a></div>
-				<div class="li"><a href="/games/amidst-the-sky"><img src=""/>Amidst the Sky</a></div>
-				<div class="li"><a href="/games/a-g-adventure"><img src=""/>Another Gentlemans Adventure</a></div>
-				<div class="li"><a href="/games/awesome-tanks"><img src=""/>Awesome Tanks</a></div>
-				<div class="li"><a href="/games/awesome-tanks-2"><img src=""/>Awesome Tanks 2</a></div>
-				<div class="li"><a href="/games/babel-tower"><img src=""/>Babel Tower</a></div>
-				<div class="li"><a href="/games/brawl-stars-laser"><img src=""/>Brawl Stars Laser</a></div>
-				<div class="li"><a href="/games/breaklock"><img src=""/>Breaklock</a></div>
-				<div class="li"><a href="/games/conways-gol"><img src=""/>Conway's Game of Life</a></div>
-				<div class="li"><a href="/games/crossy-rose"><img src=""/>Crossy Road</a></div>
-				<div class="li"><a href="/games/core-ball"><img src=""/>Core Ball</a></div>
-				<div class="li"><a href="/games/cut-the-rope"><img src=""/>Cut the Rope</a></div>
-				<div class="li"><a href="/games/drift-boss"><img src=""/>Drift Boss</a></div>
-				<div class="li"><a href="/games/drive-mad"><img src=""/>Drive Mad</a></div>
-				<div class="li"><a href="/games/duck-life-4"><img src=""/>Duck Life 4</a></div>
 				<div class="li"><a href="/games/dune"><img src=""/>Dune</a></div>
-				<div class="li"><a href="/games/evowars"><img src=""/>Evowars</a></div>
 				
 
 				<!-- Gameboy Advance-->
@@ -253,40 +227,6 @@ function sort() {
             }
         }
 
-</script>
-<script>
-function sortList() {
-  var list, i, switching, b, shouldSwitch;
-  list = document.getElementById("myUL");
-  switching = true;
-  /* Make a loop that will continue until
-  no switching has been done: */
-  while (switching) {
-    // start by saying: no switching is done:
-    switching = false;
-    b = list.getElementsByClassName("li");
-    // Loop through all list-items:
-    for (i = 0; i < (b.length - 1); i++) {
-      // start by saying there should be no switching:
-      shouldSwitch = false;
-      /* check if the next item should
-      switch place with the current item: */
-      if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-        /* if next item is alphabetically
-        lower than current item, mark as a switch
-        and break the loop: */
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark the switch as done: */
-      b[i].parentNode.insertBefore(b[i + 1], b[i]);
-      switching = true;
-    }
-  }
-}
 </script>
 <style>
 #myInput {
