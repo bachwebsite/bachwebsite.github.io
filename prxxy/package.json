@@ -8,7 +8,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node /prxxy/src/index.js"
   },
   "keywords": [
     "proxy"
