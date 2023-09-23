@@ -2,54 +2,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>ok</title>
-	<style>
-	body {
-		margin: 0;
-		padding: 0;
-		background: transparent;
-		font-family: Arial, Helvetica, sans-serif;
-	}
-	</style>
-	<meta name="robots" content="noindex, nofollow"/>
-	<link href="neptun.css" rel="stylesheet" type="text/css">
-	<!-- <link rel="stylesheet" href="//mem.neptunjs.xyz/neptun/css/neptun.css" type="text/css"> -->
+<title>Play Retro Games Online</title>
+<link rel="shortcut icon" href="https://retrogames.onl/favicon.ico" type="image/x-icon" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="description" lang="en" content="PlayStation PS1/PSX, 3DO, SEGA, Nintendo, Arcade, Atari, Neo-Geo, TG-16, PC (Win3x, MS-DOS), Amstrad, MSX." />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<link rel="stylesheet" type="text/css" href="/cc/cc-games.css">
+<style>
+#onl {
+background-image: url(/images/n64/super-mario-64.png);
+}
+</style>
 </head>
 <body>
-
-
-	<div id="emu"></div>
-
-	
-		<script>
- 
-			var NepDefCon = '1'; 
-			 
-			var NepPlayer = "#emu"; 
-			 
-			var NepEmu = "n64";
-			 
-			var NepZoom = "enable"; 
-			 
-			var NepMaxWidth = "1100px";
-			 
-			var NepAutoStart = true;
-			 
-			var NepLang = "en";
-			 
-			var EmuN64air = true;
-			 
-			var gameUrl = "//breads2de-rosy.vercel.app/games/sm64";
-			 
-			var SaveTitle = "super-mario-64";
-			 
-		</script>
-
-	
-		<script data-name="njs2" src="NJS.gge"></script>
-		<!--<script src="//mem.neptunjs.xyz/neptun/gge/njsLoader.js" type="text/javascript"></script>-->
-
-
+<div id="onl"></div>
+</div>
+<script type="text/javascript">
+    EJS_player = '#onl';
+    EJS_gameUrl = '/games/sm64/super-mario-64.7z'; // Url to Game rom
+        EJS_gameID = 1263;
+    EJS_core = 'n64';
+    EJS_pathtodata = '/data/';
+</script>
+<script src="/data/loader.js"></script>
+<script type="text/javascript">
+document.addEventListener('mouseup', function(e) {
+  let container = document.getElementById('onl');
+  if (!container.contains(e.target)) {
+        container.style.backgroundImage = 'none';
+  }
+});
+</script>
+<span style="font-family: &quot;verdana&quot; , sans-serif; font-size: 14px;"><span style="color: #ad3a2b;"><font size="2">Super Mario 64</span></span></font>
 </body>
-</html>
+</html> 
