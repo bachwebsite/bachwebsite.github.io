@@ -1,0 +1,11 @@
+window.KENGSDK_APPKEY="null";
+window.KENGSDK_APPSECRET="null";
+window.KENGSDK_INIT_CLASS="null";
+window.GAME_VERSION=null;
+window.AD_CLASS="null";
+window.BANNER_AD_CLASS="null";
+window.VIDEO_AD_CLASS="ad.GameH5Video";
+window.PAY_CLASS="null";
+window.RANK_CLASS="null";
+window.NOTCH_CLASS="null";
+window.KENGSDK_CHANNEL="null";
