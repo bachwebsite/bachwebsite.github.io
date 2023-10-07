@@ -4,6 +4,17 @@
 	padding:0px;
 	margin:0px;
 }
+.chatframe {
+	background-image:url(shadedEdges.png),url(chatBG.png);
+	width:100%;
+	height:100%;
+	background-color:#5d00a8;
+	background-size:100% 100%,auto;
+	font-family:Verdana;
+	font-size:10px;
+	color:#000;
+	overflow:hidden;
+}
 html
 {
 	width:100%;
