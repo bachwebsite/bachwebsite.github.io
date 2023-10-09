@@ -1,6 +1,4 @@
-// PS! Replace this with your own channel ID
-// If you use this channel ID your app will stop working in the future
-const CLIENT_ID = '7Gtm1HoK6PfrBRy0';
+const CLIENT_ID = 'YJQKw1ty7dEPrv96';
 
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
@@ -86,7 +84,7 @@ function sendMessage() {
   }
   if (value.startsWith('http') || value.startsWith('data:image')){
     const el = document.createElement('img');
-    el.style.backgroundimage = value;
+    el.style.background-image = value;
   }
   DOM.input.value = '';
   drone.publish({
