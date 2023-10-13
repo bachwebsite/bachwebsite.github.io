@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="themes.css">
+        <title>IR Unblocked</title>
+        <link rel="icon" type="image/x-icon" href="/Pictures/irgames.png">
+        <meta name="description" content="Unblocked games, movies, scripts & more!">
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q5HYCKBBB"></script>
+
+        <script> window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date());gtag('config', 'G-8Q5HYCKBBB');</script>
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404879945245367"crossorigin="anonymous"></script>
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404879945245367"crossorigin="anonymous"></script>
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404879945245367"crossorigin="anonymous"></script>
+
+        <script src="script.js" defer></script>
+
+        <script src="games.js"></script>
+
+    </head>
+    <body onload="loadSearchData()">
+      <header>
+        <div class="container">
+            <a class="logo" href="/"><img width="200px" src="/Pictures/HeaderLogo.png" alt="logo"></a>
+              <input id="searchbar" autocomplete="off" onkeyup="search()" type="text"\n name="search" placeholder="Search...">
+              <div id="list">
+              </div>
+          </div>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="animations.html">Animations</a></li>
+                <li><a href="scripts.html">Scripts</a></li>
+                <li><a href="sitemap.html">More</a></li>
+                <a class="Options"><img onclick="document.getElementById('popup').style.display = 'block';" src="Pictures/Options.png"></a>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="popup">
+      <img class="Close" onclick="document.getElementById('popup').style.display = 'none';" src="Pictures/Close.png">
+      <br>
+      <h1>Settings</h1>
+
+      <div class="settingsList">
+
+      <div class="settingsBlock">
+      <h2 class="settingsheader" target="_blank" href="https://twitter.com/IRunblocked">Tab Cloaker</h2>
+      <span class="inputcontainer">
+      <div><input id="title" class="input" placeholder="Set Page Title..." onkeyup="setTitle(this.value)"></div>
+      <div><button onclick="resetTab()">Reset</button></div>
+      </span>
+      <br><br>
+      <h2 class="settingsheader" target="_blank" >Favicon Cloaker</h2>
+      <span class="inputcontainer">
+      <div><input id="icon" class="input" placeholder="Set Page Favicon..." onkeyup="setFavicon(this.value.trim())"></div>
+      <div><button onclick="resetTab()">Reset</button></div>
+      </span>
+      </div>
+
+      <div class="settingsBlock">
+      <h2 class="settingsheader" target="_blank" >Panic Button</h2><br>
+      <form>
+      <span class="inputcontainer">
+        <label for="website-input"></label>
+        <div><input  type="text" id="website-input" placeholder="Set Your Panic Site!" required></div>
+        <select id="key-select" required>
+          <option value="" disabled selected>Select key</option>
+          <option value="a">a</option>
+          <option value="b">b</option>
+          <option value="c">c</option>
+          <option value="d">d</option>
+          <option value="e">e</option>
+          <option value="f">f</option>
+          <option value="g">g</option>
+          <option value="Backspace">Backspace</option>
+          <option value="Escape">Escape</option>
+          <option value="Control">Ctrl</option>
+          <!-- Add more options as needed -->
+        </select>
+      </form>
+      </span>
+      </div>
+
+      <div class="settingsBlock">
+        <h2 class="settingsheader" target="_blank" >Themes</h2><br>
+        <button class="themesbtn" onclick="setTheme('default')">Default</button>
+        <button class="themesbtn" onclick="setTheme('light')">Light</button>
+        <button class="themesbtn" onclick="setTheme('dark')">Dark</button>
+        <br>
+        <button class="themesbtn" onclick="setTheme('amoled')">AMOLED</button>
+        <button class="themesbtn" onclick="setTheme('cherry')">Cherry</button>
+        <button class="themesbtn" onclick="setTheme('indigo')">Indigo</button>
+        <br>
+        <button class="themesbtn" onclick="setTheme('harley')">Harley</button>
+        <button class="themesbtn" onclick="setTheme('joker')">Joker</button>
+        <button class="themesbtn" onclick="setTheme('jesse')">Pinkman</button>
+        </div>
+
+      <div class="settingsBlock">
+      <div class="cloakingDiv"><p>Open Blank Cloaking Tab:</p><button id="toggleButton">Open</button></div>
+      </div>
+
+      <div class="settingsBlock">
+        <div class="cloakingDiv">
+          <label class="toggle-switch-label" for="toggleCheckbox">Enable Clickoff Cloaker:</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggleCheckbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+    </div>
+
+      <div class="settingsBlock"><h2>Coming Soon<br>suggest in discord!</h2></div>
+
+    </div>
+    <iframe src="Login/login.html" scrolling="no">
+    </iframe>
+    </div>
+
+          <div class="errimg">
+            <h1 style="margin-bottom: 20px;">Oops! (404)</h1>
+            <h2 style="position: relative;top: 0px;margin: 0px;">Either our server is broken, or you cant type :P</h2>
+            <p>Click <a class="link" href="/index.html">Here</a> to go home.</p>
+          </div>
+    </body>
+</html>
