@@ -199,65 +199,6 @@
 	</div>
 </div>
 <!-- begin wwww.htmlcommentbox.com -->
-
-<!-- end www.htmlcommentbox.com -->
-<script>
-function myFunction() {
-  // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('myInput');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("myUL");
-  li = ul.getElementsByClassName('li');
-
-  // Loop through all list items, and hide those who don't match the search query
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-function sort() {
-          
-            // Declaring Variables
-            var geek_list, i, run, li, stop;
-          
-            // Taking content of list as input
-            geek_list = document.getElementById("myUL");
-          
-            run = true;
-          
-            while (run) {
-                run = false;
-                li = geek_list.getElementsByClassName("li");
-          
-                // Loop traversing through all the list items
-                for (i = 0; i < (li.length - 1); i++) {
-                    stop = false;
-                    if (li[i].innerHTML.toLowerCase() > 
-                        li[i + 1].innerHTML.toLowerCase()) {
-                        stop = true;
-                        break;
-                    }
-                }
-          
-                /* If the current item is smaller than 
-                   the next item then adding it after 
-                   it using insertBefore() method */
-                if (stop) {
-                    li[i].parentNode.insertBefore(
-                            li[i + 1], li[i]);
-          
-                    run = true;
-                }
-            }
-        }
-
-</script>
 <div class="curzr" hidden>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
     <path class="inner" d="M25,30a5.82,5.82,0,0,1-1.09-.17l-.2-.07-7.36-3.48a.72.72,0,0,0-.35-.08.78.78,0,0,0-.33.07L8.24,29.54a.66.66,0,0,1-.2.06,5.17,5.17,0,0,1-1,.15,3.6,3.6,0,0,1-3.29-5L12.68,4.2a3.59,3.59,0,0,1,6.58,0l9,20.74A3.6,3.6,0,0,1,25,30Z" fill="#F2F5F8" />
@@ -369,6 +310,87 @@ class ArrowPointer {
       } else if (modAngle >= 225 && modAngle < 315) {
         style.left = '0px'
         style.top = `${ -this.cursorSize / 2 }px`
+      } else {
+        style.left = `${ -this.cursorSize / 2 }px`
+        style.top = '0px'
+      }
+    }, 0)
+  }
+
+  remove() {
+    this.cursor.remove()
+  }
+}
+
+(() => {
+  const cursor = new ArrowPointer()
+  if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {    
+    document.onmousemove = function (event) {
+      cursor.move(event)
+    }
+  } else {
+    cursor.remove()
+  }
+})()
+</script>
+<!-- end www.htmlcommentbox.com -->
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByClassName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+function sort() {
+          
+            // Declaring Variables
+            var geek_list, i, run, li, stop;
+          
+            // Taking content of list as input
+            geek_list = document.getElementById("myUL");
+          
+            run = true;
+          
+            while (run) {
+                run = false;
+                li = geek_list.getElementsByClassName("li");
+          
+                // Loop traversing through all the list items
+                for (i = 0; i < (li.length - 1); i++) {
+                    stop = false;
+                    if (li[i].innerHTML.toLowerCase() > 
+                        li[i + 1].innerHTML.toLowerCase()) {
+                        stop = true;
+                        break;
+                    }
+                }
+          
+                /* If the current item is smaller than 
+                   the next item then adding it after 
+                   it using insertBefore() method */
+                if (stop) {
+                    li[i].parentNode.insertBefore(
+                            li[i + 1], li[i]);
+          
+                    run = true;
+                }
+            }
+        }
+
+</script>
 <style>
 #myInput {
   background-position: 10px 12px; /* Position the search icon */
