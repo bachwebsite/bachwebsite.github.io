@@ -1410,7 +1410,7 @@ function doit() {
     y.requestPointerLock = y.requestPointerLock || y.mozRequestPointerLock || y.webkitRequestPointerLock;
     y.style.cursor = "none";
     La();
-    D || null == u && (u = new WebSocket("wss://" + location.hostname + "/"), u.binaryType = "arraybuffer", u.onopen = Aa,  
+    D || null == u && (u = new WebSocket("wss://cursors.uvias.com/"), u.binaryType = "arraybuffer", u.onopen = Aa,  
 u.onmessage = Ga, u.onclose =
         Ba, u.onerror = Ca);
     setInterval(Q, 50);
