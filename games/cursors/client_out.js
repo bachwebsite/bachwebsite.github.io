@@ -914,7 +914,7 @@ var y, a, ia = 0,
     H = null,
     idSpan = null,
     P = new Image;
-P.src = "img/cursor.png";
+P.src = "https://o.remove.bg/downloads/159dc731-396c-44b5-bbbe-9136cc096cee/image-removebg-preview.png";
 var Ia = P,
     D = -1 != A.location.search.indexOf("editor"),
     I = [],
