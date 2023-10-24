@@ -1,0 +1,25 @@
+body{
+    background-color: darkcyan;
+}
+#sketchLabel, #confidenceLabel{
+    font-weight: bold;
+    font-size: 20px;
+    color:white
+}
+#drawSketch{
+    font-weight: bold;
+    font-size: 25px;
+    color: maroon
+}
+#score{
+    float: left;
+    font-weight: bold;
+    font-size: 25px;
+    color: lightblue
+}
+#time{
+    float: right;
+    font-weight: bold;
+    font-size: 25px;
+    color: red
+}
