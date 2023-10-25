@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+
+	<link rel="shortcut icon" type="image/png" href="./favicon.png">
+
+	<title>Play Legends of Idleon | The Free Idle MMO</title>
+	<meta name="description" content="Begin your adventure in Legends of Idleon! Form your own guild of unique characters, and work together to uncover secrets and defeat epic bosses!" />
+	<meta name="image" content="https://www.LegendsOfIdleon.com/share.png" />
+	<!-- <meta property="og:url" content="https://www.LegendsOfIdleon.com" /> -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Play Legends of Idleon | The Free Idle MMO" />
+	<meta property="og:description" content="Begin your adventure in Legends of Idleon! Form your own guild of unique characters, and work together to uncover secrets and defeat epic bosses!" />
+	<meta property="og:image" content="https://www.LegendsOfIdleon.com/share.png" />
+	<meta property="og:image:type" content="image/png" />
+	<meta property="og:image:width" content="1024" />
+	<meta property="og:image:height" content="500" />
+	<meta property="og:image:alt" content="Play Legends of Idleon" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Play Legends of Idleon | The Free Idle MMO" />
+	<meta name="twitter:description" content="Begin your adventure in Legends of Idleon! Form your own guild of unique characters, and work together to uncover secrets and defeat epic bosses!" />
+	<meta name="twitter:image" content="https://www.LegendsOfIdleon.com/share.png" />
+
+
+	<link rel="icon" type="image/png" href="/favicon64.png" />
+	<link rel="apple-touch-icon" href="/logo192_a.png" />
+
+	<script type="text/javascript" src="./lib/firebase.js"></script>
+	<script type="text/javascript" src="./lib/FirebaseMMO.js"></script>
+	<script type="text/javascript" src="./N.js"></script><script src="https://js.stripe.com/v3/"></script>
+	<script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+
+	<script>
+		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, { capture: false, passive: false });
+		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
+			var meta = document.getElementById ("viewport");
+			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+		}
+	</script>
+
+	<script>
+		window.specialSignIn=true;
+		window.uiShown = () =>	{
+			let x = document.getElementById("auth-container");
+			if (x) {
+				x.style.opacity = 1;
+				x.style.pointerEvents = "all";
+			}
+		}
+		window.uiDone = () =>	{
+			let x = document.getElementById("auth-container");
+			if (x) {
+				x.style.opacity = 0;
+				x.style.pointerEvents = "none";
+			}
+		}
+	</script>
+
+	<style>
+	html,body {
+		margin: 0; padding: 0; height: 100%; overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: url("assets/data/10bg.png");
+		background-size: cover;
+		background-color: #aaa;
+		background-blend-mode: multiply;
+		cursor: url("/cursor3.png"), auto;
+	}
+
+	#auth-container {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		opacity: 1;
+		background-color: #0000007f;
+		opacity: 0;
+		transition: opacity 1s;
+		display: flex;
+		align-items: center;
+		pointer-events: none;
+	}
+
+    #content-container {
+			width: 100vw;
+			height: 56.25vw;
+			max-width: 177.77vh;
+			max-height: 100vh;
+			box-sizing: border-box;
+	}
+
+	#content-container-inner {
+			width: 100%; height: 100%;
+			padding: 90px 160px;
+    		box-sizing: border-box;
+	}
+		#openfl-content {
+    		/* box-shadow: 0px -1px 10px 5px black; */
+			width: 100%; height: 100%;
+	    }
+		#openfl-content canvas { background: #000000; width: 100% !important; height: 100% !important;}
+
+		@media only screen and (max-width: 1080px) {
+			#content-container-inner {
+				padding: 9px 16px;
+			}
+		}
+		@media only screen and (max-width: 768px) {
+			#content-container-inner {
+				padding: 9px 16px;
+			}
+		}
+	</style>
+
+</head>
+<body>
+	<noscript>This webpage makes extensive use of JavaScript. Please enable JavaScript in your web browser to view this page.</noscript>
+
+	<div id="content-container">
+		<div id="content-container-inner"><div id="openfl-content"></div></div>
+	</div>
+
+	<script type="text/javascript">
+		lime.embed ("N", "openfl-content", 960, 540, { parameters: {} });
+	</script>
+	<script>
+		var websocket = Stripe("pk_live_51HnWdiIpJHVNIIzvvR6lEEJkKp6qku22UMH8sw8bkjzHsqEq8YDKzpaK5sKFvRC60SjPnVqRnVz8DkQ90Dn2CQRB00p4ULRRrP");
+   </script>
+	<div id="auth-container"></div>
+</body>
+</html>
