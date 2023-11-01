@@ -1,0 +1,17 @@
+{
+"companyName": "GameAshlar",
+"productName": "Impossible Classic Stunt Car",
+"dataUrl": "d2c2901467f834c97348e4c997c487ba.unityweb",
+"wasmCodeUrl": "a23f4c83e6b1c5dcca3a381918c03591.unityweb",
+"wasmFrameworkUrl": "e6842f8435e629648093be7d07b5afc4.unityweb",
+"asmCodeUrl": "d025cb8606039f397eb596da45e63fef.unityweb",
+"asmMemoryUrl": "c8d1d37bc519ed1fa01ff038c25fbe25.unityweb",
+"asmFrameworkUrl": "09bedd6f8e5db9bb52994b4f65075856.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"backgroundUrl": "b8c1241a90a4569834bf362a81d235fe.jpg",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#FFFFFF",
+"cacheControl": {"default": "must-revalidate"}
+}
