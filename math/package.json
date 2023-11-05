@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ev-emitter": "^2.1.2",
+    "get-size": "^3.0.0",
+    "jquery": "^3.6.4",
+    "unidragger": "^3.0.1",
+    "unipointer": "^2.4.0"
+  }
+}
