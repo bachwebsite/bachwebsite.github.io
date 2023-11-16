@@ -1,0 +1,165 @@
+/* arabic */
+@font-face {
+	font-family: "Changa";
+	font-style: normal;
+	font-weight: 600;
+	src: local("Changa SemiBold"), local("Changa-SemiBold"), url(8-mw6umTgtMSI5PXqVIDMRJtnKITppOI_IvcXXDNrsc.woff2) format("woff2");
+	unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+FB50-FDFF, U+FE80-FEFC;
+}
+/* latin-ext */
+@font-face {
+	font-family: "Changa";
+	font-style: normal;
+	font-weight: 600;
+	src: local("Changa SemiBold"), local("Changa-SemiBold"), url(l9R1mHXzJ6oxjfw8BkQIThJtnKITppOI_IvcXXDNrsc.woff2) format("woff2");
+	unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+	font-family: "Changa";
+	font-style: normal;
+	font-weight: 600;
+	src: local("Changa SemiBold"), local("Changa-SemiBold"), url(aXdbZDB08TCIBRKa7Qgu_FtXRa8TVwTICgirnJhmVJw.woff2) format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+body, html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	color: white;
+	font-family: "Changa", "Sans Serif";
+	user-select: none;
+}
+canvas {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+#begin, #wasted {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .8);
+}
+#github svg {
+	transition: all 1s;
+	fill: #222;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 0;
+	width: 80px;
+	height: 80px;
+	transform: rotate(-90deg);
+}
+#github:hover svg {
+	width: 160px;
+	height: 160px;
+}
+.center {
+	text-align: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.center img {
+	display: block;
+}
+.scale {
+	animation: scale 5s infinite ease-in-out;
+}
+@keyframes scale {
+	0% {
+		transform: scale(0.8);
+	}
+	50% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0.8);
+	}
+}
+input, button {
+	font-family: "Changa", "Sans Serif";
+	font-size: 1.5rem;
+	outline: none;
+	border: 0;
+	padding: .5rem 1rem;
+	line-height: 2.5rem;
+}
+button {
+	text-align: center;
+	cursor: pointer;
+}
+button:active {
+	transform: translateY(4px);
+}
+button:disabled {
+	cursor: not-allowed;
+}
+#name, #settings {
+	background: #ededd1;
+	border-bottom: 6px solid #a1a18d;
+}
+.yellow {
+	background: #eaec4b;
+	border-bottom: 6px solid #a1a130;
+	color: #888a34;
+}
+.yellow:hover {
+	background: #fafc5b;
+}
+.yellow:active {
+	border-bottom: 2px solid #a1a130;
+}
+.orange {
+	background: #FF972F;
+	border-bottom: 6px solid #AE4E0D;
+	color: #422100;
+}
+.orange:hover {
+	background: #FFB76F;
+}
+.orange:active {
+	border-bottom: 2px solid #AE4E0D;
+}
+.green {
+	background: #7fed4c;
+	border-bottom: 6px solid #56a130;
+	color: #4f8a34;
+}
+.green:hover {
+	background: #8efc5b;
+}
+.green:active {
+	border-bottom: 2px solid #56a130;
+}
+span {
+	color: red;
+}
+#wasted {
+	display: none;
+}
+#wasted img {
+	width: 650px;
+}
+.toggle {
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+}
+#settings {
+	display: grid;
+	padding: 20px;
+}
+#settings > * {
+	margin-top: 10px;
+}

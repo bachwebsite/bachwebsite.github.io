@@ -1,0 +1,37 @@
+{
+  "name": "paper-io",
+  "version": "0.0.1",
+  "private": true,
+  "description": "An multiplayer-IO type game (cloned from Paper-IO)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.js -f iife | terser -c -m > public/js/bundle.js",
+    "build-dev": "rollup -c rollup.config.js -f iife -o public/js/bundle.js -w"
+  },
+  "repository": "stevenjoezhang/paper.io",
+  "keywords": [
+    "Paper-IO",
+    "IO",
+    "Game"
+  ],
+  "author": "Mimi <stevenjoezhang@gmail.com> (https://zhangshuqiao.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevenjoezhang/paper.io/issues"
+  },
+  "homepage": "https://github.com/stevenjoezhang/paper.io",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.0",
+    "jquery": "^3.6.1",
+    "mimi-server": "^0.0.1",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup": "^3.3.0",
+    "terser": "^5.15.1"
+  }
+}
