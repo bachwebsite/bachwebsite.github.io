@@ -27,7 +27,7 @@ html
 	background-size:auto,100% 100%,auto;
 	background-blend-mode:hue,normal,normal;
 	*/
-	background-image:url(shadedEdges.png),url(bg.png);
+	background-image:url(shadedEdges.png);
 	background-size:100% 100%,auto;
 	font-family:Verdana;
 	font-size:10px;
