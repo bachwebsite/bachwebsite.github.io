@@ -403,6 +403,62 @@ function sort() {
         }
 
 </script>
+<script type="text/javascript">
+   const options = {
+        background: {
+          color: "#222", // the canvas background color
+        },
+        interactivity: {
+          events: {
+            onClick: {
+              // this handles the mouse click event
+              enable: false,
+              mode: "push", // this adds particles
+            },
+            onHover: {
+              // this handles the mouse hover event
+              enable: true,
+              mode: "repulse", // this make particles move away from the mouse
+            },
+          },
+          modes: {
+            push: {
+              quantity: 3, // number of particles to add
+            },
+            repulse: {
+              distance: 100, // the distance of the particles from the mouse
+            },
+          },
+        },
+        particles: {
+          links: {
+            enable: true, // this enables links between particles
+            opacity: 0.3,
+            distance: 200,
+          },
+          move: {
+            enable: true, // this makes particles move
+            speed: { min: 1, max: 5 }, // this is the speed of the particles
+          },
+          opacity: {
+            value: { min: 0.3, max: 0.7 }, // this sets the opacity of the particles
+          },
+          size: {
+            value: { min: 1, max: 3 }, // this sets the size of the particles
+          },
+        },
+      };
+
+  tsParticles.load("tsparticles", options); 
+      window.addEventListener('beforeunload', function(e) {
+        e.preventDefault(); // Cancel the event
+        e.returnValue = ''; // Chrome requires returnValue to be set
+        // Display a message
+        var confirmationMessage = 'Are you sure you want to leave this page?';
+        (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+        return confirmationMessage; // Webkit, Safari, Chrome etc.
+      });
+    </script>
 <style>
 #myInput {
   background-position: 10px 12px; /* Position the search icon */
