@@ -55,6 +55,7 @@ body
 .window
 {
 	display:inline-block;
+	background-color:#a5a5a5;
 	border:1px solid #cccccc;
 	border-width:16px 5px 5px 4px;
 	border-image:url(borderWindow.png) 16 5 5 4 repeat;
