@@ -6,7 +6,6 @@
 	cursor: url(//breads2de.netlify.app/ok.png);
 }
 .chatframe {
-	background-image:url(shadedEdges.png),url(chatBG.png);
 	width:100%;
 	height:100%;
 	background-color:#5d00a8;
