@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "basis33";
+  src: url("/assets/fonts/basis33.ttf") format('truetype');
+}
+
+.top-header {
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  background: rgb(22,22,22);
+  display: flex;
+}
+
+body {
+  background: linear-gradient(90deg, rgba(21,21,21,1) 1%, rgba(48,48,48,1) 100%);
+}
+
+a {
+  text-decoration:none;
+  color:inherit;
+}
+
+.an-card {
+  float:left;
+  text-align:center;
+  align-items:center;
+  border-radius:15px;
+  margin-left:20px;
+  margin-top:15px;
+  width:145px;
+  height:50px;
+  background: linear-gradient(90deg, rgba(22,22,22,1) 0%, rgba(0,52,88,1) 100%);
+}
+.an-card h1 {
+  font-size:20px;
+  font-family: "basis33";
+  color:white;
+}
+.an-card img {
+  margin-top:4px;
+  width:120px;
+  height:120px;
+}
+.an-card:hover {
+  cursor:grab;
+}
+.an-card:active {
+  cursor:grabbing;
+}
+
+.wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to right, #3498db, #2980b9);
+      animation: wave-animation 2s infinite linear;
+    }
+
+@keyframes wave-animation {
+   0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+   100% {
+     transform: translateY(0);
+  }
+}
+
+.container-main {
+  display: inline-block
+      text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.an-title {
+  margin-top:20vh;
+  font-size: 200px;
+  color:white;
+  text-align:center;
+  font-family: "basis33", monospace;
+}
+
+.header-search {
+  display: inline-block;
+  height:32px;
+  background-color: rgb(22,22,22);
+  font-family: "basis33", monospace;
+}
+.px-search {
+  height:64px;
+  width: 50vw;
+  margin-left:25vw;
+  background-color: rgb(22,22,22);
+  text-align:center;
+  align-items:center;
+}
