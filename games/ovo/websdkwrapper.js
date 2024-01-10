@@ -241,7 +241,7 @@ globalThis.WebSdkWrapper = (function () {
       get sdk() {
         return globalThis.gdsdk;
       },
-      scriptSrc: "//lablockedgames.com/gd_1_5_2.js",
+      scriptSrc: "//html5.api.gamedistribution.com/main.min.js",
       hasAds: true,
       enableOnlyInProduction: true,
       hasBanner: false,

@@ -28,6 +28,12 @@ function initWebSdkWrapper(debug = false) {
 
   try {
     let json = JSON.parse(config);
+    if (
+      json.hasOwnProperty("removeServiceWorker") &&
+      json.removeServiceWorker
+    ) {
+      removeServiceWorker();
+    }
     if (json.hasOwnProperty("removeSocials")) {
       globalThis.adconfigRemoveSocials = json.removeSocials ? 1 : 0;
     } else {
@@ -46,6 +52,11 @@ function initWebSdkWrapper(debug = false) {
         : 0;
     } else {
       globalThis.adconfigRemoveMidrollRewarded = 0;
+    }
+    if (json.hasOwnProperty("noReligion")) {
+      globalThis.adconfigNoReligion = json.noReligion ? 1 : 0;
+    } else {
+      globalThis.adconfigNoReligion = 0;
     }
     WebSdkWrapper.init(json.name, !!debug, json).then(postInit);
   } catch (e) {
@@ -120,8 +131,38 @@ function crazyHappyTime() {
   globalThis.WebSdkWrapper.happyTime();
 }
 
+function isLayoutLevel(layoutname) {
+  let regex = /Level \d+/;
+  return regex.test(layoutname);
+}
+
+function isLayoutMenu(layoutname) {
+  return !isLayoutLevel(layoutname);
+}
+
+let lastAdLayoutWasMenu = false;
+let lastAdLayout = "";
 function crazyMidRoll() {
+  let runtime = cr_getC2Runtime();
+  if (!runtime) return;
+  let curLayout = runtime.running_layout.name;
+  if (isLayoutMenu(curLayout) && lastAdLayoutWasMenu) return;
+  if (isLayoutMenu(curLayout) && curLayout !== "Main Menu") return;
+  if (curLayout === lastAdLayout) return;
+  lastAdLayout = curLayout;
+  lastAdLayoutWasMenu = isLayoutMenu(curLayout);
+  console.log("Trying to play ad");
+  let globalsInstance = runtime.types_by_index.find(
+    (x) => x.plugin instanceof cr.plugins_.Globals && x.instvar_sids.length > 20
+  ).instances[0];
+  let startTIme = globalsInstance.instance_vars[4];
+  let now = Date.now();
   globalThis.WebSdkWrapper.interstitial().then((success) => {
+    let newNow = Date.now();
+    let timeDiff = newNow - now;
+    let timeDiffSeconds = timeDiff / 1000;
+    startTIme = startTIme + timeDiffSeconds;
+    globalsInstance.instance_vars[4] = startTIme;
     if (success) c2_callFunction("adOver");
     else c2_callFunction("adOverFail");
   });
@@ -129,6 +170,10 @@ function crazyMidRoll() {
 }
 
 function crazyRewarded() {
+  let runtime = cr_getC2Runtime();
+  let curLayout = runtime.running_layout.name;
+  lastAdLayout = curLayout;
+  lastAdLayoutWasMenu = isLayoutMenu(curLayout);
   globalThis.WebSdkWrapper.rewarded().then((success) => {
     if (success) c2_callFunction("adOver");
     else c2_callFunction("adOverFail");
@@ -233,10 +278,7 @@ function translateTips(locale) {
   let tips = globalThis.gatheredTips;
   let json = JSON.parse(tips);
   let res = json.map((tip, index) => {
-    let key = findLanguageKey("en-us", tip.text);
-    if (key === "") {
-      key = `tip${index + 1}`;
-    }
+    key = `tip${index + 1}`;
     return {
       text: getLanguageValue(locale, key, "text", tip.text, ""),
       frame: tip.frame,
@@ -389,6 +431,28 @@ function processString(string, ...params) {
   return string;
 }
 
+function removeServiceWorker() {
+  let attempts = 50;
+  let stopSWInterval = setInterval(() => {
+    if (navigator.serviceWorker) {
+      console.log("try removing");
+      attempts--;
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        let removed = false;
+        for (let registration of registrations) {
+          registration.unregister();
+          removed = true;
+        }
+        if (removed || attempts <= 0) {
+          clearInterval(stopSWInterval);
+          console.log("removed!");
+          console.log(attempts);
+        }
+      });
+    }
+  }, 500);
+}
+
 function localeExists(locale) {
   return (
     globalThis.languageJSON &&
@@ -399,6 +463,8 @@ function localeExists(locale) {
 var __ovoIsSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 function doGetLanguageValue(locale, key, value, defaultValue, metadata) {
+  if (!globalThis.languageJSON || !globalThis.languageJSON.languages)
+    return defaultValue;
   if (!localeExists(locale)) locale = detectLanguage();
   if (key !== "" && languageKeyExists(locale, key) === 1) {
     let data = globalThis.languageJSON.data[locale][key];
@@ -423,6 +489,26 @@ function getLanguageValue(locale, key, value, defaultValue, metadata) {
     ret > 10
   )
     return 50;
+  if (globalThis.adconfigNoReligion === 1) {
+    if (
+      locale === "en-us" &&
+      value.trim().toLowerCase() === "text" &&
+      ret === "Hellish"
+    )
+      return "Dangerous";
+    if (
+      locale === "en-us" &&
+      value.trim().toLowerCase() === "text" &&
+      ret === "Hellish"
+    )
+      return "Dangerous";
+    if (
+      locale === "en-us" &&
+      value.trim().toLowerCase() === "text" &&
+      ret === "Coin God"
+    )
+      return "Coin Master";
+  }
   return ret;
 }
 
