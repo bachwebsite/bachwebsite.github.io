@@ -215,12 +215,16 @@ a {text-decoration: none; color: inherit;}
 	transform: scale(1.1);
 	transition: 0.3s ease-in-out all;
 }
-#container {
+.container {
 	justify-content: space-evenly;
+}
+#container {
+	display: flex;
+	align-items: center;
 }
 .lead { 
 	margin: auto;
-    font-size: 200px;
+    font-size: 125px;
     font-family: 'Quicksand'; 
     background: linear-gradient(90deg, rgba(60,60,60,1) 0%, rgba(60,60,60,1) 100%);
     background-clip: text;
@@ -307,9 +311,11 @@ a {text-decoration: none; color: inherit;}
 } 
 
 .context-menu ul { 
+	
+	transition: 0.3s ease-in-out all;
     padding: 0px; 
     margin: 0px; 
-    min-width: 150px; 
+    min-width: 300px; 
     list-style: none; 
 } 
 
@@ -325,5 +331,7 @@ a {text-decoration: none; color: inherit;}
 } 
 
 .context-menu ul li:hover { 
+	transform: scale(1.1);
+	transition: 0.3s ease-in-out all;
     background: darkgray; 
 } 
