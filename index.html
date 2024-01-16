@@ -2,36 +2,41 @@
 <html lang="en">
 <head>
     <script async src="https://arc.io/widget.min.js#ij3vVro9"></script>
-    <title>Breakium | Tutor for Kids</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>BREAKIUM</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <span class="lead" style="margin-left: 30px;"><a href="/g/">games.</a> <br><a href="//p.breakium.com">proxy.</a> <br><a onclick="addWidgetBotScript()" style="cursor: pointer;">discord.</a> <br><a href="/yt2/">youtube. </a></span> 
-        <span class="lead" style="font-size: 25px;">copyright breakium.com</span>
+    <div class="header">
+        <a href="/">
+        <button class="delete-button">
+            breakium
+          </button>
+        </a>
+        <a href="/g/">
+            <button class="delete-button" style="width: 150px;">
+                games
+            </button>
+        </a>
+        <a href="/p-redirect/">
+            <button class="delete-button" style="width: 130px;">
+                proxy
+            </button>
+        </a>
+        <a href="/music/">
+            <button class="delete-button" style="width: 130px;">
+                music
+            </button>
+        </a>
+        <a href="/yt2/">
+            <button class="delete-button" style="width: 175px;">
+                youtube
+            </button>
+        </a>
     </div>
-    <script src="script.js"></script>
-    <script>
-        function addWidgetBotScript() {
-    // Create a script element
-        var script = document.createElement('script');
-
-    // Set the source attribute to the WidgetBot script
-        script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
-        script.async = true;
-        script.defer = true;
-
-    // Set the content of the script
-        script.innerHTML = `
-            new Crate({
-                server: '1104851833383571478', // Breadside
-                channel: '1144877440053821460' // #🤓pov-ur-in-class
-            });
-        `;
-
-    // Append the script to the body of the document
-        document.body.appendChild(script);
-    }
-    </script>
+    <div class="main-text-container">
+        <div class="main-text"> All your tutoring needs in <span id="red" class="main-text-no-mid" onmouseleave="unredden()" onmouseover="redden()" onclick="rizz()">one</span> place.</div>
+    </div>
+    <p>all copyright is subject to breakium.com </p>
+    <script src="rand.js"></script>
 </body>
 </html>
