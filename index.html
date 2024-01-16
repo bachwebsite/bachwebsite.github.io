@@ -32,11 +32,38 @@
                 youtube
             </button>
         </a>
+        <a onclick="addWidgetBotScript()">
+            <button class="delete-button" style="width: 175px;">
+                discord
+            </button>
+        </a>
     </div>
     <div class="main-text-container">
         <div class="main-text"> All your tutoring needs in <span id="red" class="main-text-no-mid" onmouseleave="unredden()" onmouseover="redden()" onclick="rizz()">one</span> place.</div>
     </div>
     <p>all copyright is subject to breakium.com </p>
     <script src="rand.js"></script>
+    <script>
+        function addWidgetBotScript() {
+    // Create a script element
+        var script = document.createElement('script');
+
+    // Set the source attribute to the WidgetBot script
+        script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+        script.async = true;
+        script.defer = true;
+
+    // Set the content of the script
+        script.innerHTML = `
+            new Crate({
+                server: '1104851833383571478', // Breadside
+                channel: '1144877440053821460' // #🤓pov-ur-in-class
+            });
+        `;
+
+    // Append the script to the body of the document
+        document.body.appendChild(script);
+    }
+    </script>
 </body>
 </html>
