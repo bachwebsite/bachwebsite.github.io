@@ -8,8 +8,8 @@
 <body>
     <div class="container">
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search for buttons...">
-            <button onclick="searchButtons()">SEARCH</button>
+	    <button onclick="decoOn()">text-decoration: on</button>
+	    <button onclick="decoOff()">text-decoration: off</button>
           </div>
           <div class="centerre">
           <span class="gc">Over 280 games! Made by Bach</span>
@@ -1005,7 +1005,22 @@
       
       for (var i = 0; i < bubblyButtons.length; i++) {
         bubblyButtons[i].addEventListener('click', animateButton, false);
-      }</script>
+      }
+    
+    function toggleDecoration() {
+    // Get the anchor element
+    var link = document.getElementByTagName("a");
+
+    // Check the current state of text decoration
+    if (link.style.textDecoration === "underline") {
+      // If underline is applied, remove it
+      link.style.textDecoration = "none";
+    } else {
+      // If underline is not applied, add it
+      link.style.textDecoration = "underline";
+    }
+}
+    </script>
        <div id="contextMenu" class="context-menu" 
        style="display:none"> 
        <ul> 
