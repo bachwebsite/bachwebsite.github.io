@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+    #editor {
+      z-index: -99999999;
+      background-color: gray;
+      width: 100%;
+      height: 50vh;
+      border: 1px solid black;
+      font-family: monospace;
+      font-size: 16px;
+      padding: 10px;
+    }
+    #output {
+      width: 100%;
+      height: 50vh;
+      border: 1px solid black;
+    }
+    #console {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="console"></input>
+  <div id="editor">i am the editor</div>
+  <iframe id="output"></iframe>
+  <script>
+    var editor = document.getElementById("editor");
+    var output = document.getElementById("output");
+
+    editor.contentEditable = true;
+    editor.addEventListener("input", function() {
+        var code = editor.innerText;
+        output.contentWindow.document.open();
+        output.contentWindow.document.write(code);
+        output.contentWindow.document.close();
+    });
+
+    function checkTabPress(key_val) {
+        if (event.keyCode == 220) {
+            openthegates();
+        }
+    }
+
+    function openthegates() {
+        const console = document.getElementById("console");
+        console.style.display = "block";
+    }
+  </script>
+</body>
+</html>
