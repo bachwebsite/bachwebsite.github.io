@@ -1,5 +1,5 @@
 body {
-    background-image: url(bggg.png);
+    margin:0;
     overflow: hidden;
 }
 
@@ -14,6 +14,7 @@ a {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: url(bggg.png);
 }
 
 .nameofsite {
@@ -24,4 +25,17 @@ a {
 
 a:hover {
     color:blueviolet;
+}
+
+@keyframes moveUp {
+    from {
+      background-position: 0 0; /* Initial background position */
+    }
+    to {
+      background-position: 0 -20000vh; /* Move background up by the height of the container */
+    }
+  }
+  
+.container {
+  animation: moveUp 9999s linear infinite; /* Adjust the duration and timing function as needed */
 }
