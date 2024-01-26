@@ -7,7 +7,7 @@ a {
     transition: 1s ease-in-out;
     text-decoration: none;
     color:white;
-    font-size: 50px;
+    font-size: 25px;
 }
 .container {   
     display: flex;
