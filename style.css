@@ -1,41 +1,58 @@
 body {
-    margin:0;
-    overflow: hidden;
+  margin: 0;
 }
 
 a {
-    transition: 1s ease-in-out;
-    text-decoration: none;
-    color:white;
-    font-size: 25px;
+  transition: 1s ease-in-out;
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
 }
-.container {   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url(bggg.png);
+
+.ad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7vh; /* Adjust the height as needed */
+  font-family: 'Inter', monospace;
+  color:white;
+}
+
+.ad1 {
+  background-color: #2B2D31; /* Update if needed */
+}
+
+.ad2 {
+  background-color: #2B2D31; /* Example background color for ad2, update as needed */
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 86vh;
+  background-image: url(bggg.png);
 }
 
 .nameofsite {
-    font-family: 'Inter', sans-serif;
-    color:aliceblue;
-    font-size: 100px;
+  font-family: 'Inter', sans-serif;
+  color: aliceblue;
+  font-size: 100px;
 }
 
 a:hover {
-    color:blueviolet;
+  color: blueviolet;
 }
 
 @keyframes moveUp {
-    from {
+  from {
       background-position: 0 0; /* Initial background position */
-    }
-    to {
-      background-position: 0 -20000vh; /* Move background up by the height of the container */
-    }
   }
-  
+  to {
+      background-position: 0 -20000vh; /* Move background up by the height of the container */
+  }
+}
+
 .container {
   animation: moveUp 9999s linear infinite; /* Adjust the duration and timing function as needed */
 }
