@@ -1,0 +1,1502 @@
+#nav-ad {
+  width: 300px;
+  height: 250px;
+  max-height: 250px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#nav-ad > div {
+  text-align: center;
+  color: #aaa;
+  padding: 4px;
+}
+
+@media (max-height: 700px) {
+  #nav {
+    height: calc(100% - 200px) !important;
+  }
+
+  #nav-ad {
+    display: none;
+  }
+}
+
+#inventory-ad {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 120px;
+  max-height: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'roboto', sans-serif;
+  outline: 0;
+  -webkit-user-select: none;
+}
+
+html {
+  background: #222;
+}
+
+.opener {
+  width: 750px;
+  height: 170px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #333;
+  position: relative;
+  margin-top: 100px;
+}
+
+#openerDisplay {
+  width: 750px;
+  height: 170px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #333;
+  position: relative;
+  margin-top: 100px;
+}
+
+.selector {
+  position: absolute;
+  top: 0;
+  left: 374px;
+  width: 2px;
+  height: 100%;
+  background: #555;
+  z-index: 99999;
+  box-shadow: 0 0 5px #fc0;
+}
+
+.scroll-s {
+  position: absolute;
+  width: 6000px;
+  left: 0;
+}
+
+#inventoryItems {
+  height: calc(100% - 76px);
+  overflow-y: scroll;
+}
+
+.scroll-s > .item,
+#wic_div .item,
+#inventoryItems .item > .innerItem,
+#wic .item > .title,
+#shop .item > .innerItem,
+#invWeapons .item,
+#BetWith .item,
+#withdrawContainer .item,
+#wonitemscontainer .item {
+  width: 130px;
+  height: 150px;
+  background: #444;
+  display: inline-block;
+  margin: 10px;
+  transition: 0.3s;
+  overflow: hidden;
+  position: relative;
+  transform: scale(1);
+}
+
+#invWeapons .item,
+#BetWith .item {
+  display: inline-block !important
+}
+
+#moveInv.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#invWeapons,
+#BetWith {
+  height: calc(100% - 170px);
+  min-width: 50%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#moveInv {
+  z-index: 1;
+}
+
+#moveInv .image {
+  height: calc(100% - 70px);
+}
+
+.scroll-s > .item.stattrak::before,
+#inventoryItems .item > .innerItem.stattrak::before,
+#wic > .item,
+#shop .item > .innerItem .stattrak::before,
+#invWeapons .item.stattrak::before,
+#BetWith .item.stattrak::before,
+#withdrawContainer .item.stattrak::before,
+#wonitemscontainer .item.stattrak::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  background-image: url(https://mtsl.dk/csgo/images/Stattrak.png);
+  background-size: 32px 32px;
+  background-position: center;
+  position: absolute;
+  bottom: 42px;
+  right: 2px;
+  z-index: 9;
+}
+
+#topbtn {
+  position: absolute;
+  top: 0;
+  width: 200px;
+}
+
+#wonitemscontainer {
+  margin-top: 40px;
+  height: calc(100% - 45px);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#selector {
+  position: absolute;
+  top: 0;
+  left: 374px;
+  width: 2px;
+  height: 100%;
+  background: #555;
+  z-index: 99999;
+  box-shadow: 0 0 5px #fc0;
+}
+
+.scroll-s > .item > .title,
+#inventoryItems .item > .innerItem > .title,
+#wic_div .item > .title,
+#shop .item > .innerItem > .title,
+#invWeapons .item > .title,
+#BetWith .item > .title,
+#withdrawContainer .item .title,
+#wonitemscontainer .item .title {
+  position: absolute;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  background: #393939;
+  padding: 5px;
+  font-size: 13px;
+}
+
+#inventoryItems .item,
+#wic_div .item,
+#shop .item,
+#invWeapons .item,
+#BetWith .item {
+  width: 150px;
+  display: inline-block;
+}
+
+#inventoryItems .item > .itemActions,
+#shop .item > .itemActions,
+#invWeapons .item,
+#BetWith .item {
+  margin: 0 10px 10px;
+  display: flex;
+}
+
+.exceedingly_rare {
+  border-left: 3px solid rgb(255, 215, 0);
+}
+
+.covert {
+  border-left: 3px solid rgb(235, 75, 75);
+}
+
+.classified {
+  border-left: 3px solid rgb(211, 44, 230);
+}
+
+.restricted {
+  border-left: 3px solid rgb(136, 71, 255);
+}
+
+.milspec {
+  border-left: 3px solid rgb(75, 105, 255);
+}
+
+.standard {
+  border-left: 3px solid rgb(230, 230, 230);
+}
+
+.industrial {
+  border-left: 3px solid rgb(90, 150, 210);
+}
+
+.consumer {
+  border-left: 3px solid rgb(175, 200, 220);
+}
+
+button {
+  flex-grow: 1;
+  height: 30px;
+  background: #444;
+  border: 0;
+  color: lightblue;
+  font-weight: bold;
+  border-radius: 3px;
+  margin: 10px;
+  padding: 0 10px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.2s;
+  box-shadow: 0 0 0 1px #555 inset;
+}
+
+button:hover:not(:disabled) {
+  box-shadow: 0 0 0 2px #333;
+  background: transparent;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+#inventoryItems .item > .itemActions > button,
+#shop .item > .itemActions > button {
+  margin: 0;
+  padding: 0;
+}
+
+#inventoryItems .item > .itemActions > button:not(:first-child):last-child {
+  margin-left: 2px;
+}
+
+.image {
+  height: calc(100% - 50px);
+  width: 100%;
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-filter: drop-shadow(0 2px 4px #222);
+  transition: 0.2s;
+}
+
+.image:hover {
+  background-size: 120px;
+}
+
+.simpleGraphics .image {
+  -webkit-filter: none;
+  box-shadow: none;
+}
+
+.popup {
+  display: none;
+  overflow: hidden;
+}
+
+.popup.show {
+  display: block;
+}
+
+.page {
+  display: none;
+  position: absolute;
+  left: 300px;
+  width: calc(100% - 300px);
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+  color: #fff;
+}
+
+#settings {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+a {
+  color: #00c0fb;
+}
+
+.page.show {
+  display: block;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 260px;
+  width: calc(100% - 260px);
+  height: 100%;
+  background: #222;
+}
+
+#closeOpener {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 25px);
+  margin: 0;
+}
+
+#closeOpener.show {
+  display: block;
+}
+
+#btnLeftCase {
+  position: absolute;
+  top: 280px;
+  left: calc(50% - 375px);
+  margin: 0;
+}
+
+#btnCenterCase {
+  position: absolute;
+  top: 280px;
+  left: calc(50% - 42px);
+  margin: 0;
+}
+
+#btnCenterCaseBottom {
+  position: absolute;
+  top: 280px;
+  left: calc(50% + 44px);
+  margin: 0;
+}
+
+#btnRightCase {
+  position: absolute;
+  top: 280px;
+  left: calc(50% + 375px - 117px);
+  margin: 0;
+}
+
+#sidemenu {
+  height: 100%;
+  width: 300px;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: #444;
+  transition: 0.3s;
+  opacity: 1;
+}
+
+#cash {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: #fff;
+  z-index: 999999;
+  font-size: 20px;
+  font-weight: bold;
+  width: 216px;
+  text-align: center;
+}
+
+#click_cookie_m {
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  box-shadow: none;
+}
+
+#click_cookie_m_inner {
+  color: #00c0fb;
+  font-weight: 300;
+  font-size: 180px;
+  text-shadow: -5px 5px #000;
+  margin-right: 10px;
+  pointer-events: none;
+  transition: 0.1s;
+  transform: scale(1);
+}
+
+#click_cookie_m:active #click_cookie_m_inner {
+  transform: scale(0.8);
+}
+
+.fadeup {
+  position: absolute;
+  animation: fadeup 1s;
+  z-index: 99999;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0;
+}
+
+@keyframes fadeup {
+  0% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+  90% {
+    opacity: 0;
+    margin-top: -100px;
+  }
+  100% {
+    opacity: 0;
+    margin-top: -100px;
+  }
+}
+
+#overlay {
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.navlink {
+  background: transparent;
+  box-shadow: 0 0 0 0px #666 !important;
+  color: #fff;
+  border-radius: 0;
+  display: block;
+  width: calc(100% - 16px);
+  border-radius: 2px;
+  font-size: 15px;
+  height: 50px;
+}
+
+.navlink:active {
+  box-shadow: 0 0 0 2px #666 !important;
+  color: #666;
+}
+
+.navlink:hover,
+.navlink.selected {
+  box-shadow: 0 0 0 2px #fff !important;
+  color: #fff;
+}
+
+#nav {
+  position: fixed;
+  top: 200px;
+  width: calc(300px - 20px);
+  height: calc(100% - 300px);
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+#stats {
+  position: absolute;
+  top: 10px;
+  width: 280px;
+  height: 190px;
+  background: #333;
+  left: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  background: #222;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+.hide {
+  display: none;
+}
+
+#openerType {
+  position: absolute;
+  width: calc(100%);
+  text-align: center;
+  color: lightblue;
+  padding: 30px 0;
+}
+
+#rank {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background-position: center;
+  background-size: 300px;
+  color: #888;
+}
+
+#rankTop {
+  position: absolute;
+  left: 0;
+  bottom: 75px;
+  height: 2px;
+  width: 100%;
+  background: #444;
+}
+
+#rankProcent {
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(to right, #fc0 0%, #e44 100%);
+  transition: 0.2s;
+}
+
+#rankText {
+  color: #999;
+  bottom: 78px;
+  left: 4px;
+  position: absolute;
+  font-weight: 600;
+}
+
+#rankTextRight {
+  color: #999;
+  bottom: 78px;
+  right: 4px;
+  position: absolute;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+#rankTextRight > span {
+  font-size: 10px;
+}
+
+#upgrades > div {
+  height: 50px;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 1px #000;
+  overflow: hidden;
+  position: relative;
+}
+
+#upgrades > div > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#upgrades > div > .name {
+  color: #fc0;
+  font-weight: bold;
+  display: block;
+}
+
+#upgrades > div > span {
+  padding: 3px 8px;
+}
+
+#offline {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+#offline.show,
+#inspect.show,
+#betting.show {
+  display: flex;
+}
+
+#wic_div {
+  position: absolute;
+  top: 340px;
+  left: 0px;
+  height: calc(100% - 340px);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.simpleGraphics .title {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.simpleGraphics .innerItem::after {
+  text-shadow: none !important;
+}
+
+#inspect {
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  align-items: center;
+}
+
+#inspect_image {
+  height: 600px;
+  width: 600px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+#openHere {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 350px);
+}
+
+.mt1_cases .opener {
+  margin: 40px 0 !important;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
+
+#betting {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.betting {
+  width: 75px;
+  height: 75px;
+  background-color: #333;
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 2px #444;
+}
+
+#Coinflip {
+  background-image: url(https://mtsl.dk/csgo/images/coin.png);
+}
+
+.combo {
+  margin: 10px;
+}
+
+.combo > div {
+  display: inline-block;
+  float: left;
+}
+
+.betting-right {
+  height: 75px;
+  width: 150px;
+  margin-left: 2px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background: #444;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px #555;
+}
+
+.popup {
+  color: #fff;
+}
+
+.tradeOptions {
+  position: fixed;
+  bottom: 0;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  padding: 15px;
+}
+
+.popup h1 {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0 auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.actions button {
+  flex-grow: 0;
+}
+
+#coins {
+  width: 540px;
+  height: 270px;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 135px);
+  left: calc(50% - 270px);
+}
+
+#coins.select {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+#coins > figure {
+  flex-grow: 1;
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #444;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  display: block;
+}
+
+#coin_ct {
+  background-image: url(https://mtsl.dk/csgo/images/coin_ct.png);
+  transform: rotateX(0deg);
+}
+
+#coin_t {
+  background-image: url(https://mtsl.dk/csgo/images/coin_t.png);
+  transform: rotateX(0deg);
+}
+
+#coinflip {
+  perspective: 250px;
+}
+
+.flipToCT,
+.flipToT {
+  opacity: 1 !important;
+  pointer-events: none !important;
+  transition: 7s linear;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+}
+
+.flipToCT #coin_ct,
+.flipToT #coin_ct {
+  transform: rotateY(180deg) translateX(calc(50% - 260px));
+}
+
+.flipToCT #coin_t,
+.flipToT #coin_t {
+  transform: translateX(calc(-50% - 10px));
+}
+
+.flipToCT {
+  transform: rotateY(1260deg);
+}
+
+.flipToT {
+  transform: rotateY(1080deg);
+}
+
+#invWeapons {
+  border-right: 1px solid #555;
+}
+
+#BetWith {
+  border-left: 1px solid #555;
+}
+
+#cf_output {
+  text-align: center;
+  font-weight: bold;
+}
+
+.tradeOptions p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#tradeValue {
+  color: #00c0fb;
+}
+
+.split {
+  margin: 10px 0;
+  height: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #555;
+}
+
+#sidemenu[style="opacity: 0.3; pointer-events: none;"] {
+  pointer-events: none;
+  opacity: 0.7 !important;
+}
+
+#navtoggle {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 48px;
+  width: 100%;
+  background: #333;
+  z-index: 9999;
+  background-image: url(https://mtsl.dk/csgo/images/menu.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+}
+
+#navtoggle.open {
+  background-position: 275px center;
+  background-image: url(https://mtsl.dk/csgo/images/close.png);
+}
+
+@media (max-width: 600px) {
+  #sidemenu {
+    overflow: hidden;
+    position: fixed;
+    margin-left: -260px;
+    z-index: 9999;
+  }
+
+  .page,
+  .popup {
+    width: 100%;
+    height: calc(100% - 48px);
+    left: 0;
+  }
+
+  #navtoggle {
+    display: block;
+  }
+
+  #sidemenu.open {
+    margin-left: 0px;
+  }
+
+  .closeMenu {
+    pointer-events: auto !important;
+    width: calc(100% - 250px);
+    height: 100%;
+    left: 250px;
+    top: 0;
+    position: absolute;
+  }
+
+  #click_cookie_m {
+    height: 200px;
+    width: 200px;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+  }
+
+  #openerDisplay {
+    transform: scale(0.4);
+    transform-origin: 15px;
+  }
+
+  .opener {
+    transform: scale(0.4);
+    transform-origin: 334px;
+  }
+
+  #btnLeftCase {
+    top: 234px;
+    left: calc(50% - 155px);
+  }
+
+  #btnRightCase {
+    top: 234px;
+    left: calc(50% + 155px - 117px);
+  }
+
+  #nav {
+    position: absolute;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch !important;
+    width: 252px;
+    height: calc(100% - 200px);
+  }
+
+  #nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navlink {
+    box-sizing: border-box;
+    width: calc(100% - 12px);
+  }
+
+  .tradeOptions {
+    position: fixed;
+    bottom: 30px;
+    left: 0px;
+    height: 95px;
+    background: #222;
+    width: 100%;
+  }
+
+  #inspect_image {
+    height: 200px;
+    width: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    background-size: 100%;
+  }
+}
+
+#sortDropdown {
+  display: inline-block;
+}
+
+#pn,
+#pn2 {
+  width: 40px;
+  padding: 6px;
+  text-align: center;
+}
+
+.dropdown {
+  position: absolute;
+  background: #444;
+  margin-top: -10px;
+  z-index: 9999;
+  border-radius: 4px;
+  margin-left: 10px;
+  display: none;
+  padding: 10px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 150px;
+}
+
+.dropdown > button {
+  display: block;
+  box-shadow: none !important;
+  transition: 0s;
+  border-left: 3px solid #444;
+  width: calc(100% - 23px);
+  box-sizing: inherit;
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 0;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.dropdown-container {
+  display: inline-block;
+}
+
+.dropdown > button[r="up"]::before {
+  position: absolute;
+  content: "â–²";
+  right: 0;
+  top: 0;
+  height: 44px;
+  line-height: 44px;
+  right: 10px;
+}
+
+.dropdown > button[r="down"]::before {
+  position: absolute;
+  content: "â–¼";
+  right: 0;
+  top: 0;
+  height: 44px;
+  line-height: 44px;
+  right: 10px;
+}
+
+.dropdown > button:hover {
+  border-left: 3px solid lightblue;
+}
+
+.dropdown-button:hover ~ .dropdown,
+.dropdown:hover {
+  display: block;
+}
+
+.betting-right h3 {
+  position: absolute;
+  top: 4px;
+  font-size: 13px;
+  color: #999;
+}
+
+#jp_selector {
+  height: 100px;
+  width: 500px;
+  overflow: hidden;
+  background: #333;
+  margin: 0 auto;
+  position: absolute;
+  left: calc(50% - 250px);
+  top: 150px;
+}
+
+#jp_selector::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 0;
+  background: #00c0fb;
+  box-shadow: 0 1px 2px #00c0fb;
+}
+
+#jp_inner > div {
+  min-width: 100px;
+  min-height: 100px;
+  color: #777;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 100px;
+  text-align: center;
+  background-position: center;
+  background-size: 100%;
+  background-image: url('image/profile0.jpg');
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+#jp_inner {
+  display: flex;
+}
+
+#jp_inner.start {
+  animation: select 7.9s;
+  margin-left: -3200px;
+}
+
+@keyframes select {
+  0% {
+    margin-left: -0px;
+  }
+  100% {
+    margin-left: -3200px;
+  }
+}
+
+#jp_joined tr > * {
+  padding: 5px;
+}
+
+#jp_joined {
+  position: absolute;
+  top: 260px;
+  left: calc(50% - 250px);
+}
+
+#jp_joined img {
+  height: 40px;
+}
+
+#jp_winlose_output {
+  position: absolute;
+  top: 154px;
+  left: calc(50% - 242px);
+  z-index: 9999;
+}
+
+#jp_output {
+  text-align: center;
+}
+
+.jp_player {
+  box-shadow: 0 2px 4px #fc0 inset;
+}
+
+input {
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid #555;
+  background: #222;
+  box-sizing: border-box;
+  padding-left: 6px;
+  color: #fff;
+}
+
+.rankNeeded::before {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  background-image: url("");
+  background-size: 170px;
+  background-position: center;
+}
+
+.rankNeeded[minrank="1"]::before {
+  background-image: url("images/rank1.png");
+}
+
+.rankNeeded[minrank="2"]::before {
+  background-image: url("images/rank2.png");
+}
+
+.rankNeeded[minrank="3"]::before {
+  background-image: url("images/rank3.png");
+}
+
+.rankNeeded[minrank="4"]::before {
+  background-image: url("images/rank4.png");
+}
+
+.rankNeeded[minrank="5"]::before {
+  background-image: url("images/rank5.png");
+}
+
+.rankNeeded[minrank="6"]::before {
+  background-image: url("images/rank6.png");
+}
+
+.item .price {
+  position: absolute;
+  top: 99px;
+  left: 0;
+  background: #333;
+  width: 100%;
+  padding: 0 3px;
+}
+
+#moveInv .item,
+#withdrawContainer .item,
+#wonitemscontainer .item {
+  height: 169px;
+  width: 140px;
+}
+
+#roulette {
+  overflow-y: hidden;
+}
+
+#rouletteWheel_INNER {
+  width: 7104px;
+  position: absolute;
+  left: 0;
+  transition: 0.3s;
+}
+
+#rouletteWheel::before {
+  content: "";
+  width: 2px;
+  left: calc(50% - 1px);
+  height: 100%;
+  background: #fff;
+  top: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+#rouletteWheel_INNER > div {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  line-height: 48px;
+  text-align: center;
+}
+
+#rouletteWheel {
+  overflow: hidden;
+  height: 48px;
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.rou_betOn {
+  color: #fff;
+  box-shadow: 0 0 0 0px #fff;
+}
+
+.rou_betOn:hover {
+  box-shadow: 0 0 0 2px #fff !important;
+}
+
+.rou_betting_div {
+  display: inline-block;
+  text-align: center;
+  background: #333;
+  margin: 10px;
+  margin-top: -26px;
+  border-radius: 3px;
+  padding: 5px 0;
+  padding-top: 20px;
+}
+
+#rouletteWithdrawMenu {
+  z-index: 9999;
+}
+
+#withdrawContainer {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch !important;
+  height: calc(100% - 127px);
+}
+
+#withdrawSearch {
+  margin-left: 10px;
+}
+
+#rou_betting_amount_controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#rou_betting {
+  width: 100%;
+  text-align: center;
+}
+
+#rou_betting_bet_controls {
+  display: flex;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.rou_betOn_container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#rou_betting_bet_controls.offline button {
+  pointer-events: none;
+}
+
+#roulette h1,
+.popup h1 {
+  text-align: center;
+  padding: 30px 0px 10px;
+  text-shadow: 2px 2px 2px #a92727;
+}
+
+#roulette p,
+#rouletteWithdrawMenu p {
+  padding: 0 10px;
+}
+
+#r_coins,
+#w_coins {
+  color: #85f3a3;
+  font-weight: bold;
+}
+
+.rou_history_element {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  display: inline-block;
+  text-align: center;
+  line-height: 32px;
+  margin-right: 10px;
+}
+
+#rou_history {
+  padding: 10px;
+  height: 32px;
+}
+
+.fn::after {
+  content: "FN";
+}
+
+.mw::after {
+  content: "MW";
+}
+
+.ft::after {
+  content: "FT";
+}
+
+.ww::after {
+  content: "WW";
+}
+
+.bs::after {
+  content: "BS";
+}
+
+.innerItem::after,
+.item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px;
+  text-shadow: 0 1px #000;
+}
+
+.mw .image,
+#inspect_image.mw {
+  -webkit-filter: brightness(0.9) grayscale(0.1) drop-shadow(0 2px 4px #222);
+}
+
+.ft .image,
+#inspect_image.ft {
+  -webkit-filter: brightness(0.8) grayscale(0.3) drop-shadow(0 2px 4px #222);
+}
+
+.ww .image,
+#inspect_image.ww {
+  -webkit-filter: brightness(0.7) grayscale(0.5) drop-shadow(0 2px 4px #222);
+}
+
+.bs .image,
+#inspect_image.bs {
+  -webkit-filter: brightness(0.6) grayscale(0.8) drop-shadow(0 2px 4px #222);
+}
+
+.simpleGraphics .image {
+  -webkit-filter: none !important;
+}
+
+.bg_roulette {
+  height: 148px;
+  width: 100%;
+  position: absolute;
+  background: url(https://mtsl.dk/csgo/images/Csgo-de-lake.png);
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  -webkit-filter: grayscale(1) brightness(0.4);
+}
+
+#rouletteBack,
+#rouletteDeposit,
+#rouletteWithdraw,
+#withdrawContainerClose {
+  background: transparent;
+  box-shadow: none;
+}
+
+#rouletteBack:hover,
+#rouletteDeposit:hover,
+#rouletteWithdraw:hover,
+#withdrawContainerClose:hover {
+  background: #333 !important;
+}
+
+a:active {
+  color: tomato;
+}
+
+.rankup {
+  animation: rankup 1s;
+}
+
+@keyframes rankup {
+  0% {
+    background-color: transparent;
+  }
+  20% {
+    box-shadow: 0 2px 4px #fc0 inset;
+    background-color: #d29c3f;
+  }
+  80% {
+    box-shadow: 0 2px 4px #fc0 inset;
+    background-color: #d29c3f;
+  }
+  100% {
+    box-shadow: 0 0 -2px #fc0 inset;
+  }
+}
+
+.navlink:nth-child(1) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB1ElEQVRYR+2WUU4CMRCGO+EAcgP1BOoN5ATGE+hLG97gBsoN8I1MeagnEU6g3oAj4CsJjJlNS0rpQrsNiw/uCzQL+b/9Z+afBXHmC86sL7IApJRjAHiw0AYRR6UPkAxgxQeB4AgRX0sgkgGUUkshxAUR3bEgAHwKIRaIeN0WALEQIlbQSqmdc1OIHAf+Af6mA0TEzclNOeZPIhq6c8qYFvfAkeY7OqbFAMFYsgPbMXXuWEfMarUaGWMqx9xVDFA3lm5MfTEietNaVyVqE+CRiBY2uLY50hrAseCKlkApxfn+5C+dMPlKz7UOWPGXoHYGAJ79KM6N3rro3nNASsn1utxsNj0AWALAjJeQE3SWtgIwnU5nUspbH+LkAK4EdoZ7WusvH+LkAHbVGm7CGAQidnPtP7S+a4NIKRWFYEdaAahzool4IwecUMyJXAjbQ/wK9xOWMGkXlEJ42fKOiFWeNInivZ5IcYKfXgjxAQBd3pRhDyU5ECsHET1yThyCCMT3NiH/NwvAb0z+TkTsitFaz30QKzxw8U1Ec631fQw2G8BC8LLa2Rd1TsTeARr1QCjQ7/ev1uv1EAD4yW6C+99ENOt0OuPJZLI4VKZGDqQ0X+pvzg7wCzBAjDBbet/YAAAAAElFTkSuQmCC") !important;
+}
+
+.navlink:nth-child(2) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA/ElEQVRYR+2Xwa3CMBBEZw85QweU8KEDqOSHw25R3gPuBEqADijhc85hv4wUCRHH4CgiCOxrPJ6Z51WiECZeNLE/SoD3JlDX9byqqj0RLYfMipkdm6bZeO//+vRJAiLiAfwOMW81ZuZVdZsdgJlrItoBuJjZWlWPOUGYeUlEBwAzM9uqaijTWVECQQwgoJ+nxI8CtSXMLFzBJlYiGkBEQtufRwY5z8M8qOrqXtMXwHIOf3avc67jlwwQEzxrdrtPRK6FPiMAM5+JaBEj0XfPoxJIBQBwcs51XlqjBigzUAgUAoXAdxEY0jalyf4aThZgbOPUee/9X/AKEoXAPyJNxyGFOqc6AAAAAElFTkSuQmCC") !important;
+}
+
+.navlink:nth-child(3) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABpklEQVRYR+2VwU3DQBBFZ3zIFaiApAKgA6gAqAAfsqPcgApIKiDcoplImA6gAugAqIBQATnn4EGLvMgyYb1rE4VDfIv0d/z8/58NwpofXPP7YQOwceD/OUBELwCwV9qOS2Yer2pbfjiwBACSJOlNJpPZKiC8ERBRBgBnALAyF7wAxpgUEW9V9UFETowxM0TcbeHEHTOn5fNegMFg0M3z/E1V5yKyU3KkKcMpM98HA1ih+2pVPRARW9Doh4jUHlosFjtZls2jANr2oN/vHyZJ8ggAr8y8X6WvvQeqPYj9fGPMGBHPVfVGRC6iAao9iAVwa53n+dF0On2KBmjTgzRNtzudzoedwcxL3a6NwB5u2oOQ+IIAQgYtiyYEPAjA9SA2f6f3XeVBAEUMtsHXsRC/td/NCQYoymhX6rg4nDHzqApUrJ1XE3URObHb58oLR8w8jNE0WsMiAnuFbtkr2f5GxGcAmDFzzw0lolrNnwKo6ruIdH0AVU0bAGv1lS8CIqrVNAYoYhiq6tf/OSLaEn7nX3KhVtOohLHrF6qPWsPQoTG6DcDaHfgE/Or3IQeeyHkAAAAASUVORK5CYII=") !important;
+}
+
+.navlink:nth-child(4) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACc0lEQVRYR+2XUW7aQBCGZ5DFa+gJQk5QcoLQE5SeoEZiV7w1PUGTGyRvaAap7glKbhBO0OQEpScofbWEpxrklVbL2tjQiDzUT5bY9X7zzz8zC8KJHzzx+fAf4PUpYK2VY3xBRK2C2ln8agDaRuLAdZ8xZoWI30VkwczLOkUrFdgHYIwZIOKPTqdzMZvNVj6Ar6KIrBHxEQAWeZ4/ZFm29oGOAbhDxHMAWBLRnQ8wmUyGiDhCxCEAvHUHisgvZu7/EwBr7VNRFNeIeMPMQx9AD0jTtJckyVWSJM+bzUZh34vIPTNfHwxgrc1ERJh5HOY1BDDGqOx9jVjfEfEKAD4Q0eIgAD0cAD6WmzWfYz+fgQc0yhQAzvI8v+x2u791X8xXjTwQHL5lEJHMVyL0wHw+fzTGLBBRwbUilpqqULm9ANbaGwD4UlFKt0Skv0OYArfeGKP5/wQAn9WsrQHKmla3x54VEV3sAdCecC4il8z81BrAWqt1exY73S+rmALT6bRfFMVPAPhDRL3YN/amoKzpDBF7IrKNABEH2mBEJNVcVylgjEkR8SsAfCMiNeXOsxfA31GaUd2887GYAqUJtf7HzKxmPA6g9IO4vAdw2ynql5pLX57nb8IW7PbWKqDdTkTUwbexEqoDcLMCAJ6JaFBh4t0rWTDVtGz6OkxiJVQH4Mo31n79fbUKhBOvKoqYCV37LYrinTPq0R5oCqCDqK79NlKg7rC639SE1tpR2X4fmFnfK58XuZJ5syPafmsVODRyf59r3+621EqBtgBqVB29TW4/jUzYFsBfX/b+kYjolWxd1X5fPAVtgmj1J6LNh5uuPTnAX9aLsTAVOVuAAAAAAElFTkSuQmCC") !important;
+}
+
+.navlink:nth-child(5) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADVklEQVRYR+1WXU7bQBCeWUPEW3OEcALSG6QnIJwAI+EVj+EETU9QHtEaCecEDSdobkA4QXOE8Ia8eKf6rN3IcuzEtEi84JdEXu/MN99888P0wQ9/sH/6BPAmBq6urgZFUZwy80hEBsw8RApFZMnMKxFZRFH0cHt7u+qa2k4AvOPvzBx3MSwiWRRFP7oA2QtAaz0WkXtm7nvnM0RKRMs0TZd4lyQJmBiCGSI696ysmfnCGDPfBXongCRJYma+9wYfoiiavLy8rA8PD8d4x8wDf1ZSbq2dHx0d9YuiuGHmU392kaZp1gaiFQAiJ6Jf/uJ1nufZwcEBohxba6dwFChGijywqYjMX19fl71eD+n66e+ftTHRCMDn/NHTfm2MuUmSZGGtHWdZtt5FaRzH/V6vtzDGDLXWE4AQkbW19rjpbiMArTUoOxeRByKaIr9NNPrcU9BCFRice61MfTpmxpgtEW8BQPTOuT8wppQ6xq9zblin0Dv/7Z1+q4NACpVSpUir9uqVsQUg0EZEM+dchpynaQoqN09wHioDFBNRE4jM25h4Fsp0Vm1tAUiSZI6PRaRULxipoq47D8aaQEAPyHuoJqQ0TdOygsLTxABoOxGRr0Q0j6JoFAB4gaHkvoChUPPhf11sXszoGWNmfkTHTNMUdncCEJwaYxoF6qMZQVBa6823SZKAWjhorPnqt50B4FIbEBhpM1qrhtLGWwBsUgBlhzw21f4+ABUNoIE9EtET+kNnEfrePm/rYvsAXF5ejpRSMfoBWnpXEZbdC8JCnmHk7u4OQtp6ugDA3VBZRLS/DOuNyDk3VUpNm0brLgDeTnn3TY3Ii6tsxShDY8yZ1rocMk0tt4kZ9Ao0MGPMtBJ9t1YMgx49xIh6v0YOrbUrjOFdoxV3UaYYy5icSikIDul8zvN80HkYeRY241hEJli1nHOxc26hlOrXhekXlxUiV0qhBeP+v43jQGt1IUE6lFLXRVH0RaTvowtb0to5h71wHUUR/sNx2XJDS29KFd51WsmICJpAOmAQA2ohIk/VlYyZ0b5Hlb3xmYji/1rJAuqg6ErvbwsovJ/leT7Zt7x0YqDqyQPBkopIsQ+e+PMnEUH+oY95l224dRruC+29z/dq4L0d1u19AvgLTg1IP8B8Zw8AAAAASUVORK5CYII=") !important;
+}
+
+.navlink:nth-child(6) {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADAUlEQVRYR+1XUU4bMRCd8Sr5BU4AnAA4QeEEJSfoVsIWf4UTkJ6A8IfsSGxPQHIC4ASkJ4CeoPC7KzzVi+xos9mErIBGleqfRLv2ePze85tZphUPXvH+9G8mYIx5IqK1Mnoi8uSc22iKaGMEjo+Pt7z3D3UbKaW2Ly8vH5sk0TgBY8whEV2LyJ1zbh+baa1vmfkTEXWstYMPTUBr3WPmb0T03VrbxWbGGPyeiciFc+7kzQkA5peXl2siypIkGQJWrfUuEZ0z8/jU5dNGVPBQRG6J6NQ5NwpxPhNRmiRJp46eWgq01gNmxsLxEJERMyMB/P/FzL08z7MsyyBGStN0vdVqgZouM29W14QwA2ttp4rOTAJHR0f7SqkbInomIvCJwFHxp9ba3iKIjTGg4DzMmYrhvT/o9/tAaDJmEjDGjIhop8LxoYg8AtZl+AVdzLwVBVnSyMg5tzc3Aa11ysxXmJDn+UaEuLopUGLms5IeBt77i+rp4jpQ1G63fwdqvjrnsvhuCoEgNPC/Cd6JCJOnTh1PMweJyc2I70PMK2gI+gGl5ZgzFIRswdMO3C1Jkr2o3oo+uhAiNmq32ykECK2UeQ634J6Z14noZ57n+1VUa29BSAKOtlZ2t5LhzIgxik9Ehs45CBcGBS3c4yBFUWzXUTrXCY0xgiDW2smc+KxOH2WLrltTfrbwFsSXK00gGMsDuKtQEA3q4ygIm98E53tWSu1WRQhOIbqiKH4AsVar9QXuiP9VEXrvcYvWcKuKojhYKMIgGtSALahWRNL3uIbMjNsCc3sUkc7ca9jQiE5ivYDyRaT3ZiMChO9lxSKy2e/3hyHmuFwDVWvtuKjVOiEeRrMJPI+LUTASVMIT59zFssWoGmOpYhQMZKocI/PAIV7DoOCCw0o5hhBRCaEfjPIaJD8xqFd9IJgKTp8ppQalhgTdEFovjEn7VWlI7ogISI0bEu89XDFVSh0u3ZAsgvivtGSvcLzapnTlbXm4VjMfJmjhrLUou41G4++CRtGXmPw/gT/BAjA/brfZMwAAAABJRU5ErkJggg==") !important;
+}
+
+.navlink {
+  background-position: 10% 50% !important;
+  background-size: 32px !important;
+  background-repeat: no-repeat !important;
+}
+
+.navlink:nth-child(1):hover,
+.navlink:nth-child(1).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABsUlEQVRYR+2X0VHDMBBEdyuADoAKIB2QCphUAB1AB5AOQgehEpIKgA4oASo4Zo2UEbIUSzJJ+EB/sjxzT3t3ezZx4MUDx0cVgJktAFw56CXJ+dgLFAO44LdRwDnJhzEQNQAfAI4ATFzAFwDvJM/2BWAKRLKDNrMf+1aIGgX+Af6mAgBUnFpqUa07vy9p09E1MFB8g236GwBhW4on3Ht19HwJQEDhs3InjNuudB8p9EjSp6g7Gq1Azhc8IICZDAuAjGvjIx5s5wBDxpUEMDP5+3U4dEolH1LEn2cVcMHvo9ypgG5SEpZacM66ewqYmfJ1AmDqenzlhtB30bhZUBrYv9cEQHJlZhcANhD7AFD+lQL165TkawixcwA3apVzFWEPguRxrfzbxne2Dc0sCSFF9gKQU6IleJMCQfX2lKiFcDUkJ/yMU1jkhKl01EAE3vJEsvOTFituUsLd/hmAincS11CRApl0zOQT25SIgvcmYdU0TEDokVTRD8o6BHGB9Q/h5V6TvEzBVikQQHizKimF5M2rayCOZGan7vtPNzuPzt+cfS9IarZkV5MCJdcufefgAF/rdDgw45FX7gAAAABJRU5ErkJggg==") !important;
+}
+
+.navlink:nth-child(2):hover,
+.navlink:nth-child(2).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA5ElEQVRYR+2X6w2CQBCEv6lAO7AEtQOtRKlMO9ESsANL0ArGnNHECMcrBIje/mWHmf32wkOMXBrZnxRg2gRsz4ETsOp4VnJgK+kW01cSsH0Edh3N37KjpKx1ANt74ADcgY2kME3jsh2onYEZkEkKwxSqlMBLHNCHFUTFdWk+hggrCKsoDBELEBqXdQYtr+eS1t+aWAC3vHmjdkkFv8oAZYJGTl9Ntp8D/UYA21dgESFRuudeCdQEuEgqPLR6DZDOQCKQCCQC/0Wgy7RVmtZvw9EC9G1cSWVIs8YfpUOGmvaf0RAkHjd3rCEPT3CUAAAAAElFTkSuQmCC") !important;
+}
+
+.navlink:nth-child(3):hover,
+.navlink:nth-child(3).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABc0lEQVRYR+2Vb1XDQBDEZxRAFUAVQB2AAkBBcQAogCoAFFAcUAXggKKAooA6GN7y7vouIfT+hLzwIfd5bvO72dkN0fNhz9/HADA48P8ckLQEcBBMxxXJu66m5YcDDQD27THJVRcQW1sgaQ5gCqAzF2IA5wAeACxInkoyF/ZaOPFI0mpuTgxgH8A7gDXJUeBIKcMZyadkABMGr56QtIBmH0lyl0Yk17kArXIg6QjAM4A3kod1+ugekFTJQe7zJdkIXwC4J3lZAlDJQQGA3yvHJF+yAdrkQNIugE+rQbLR7WgLHEBRDlLalwpQlIOURZYK4HOQGwGv/3WVJwG4NliCbwsIGtPv6yQDOAgbqRN3eU5yVgdyY7dVk7WIvDiY5/D+jORNjqZoDN3rbYXuAJi4Iq8AViTHAUBU89cAHyQtoN9HUhNARdMGwKy+rhWotyCqKQZwL7QP+P+5hXDT/8CFqKYohAXjl3QlawyTKmaKBoDeHfgCiaOyIQzt2Q8AAAAASUVORK5CYII=") !important;
+}
+
+.navlink:nth-child(4):hover,
+.navlink:nth-child(4).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACG0lEQVRYR+2X3XETQRCEv44AiAA7AnAEmAiACLAjACLAZGAiwEQAZCBHAI4AEQEmgqZadec67/2uhEt+YF50qtPs9kx3z67EnkN73p//AO5fB2x7F11Iqiqq9+N7A6C2khZ48myvgS/AV0mXUx0d7cAcANtPge/AoaR1AaBL4zWwChjgm6R8v4ldAJwDj4FLSecFgGPgJZDPJ539fkk6+FcAfgBvgTNJx10A2cD2Q+AZcAUE7Avgo6TkbNcB2xdZW9JpyesAgLT9IBXbznPAvJIUKuoBNJu/bjKzyGmXz4KCVHkCPACOgN/JG9LVIg0Um7foL7qdKDUgaWU7QNO1OCJaiSZuxSwA22fA+xErfZCU9+F8o/yyStvh/w3wLmLdBkA8HbUPxVrS4QyANv9IUoRb3YH4NlwOxY2thjpgO5b7CfyRFFf0YgkF4S08ZoG2ggyhADsJ12MdsB0hfgI+S8pzPYBuRiPG8NxbbKQDEWH8H8ekiJ0BhM/MgQ3vBbieCG239D0qR3CbO0mB7bQ8Co7aexaaAtA5K64khbLBmAMQ20RIqyELzQBo7dsbv928OQC3TryxKoZE2Bm/z1uh7qyBpQCag2h0/C7qwNRmU++aC0mO4ozfnP95Ho07uZJ1zo7B8TvZgW0rLwTZjt/NbamqA7UAGrtlMM3efhaJsBZAUXks217FrsfG751TUFNE1Z+ImoWX/nbvAP4CUVNgMCnrn+AAAAAASUVORK5CYII=") !important;
+}
+
+.navlink:nth-child(5):hover,
+.navlink:nth-child(5).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACuUlEQVRYR+2W4XETQQyFnyqAEkgFmA5CBSQVYDpIKsBUQDqAVEBSAemApAIoIalAzLdIN5vzrm8dM5M/2Zkbe+yT9PT0JK3pmY89c3y9ANiLAXd/I+mDpGNJfF9FCW8l/ZF0I+nazPg+dIYARODPktZDXqXvkr6MAFkE4O4nkr5Jeh3BLyPTWzMjc7k7TPDAzMd4717SJzO72gV6JwB3J2OCc64lnUnCMaA4lIGTlBMMoBdRKv4DBIw0TxdAZP4jrM71j1ayJPiGQElxlAhg/A4ImAH817A/7THRBBAOf0U252Z24e4I7MTMCNQ97g4DN2a2cncYAwQ2Ry3bHgCypZbQTlarFo1Re6UWalQRHNDY0zmXZrYl4i0Akf3vcHYUnwB4JKYI/jP+fz8HESUsIpU0+Zt3RgtA0obaYQLa+W06VfDsDChugcCeB3tYKOWsfbUAkCkvF/XCSI26ETz9bYFAD9S96iaGVHZQsWsBgLa3kt6Foo8rtZMxLfeKmlY9n98fiS3KWcQrCVEzO/A7nRYAL8jMegJFSIBau/v0rrtDLQGaPV+/OwwAox4QnPSczvRSfOwDYCoBys46thp/CUClAQYYJbhjPiwxMIkwZvtVb4oNAGA3UDJ0wEgfEuHUhlFn6o2DrTMCAFt3z6SG2pAFUw8iJtmmtVp3AYgOKLZ7DaIQV45i6D9197JkWiO3w0xZWma2qbIfG8UBABYQI/3OJqQE9D9Ou6s1bKk5lOcdgWX0wOoeXkbhiOGR6xhdsJhSUEy4+W7g/QIyR/iT13HSOruQEBA2mIY8ZFjvAhhjEvKQdY7cp11IKhCZEeXgUAJKQk/XVzLGd7Yd70H7+qArWQUCTSDEvO+1tFf/xm44W7q8NJfRLs/RWjCS13Ky5txV13K65f9ey5fSPeT/xWv5Ic5HbF8A/AV94HAwz96SnAAAAABJRU5ErkJggg==") !important;
+}
+
+.navlink:nth-child(6):hover,
+.navlink:nth-child(6).selected {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACkklEQVRYR+2X/VEUQRDF34tAiQCMQIhAjUCIQIxAjECNQIlAiECIAIjAIwIxAiGCtn5bPVuzc3vcrXB1WuX8s7V78/H6vdfdc9aGhzd8vv5NABFxK+lJw96t7a2pjE5mICJ2JP1YcNAz2zdTQPwJgH1J3yRd2X7JYRFxKemFpAPbZ+sG8EXSO0mfbH9MADw/SDq2ffRgAEkzUZ5IOofWiNiV9FlSF3UdbUQUVvgOG+9tz3Kf15IOc/6cPKMSRAQ0srCMmSQAMH5KgoUT25gRCZ5KAgRMbOe8eg2fzmwftOzMAYgIIryQdMei3Lg4nsg4fOGICCSAKUa7xyvbMNSPMQAgf95oTHQ30LqKvinXTjFkRBSPzGzvLQQQEWj1NSdsFYrbQ5MlTFf8AFMYcBBdWZcS/cr3t7bxVjcGDCRyNkNHomXyIOoqmjEy+syoDsc7BMUT/+zXe45JgKGIBBkw2V4pLo0/oLVEAnO845Ve58yC75LY8xrGWlYXZQELSBk27KtbVXDmzFiZj7TFM2QHUQOAQNiny5p7TVhRF51Gdg8yIrpvkub8UZfosTX1t78fQLqWhoMUtQSlQK1PgjycQoR+FJLdEROiJaY7TTrfZHXktTUhWYSXePLbwAdjaUgPoOXi2sNHSkOyhazC2HTMPrVbAFMKESW39ItzGHhwIcrUeaxSvG0bYKRjKcXXtktTm6+EObk0I7QqzQgzMo5sH4+VwCp962bU7rG8GSWIth3jBzRkoCMRUXDqdowRORz/MOo1vPcFamkdyKICCMxDHy8XEloxVy9Gf/1qLiRXyVS5kFAV8RY9YLULyRKK138lWwJg45fSzV7L06Rjf0zubJdsuY/EwW+T/xesvPOKE/8D+A3SA3ww/e5/1gAAAABJRU5ErkJggg==") !important;
+}
+
+.gv {
+  padding: 10px 10px 0;
+  color: #aaa;
+  font-size: 12px;
+}
