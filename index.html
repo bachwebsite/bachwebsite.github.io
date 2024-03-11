@@ -1,69 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XERNXVBLJ4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-XERNXVBLJ4');
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>breakium</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script async="" src="https://arc.io/widget.min.js#ij3vVro9"></script>
-    <!-- Google tag (gtag.js) -->
+    <title>Breakium</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jacquarda+Bastarda+9&family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap');
+.container {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+div {
+  display: block;
+}
+html, body {
+  height: 100%;
+  background-color: rgb(18, 18, 18);
+  color: white;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+}
+html, body {
+  height: 100%;
+  background-color: #008080 ;
+  color: white;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+}
+#canvas {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+  .btn {
+  font-family: "Manrope", sans-serif;
+    color: black;
+    filter: drop-shadow(#3ab09e  5px 5px 10px);
+    padding: 15px 100px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(top, #c9ffe5, #5f9ea0);
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+  }
+.btn:hover {
+  color: white;
+  transition: all 0.3s ease 0s;
+  background: -webkit-linear-gradient(top, rgb(7, 113, 143), rgb(0, 53, 68));
+}
+.sml {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+    text-align: center;
+    background: -webkit-linear-gradient(top, #c9ffe5, #5f9ea0);
+}
+ .button-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the column width as needed */
+        gap: 20px; /* Adjust the gap between buttons */
+        max-width: 800px; /* Adjust the maximum width of the grid */
+        margin: 0 auto;
+        justify-content: center;
+      }
 
-</head>
-<body>
-    <div class="ad ad1">
-        FOR NEW LINKS JOIN THIS -> <a href="https://discord.gg/vmFUQTKnEQ">https://discord.gg/vmFUQTKnEQ</a>
-    </div>
+      .button-grid .btn {
+        padding: 15px;
+      }
 
-    <div class="container" id="container">
-        <a href="/yt2/" style="color: white; font-family: 'Inter', sans-serif;">youtube</a>
-        <a>•</a>
-        <a onclick="addWidgetBotScript();" style="cursor: pointer; color: white; font-family: 'Inter', sans-serif;">discord</a>
-        <a>•</a>
-        <span class="nameofsite">BREAKIUM</span>
-        <a>•</a>
-        <a href="/g/" style="color: white; font-family: 'Inter', sans-serif;">games</a>
-        <a>•</a>
-        <a href="/p/" style="color: white; font-family: 'Inter', sans-serif;">proxy</a>
-    </div>
+      /* Media query for smaller screens */
+      @media (max-width: 768px) {
+        .button-grid {
+          grid-template-columns: 1fr; /* Make a single column layout for smaller screens */
+        }
+      }
+  
+p, h1, h2, h3, h4, h5, h6, span, hr {
+  background: -webkit-linear-gradient(#00755e, #66ddaa );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#title {
+    font-size: 150px;
+    margin-bottom: 50px;
+    font-family:'Quicksand', sans-serif;
+}
+</style>
+<script async="" src="https://arc.io/widget.min.js#ij3vVro9"></script>
+  </head>
+  <a href="https://discord.gg/vmFUQTKnEQ">https://discord.gg/vmFUQTKnEQ</a>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div class="container"><h1 id="title">Breakium</h1><div class="button-grid">
+        <!-- Add more buttons here -->
+        <a href="/g/" class="btn" id="games">Games</a>
+        <a onclick="addWidgetBotScript();" class="btn" id="discord">Discord</a>
+        <a href="/yt2/" class="btn" id="youtube">YouTube</a>
+        <!-- Add more buttons as needed -->
+      </div></div>
+      
+<script>
+const canvas = document.querySelector("#canvas");
+const ctx = canvas.getContext("2d");
 
-    <div class="ad ad2">
-        YOUR AD CONTENT HERE JUST PAY ME 5$ FOR 2 WEEK
-    </div>
+let w, h, particles;
+let particleDistance = 40;
+let mouse = {
+	x: undefined,
+	y: undefined,
+	radius: 70
+}
 
-    <script>
-        function addWidgetBotScript() {
-    // Create a script element
-        var script = document.createElement('script');
+function init() {
+	resizeReset();
+	animationLoop();
+}
 
-    // Set the source attribute to the WidgetBot script
-        script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
-        script.async = true;
-        script.defer = true;
+function resizeReset() {
+	w = canvas.width = window.innerWidth;
+	h = canvas.height = window.innerHeight;
 
-    // Set the content of the script
-        script.innerHTML = `
-            new Crate({
-                server: '1104851833383571478', // Breadside
-                channel: '1144877440053821460' // #🤓pov-ur-in-class
-            });
-        `;
+	particles = [];
+	for (let y = (((h - particleDistance) % particleDistance) + particleDistance) / 2; y < h; y += particleDistance) {
+		for (let x = (((w - particleDistance) % particleDistance) + particleDistance) / 2; x < w; x += particleDistance) {
+			particles.push(new Particle(x, y));
+		}
+	}
+}
 
-    // Append the script to the body of the document
-        document.body.appendChild(script);
-    }
+function animationLoop() {
+	ctx.clearRect(0, 0, w, h);
+	drawScene();
+	requestAnimationFrame(animationLoop);
+}
 
-    </script>
-    <script src="index.js"></script>
-</body>
+function drawScene() {
+	for (let i = 0; i < particles.length; i++) {
+		particles[i].update();
+		particles[i].draw();
+	}
+	drawLine();
+}
+
+function drawLine() {
+	for (let a = 0; a < particles.length; a++) {
+		for (let b = a; b < particles.length; b++) {
+			let dx = particles[a].x - particles[b].x;
+			let dy = particles[a].y - particles[b].y;
+			let distance = Math.sqrt(dx * dx + dy * dy);
+
+			if (distance < particleDistance * 1.5) {
+				opacity = 1 - (distance / (particleDistance * 1.5));
+				ctx.strokeStyle = "rgba(51,51,51," + opacity + ")";
+				ctx.lineWidth = 2;
+				ctx.beginPath();
+				ctx.moveTo(particles[a].x, particles[a].y);
+				ctx.lineTo(particles[b].x, particles[b].y);
+				ctx.stroke();
+			}
+		}
+	}
+}
+
+function mousemove(e) {
+	mouse.x = e.x;
+	mouse.y = e.y;
+}
+
+function mouseout() {
+	mouse.x = undefined;
+	mouse.y = undefined;
+}
+
+class Particle {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+		this.size = 100;
+		this.baseX = this.x;
+		this.baseY = this.y;
+		this.speed = (Math.random() * 25) + 99;
+	}
+	draw() {
+		ctx.fillStyle = "rgba(51,51,51,0.0001)";
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+		ctx.closePath();
+		ctx.fill();
+	}
+	update() {
+		let dx = mouse.x - this.x;
+		let dy = mouse.y - this.y;
+		let distance = Math.sqrt(dx * dx + dy * dy);
+		let maxDistance = mouse.radius;
+		let force = (maxDistance - distance) / maxDistance; // 0 ~ 1
+		let forceDirectionX = dx / distance;
+		let forceDirectionY = dy / distance;
+		let directionX = forceDirectionX * force * this.speed;
+		let directionY = forceDirectionY * force * this.speed;
+
+		if (distance < mouse.radius) {
+			this.x -= directionX;
+			this.y -= directionY;
+		} else {
+			if (this.x !== this.baseX) {
+				let dx = this.x - this.baseX;
+				this.x -= dx / 10;
+			}
+			if (this.y !== this.baseY) {
+				let dy = this.y - this.baseY;
+				this.y -= dy / 10;
+			}
+		}
+	}
+}
+
+init();
+window.addEventListener("resize", resizeReset);
+window.addEventListener("mousemove", mousemove);
+window.addEventListener("mouseout", mouseout);
+
+</script>
+<script>
+    function addWidgetBotScript() {
+// Create a script element
+    var script = document.createElement('script');
+
+// Set the source attribute to the WidgetBot script
+    script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+    script.async = true;
+    script.defer = true;
+
+// Set the content of the script
+    script.innerHTML = `
+        new Crate({
+            server: '1104851833383571478', // Breadside
+            channel: '1144877440053821460' // #🤓pov-ur-in-class
+        });
+    `;
+
+// Append the script to the body of the document
+    document.body.appendChild(script);
+}
+
+</script>
+  </body>
 </html>
