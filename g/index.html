@@ -6,6 +6,7 @@
     <title>Breakium | Tutor for Kids</title>
 </head>
 <body>
+    <input type="text" id="searchBar" placeholder="Search...">
     <div class="container" id="buttonContainer">
           <div class="centerre">
           <span class="gc">Over 400 games! RIGHT CLICK ANYWHERE!</span>
@@ -1114,8 +1115,21 @@
    <script src="/script.js"></script>
    <script>
     document.addEventListener("DOMContentLoaded", function() {
+            var searchBar = document.getElementById('searchBar');
             var buttonContainer = document.getElementById('buttonContainer');
             var buttons = Array.from(buttonContainer.getElementsByTagName('button'));
+
+            searchBar.addEventListener('input', function() {
+                var searchText = searchBar.value.toLowerCase();
+                buttons.forEach(function(button) {
+                    var buttonText = button.textContent.toLowerCase();
+                    if (buttonText.includes(searchText)) {
+                        button.style.display = 'inline-block';
+                    } else {
+                        button.style.display = 'none';
+                    }
+                });
+            });
 
             buttons.sort(function(a, b) {
                 var textA = a.querySelector('a').textContent.toLowerCase();

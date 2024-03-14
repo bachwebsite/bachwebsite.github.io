@@ -31,6 +31,15 @@ img.cardimg:hover {
 img.cardimg:hover + p.cardtext{
 	display: block;
 }
+#searchBar {
+	margin-left: 600px;
+	width: 600px;
+	height: 50px;
+	text-align: center;
+	color:whitesmoke;
+	background-color: #181809;
+	border-radius: 500px;
+}
 div.grayy {
 	display: none;
 }
