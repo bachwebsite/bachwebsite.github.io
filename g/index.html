@@ -5,18 +5,7 @@
     <link rel="stylesheet" href="./fff.css">
     <title>Breakium | Tutor for Kids</title>
 </head>
-<body onload="window.onload = function() {
-    var buttonContainer = document.getElementById('container');
-    var buttons = Array.from(buttonContainer.querySelector('.bubbly-button'));
-
-    buttons.sort(function(a, b) {
-        return a.innerHTML.localeCompare(b.innerHTML);
-    });
-
-    buttons.forEach(function(button) {
-        buttonContainer.appendChild(button);
-    });
-};">
+<body>
     <div class="container">
           <div class="centerre">
           <span class="gc">Over 400 games! RIGHT CLICK ANYWHERE!</span>
@@ -1123,4 +1112,20 @@
        </ul> 
    </div> 
    <script src="/script.js"></script>
+   <script>
+    window.onload = function() {
+        var buttonContainer = document.getElementById('buttonContainer');
+        var buttons = Array.from(buttonContainer.querySelectorAll('.bubbly-button'));
+
+        buttons.sort(function(a, b) {
+            var textA = a.querySelector('a').textContent.toLowerCase();
+            var textB = b.querySelector('a').textContent.toLowerCase();
+            return textA.localeCompare(textB);
+        });
+
+        buttons.forEach(function(button) {
+            buttonContainer.appendChild(button);
+        });
+    };
+</script>
 </body>
