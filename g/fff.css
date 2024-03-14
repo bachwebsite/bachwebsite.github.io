@@ -31,7 +31,7 @@ img.cardimg:hover {
 img.cardimg:hover + p.cardtext{
 	display: block;
 }
-#searchInput {
+#searchBar {
 	margin-left: 600px;
 	width: 600px;
 	height: 50px;
