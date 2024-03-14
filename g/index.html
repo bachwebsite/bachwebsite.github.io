@@ -1115,7 +1115,7 @@
    <script>
     window.onload = function() {
         var buttonContainer = document.getElementById('container');
-        var buttons = Array.from(buttonContainer.getElementsByTagName('button'));
+        var buttons = Array.from(buttonContainer.querySelector('.bubbly-button'));
 
         buttons.sort(function(a, b) {
             return a.innerHTML.localeCompare(b.innerHTML);
