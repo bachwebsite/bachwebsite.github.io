@@ -19,7 +19,7 @@ div {
 }
 html, body {
   height: 100%;
-  background-color: rgb(18, 18, 18);
+  background-color: linear-gradient(#716ccb, #3c369b) !important;
   color: white;
   font-family: Inter, sans-serif;
   margin: 0px;
