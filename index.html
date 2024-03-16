@@ -51,6 +51,17 @@ html, body {
     text-decoration: none;
     transition: all 0.3s ease 0s;
   }
+.cursor {
+    width: 7px;
+    height: 7px;
+    background-color: -webkit-linear-gradient(#716ccb, #3c369b);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 10000;
+}
 .btn:hover {
   color: white;
   transition: all 0.3s ease 0s;
