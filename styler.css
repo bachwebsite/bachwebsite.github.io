@@ -1,5 +1,5 @@
 body {
-    animation: znimation 2s forwards;
+    animation: znimation 2s backwards;
     scrollbar-width: none;
 }
 
