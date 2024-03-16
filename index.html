@@ -161,7 +161,7 @@ function drawLine() {
 
 			if (distance < particleDistance * 1.5) {
 				opacity = 1 - (distance / (particleDistance * 1.5));
-				ctx.strokeStyle = "rgb(200, 200, 255)";
+				ctx.strokeStyle = "rgba(51,51,51," + opacity + ")";
 				ctx.lineWidth = 2;
 				ctx.beginPath();
 				ctx.moveTo(particles[a].x, particles[a].y);
@@ -192,7 +192,7 @@ class Particle {
 		this.speed = (Math.random() * 25) + 99;
 	}
 	draw() {
-		ctx.fillStyle = "rgb(200, 200, 255)";
+		ctx.fillStyle = "rgba(51,51,51,0.0001)";
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 		ctx.closePath();
