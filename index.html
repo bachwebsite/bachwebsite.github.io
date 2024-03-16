@@ -100,7 +100,7 @@ p, h1, h2, h3, h4, h5, h6, span, hr {
   </head>
   <body>
     <canvas id="canvas"></canvas>
-    <div class="container"><h1 id="title">Breakium</h1>
+    <div class="container"><h1 id="title typewriter"></h1>
       <h1 id="title" style="font-size: 60px; margin-bottom: 20px;">Please join the <a href="https://discord.gg/vmFUQTKnEQ" id="title" style="font-size: 60px !important; background: -webkit-linear-gradient(#ff0000, #990000); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Discord</a>!</h1>
       <div class="button-grid">
         <!-- Add more buttons here -->
@@ -254,6 +254,27 @@ window.addEventListener("mouseout", mouseout);
     document.body.appendChild(script);
 }
 
+</script>
+<script>
+  const text = "breakium";
+  const typingDelay = 200; 
+  const initialDelay = 200;
+  const h1 = document.querySelector("#typewriter");
+
+  function type() {
+      setTimeout(() => {
+          for (let i = 0; i < text.length; i++) {
+          setTimeout(() => {
+              h1.textContent += text[i];
+              if (i === text.length - 1) {
+                console.log("skibiti toilet this was a chatgpt skid");
+              }
+          }, i * typingDelay);
+          }
+      }, initialDelay);
+  }
+
+  type();
 </script>
   </body>
 </html>
