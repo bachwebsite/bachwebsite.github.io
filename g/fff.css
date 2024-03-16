@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-
-html, body {
-	height: 100%;
-	margin: 0;
-	background-color: #262262;
-	background-attachment: fixed;
-}
 .bubbly-button a {
 	font-size: 24px;
 	font-family: 'Quicksand';
