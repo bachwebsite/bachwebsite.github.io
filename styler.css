@@ -1,8 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jacquarda+Bastarda+9&family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap');
 body {
     animation: znimation 2s backwards;
     scrollbar-width: none;
 }
+.container {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+#creds {
+    float:bottom;
+}
+div {
+  display: block;
+}
+html, body {
+  height: 100%;
+  background-color: rgb(18, 18, 18);
+  color: white;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+}
+html, body {
+  height: 100%;
+  background-color: #262262 ;
+  color: white;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+}
+#canvas {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+  .btn {
+  font-family: "Manrope", sans-serif;
+    color: black;
+    filter: drop-shadow(#565292  5px 5px 10px);
+    padding: 15px 100px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(top, #3c369b, #2d2975);
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+  }
+.cursor {
+    width: 7px;
+    height: 7px;
+    background-color: -webkit-linear-gradient(#716ccb, #3c369b);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 10000;
+}
+.btn:hover {
+  color: white;
+  transition: all 0.3s ease 0s;
+  background: -webkit-linear-gradient(top, #17153c, #090320);
+}
+.sml {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+    text-align: center;
+    background: -webkit-linear-gradient(top, #3c369b, #2d2975);
+}
+ .button-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the column width as needed */
+        gap: 20px; /* Adjust the gap between buttons */
+        max-width: 800px; /* Adjust the maximum width of the grid */
+        margin: 0 auto;
+        justify-content: center;
+      }
 
+      .button-grid .btn {
+        padding: 15px;
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 768px) {
+        .button-grid {
+          grid-template-columns: 1fr; /* Make a single column layout for smaller screens */
+        }
+      }
+  
+p, h1, h2, h3, h4, h5, h6, span, hr {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none; 
+  user-select: none;
+  background: -webkit-linear-gradient(#716ccb, #3c369b );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#title {
+    font-size: 150px;
+    margin-bottom: 0px;
+    font-family:'Quicksand', sans-serif;
+}
 @keyframes znimation {
     0% {
         opacity: 0;
