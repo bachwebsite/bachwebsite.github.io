@@ -217,7 +217,7 @@ a {text-decoration: none; color: inherit;}
 	transform: scale(1.1);
 	transition: 0.3s ease-in-out all;
 }
-.button-container {
+.container {
     width: 100%; /* Adjust the width as needed */
     max-width: 500px; /* Set a maximum width to prevent it from occupying the entire screen */
     margin: 0 auto; /* Center the container horizontally */
