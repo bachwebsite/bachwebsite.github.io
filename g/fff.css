@@ -220,6 +220,7 @@ a {text-decoration: none; color: inherit;}
 .container {
 	text-align: center;
 	justify-content: space-evenly;
+	width: 90%;
 }
 #container {
 	display: flex;
