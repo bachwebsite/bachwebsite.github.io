@@ -161,7 +161,7 @@ function drawLine() {
 
 			if (distance < particleDistance * 1.5) {
 				opacity = 1 - (distance / (particleDistance * 1.5));
-				ctx.strokeStyle = "rgba(51,51,51," + opacity + ")";
+				ctx.strokeStyle = "rgba(200,200,255," + opacity + ")";
 				ctx.lineWidth = 2;
 				ctx.beginPath();
 				ctx.moveTo(particles[a].x, particles[a].y);
