@@ -6,7 +6,7 @@ body {
 @keyframes znimation {
     0% {
         opacity: 0;
-        transform: translate(25%, 25%);
+        transform: translate(0%, 25%);
     }
     100% {
         opacity: 1;
