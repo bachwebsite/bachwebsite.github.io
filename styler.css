@@ -1,5 +1,6 @@
 body {
     animation: znimation 2s forwards;
+    scrollbar-width: none;
 }
 
 @keyframes znimation {
