@@ -32,6 +32,7 @@ img.cardimg:hover + p.cardtext{
 	color:whitesmoke;
 	background-color: #131113;
 	border-radius: 500px;
+	user-select: all;
 }
 div.grayy {
 	display: none;
