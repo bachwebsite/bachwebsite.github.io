@@ -117,3 +117,9 @@ init();
 window.addEventListener("resize", resizeReset);
 window.addEventListener("mousemove", mousemove);
 window.addEventListener("mouseout", mouseout);
+
+window.addEventListener('scroll', function() {
+    var canvas = document.querySelector('#canvas');
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    canvas.style.top = scrollTop + 'px';
+});
