@@ -5,7 +5,7 @@
 html, body {
 	height: 100%;
 	margin: 0;
-	background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(60, 60, 10));
+	background-color: #262262;
 	background-attachment: fixed;
 }
 .bubbly-button a {
@@ -37,7 +37,7 @@ img.cardimg:hover + p.cardtext{
 	height: 50px;
 	text-align: center;
 	color:whitesmoke;
-	background-color: #181809;
+	background-color: #131113;
 	border-radius: 500px;
 }
 div.grayy {
@@ -76,7 +76,7 @@ span.gc {
 	margin-bottom: 20px;
 	-webkit-appearance: none;
 	appearance: none;
-	background-color:rgba(145, 119, 0, 0.8);
+	background-color: -webkit-linear-gradient(#716ccb, #3c369b);
 	color: $button-text-color;
 	border-radius: 4px;
 	border: none;
@@ -177,8 +177,8 @@ span.gc {
 }
 .bubbly-button:hover {
 	transform: scale(1.1);
-	background-color: rgb(179, 148, 0);
-    box-shadow: 0 2px 25px rgba(179, 148, 0);
+	background: -webkit-linear-gradient(top, #17153c, #090320);
+    box-shadow: -webkit-linear-gradient(top, #17153c, #090320);
 }
 img.cardimg:hover + div.grayy {
 	display: block;
