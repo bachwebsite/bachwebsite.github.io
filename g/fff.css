@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 .bubbly-button a {
 	font-size: 24px;
 	font-family: 'Quicksand';
@@ -50,7 +51,6 @@ div.booger {
 }
 .search-container button {
 	height: 50px;
-	text: none;
 }
 span.gc {
 	text-align: center;
