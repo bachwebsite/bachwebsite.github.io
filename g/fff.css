@@ -217,11 +217,16 @@ a {text-decoration: none; color: inherit;}
 	transform: scale(1.1);
 	transition: 0.3s ease-in-out all;
 }
-.container {
-	text-align: center;
-	justify-content: space-evenly;
-	width: 90%;
+.button-container {
+    width: 100%; /* Adjust the width as needed */
+    max-width: 500px; /* Set a maximum width to prevent it from occupying the entire screen */
+    margin: 0 auto; /* Center the container horizontally */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 80vh; /* Set a maximum height to prevent it from going off-screen */
+    padding: 10px; /* Add padding for better spacing */
+	justify-content: space-evenly; /* I dont know */
 }
+
 #container {
 	display: flex;
 	align-items: center;
