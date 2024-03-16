@@ -1206,7 +1206,30 @@
            <li><a onclick="abtblk();">about blank!</a></li> 
        </ul> 
    </div> 
-   <script src="/script.js"></script>
+   <script>
+    var newWindow = window.open('about:blank', '_blank');
+
+// Write the contents of the previous page into the new window
+    newWindow.document.write('<!DOCTYPE html>');
+newWindow.document.write('<html lang="en">');
+newWindow.document.write('<head>');
+newWindow.document.write('<meta charset="UTF-8">');
+newWindow.document.write('<title>Previous Page</title>');
+newWindow.document.write('</head>');
+newWindow.document.write('<body>');
+
+// Get the content of the previous page
+var previousPageContent = document.documentElement.outerHTML;
+
+// Write the content into the new window
+newWindow.document.write(previousPageContent);
+
+newWindow.document.write('</body>');
+newWindow.document.write('</html>');
+
+// Close the document
+newWindow.document.close();
+</script>
    <script>
     document.addEventListener("DOMContentLoaded", function() {
             var searchBar = document.getElementById('searchInput');
