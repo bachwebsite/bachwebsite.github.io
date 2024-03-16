@@ -101,7 +101,7 @@ a {text-decoration: none; color: inherit;}
     margin: 0 auto; /* Center the container horizontally */
     overflow-y: auto; /* Enable vertical scrolling */
     min-height: 100%; /* Set a maximum height to prevent it from going off-screen */
-    padding: 10px; /* Add padding for better spacing */
+/* Add padding for better spacing */
 	text-align: center;
 }
 #canvas {
