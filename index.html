@@ -54,7 +54,7 @@
                     g.style.border = 'hidden';
 
                     g.onload = function() {
-                        var h = g.contentDocument.querySelectorAll('a[target="_blank"]');
+                        var h = g.contentDocument.querySelectorAll('li[target="_blank"]');
                         h.forEach(function(j) {
                             j.addEventListener('click', function(k) {
                                 k.preventDefault();
