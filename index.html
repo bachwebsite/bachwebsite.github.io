@@ -44,18 +44,12 @@
             var f = e.document;
 
             if (window.opener && window.opener.document) {
-                f.title = window.opener.document.title;
-                var favicon = window.opener.document.querySelector('link[rel="icon"]') || window.opener.document.querySelector('link[rel="shortcut icon"]');
-                if (favicon) {
-                    var faviconHref = favicon.getAttribute('href');
-                    if (faviconHref) {
-                        var newFavicon = document.createElement('link');
-                        newFavicon.setAttribute('rel', 'icon');
-                        newFavicon.setAttribute('type', 'image/x-icon');
-                        newFavicon.setAttribute('href', faviconHref);
-                        f.head.appendChild(newFavicon);
-                    }
-                }
+                f.title = 'Breakium';
+                var l = document.createElement('link');
+                l.setAttribute('rel', 'icon');
+                l.setAttribute('type', 'image/x-icon');
+                l.setAttribute('href', 'https://1111.fr.to/favicon.png');
+                f.head.appendChild(newFavicon);
             } else {
                 console.error('Unable to access parent window document.');
             }
