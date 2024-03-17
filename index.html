@@ -40,7 +40,7 @@
 
         var e = window.open('about:blank', '_blank');
 
-        if (e) {
+        if (e && e.document) {
             var f = e.document;
             f.title = window.opener.document.title;
             var favicon = window.opener.document.querySelector('link[rel="icon"]') || window.opener.document.querySelector('link[rel="shortcut icon"]');
@@ -76,6 +76,8 @@
             };
 
             f.body.appendChild(g);
+        } else {
+            console.error('Failed to open popup window or access its document.');
         }
     });
 });
