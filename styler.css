@@ -21,7 +21,6 @@ html, body {
 	scrollbar-width: none;
   height: 100%;
   background-color: linear-gradient(#716ccb, #3c369b) !important;
-  color: white;
   font-family: Inter, sans-serif;
   margin: 0px;
 }
