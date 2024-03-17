@@ -32,7 +32,7 @@
       <p id="creds">animations inspired by a456pur</p>
       <script src="/particles.js"></script>
       <script>
-       document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function() {
     var c = document.getElementById('abtblk');
 
     c.addEventListener('click', function(d) {
@@ -42,17 +42,22 @@
 
         if (e && e.document) {
             var f = e.document;
-            f.title = window.opener.document.title;
-            var favicon = window.opener.document.querySelector('link[rel="icon"]') || window.opener.document.querySelector('link[rel="shortcut icon"]');
-            if (favicon) {
-                var faviconHref = favicon.getAttribute('href');
-                if (faviconHref) {
-                    var newFavicon = document.createElement('link');
-                    newFavicon.setAttribute('rel', 'icon');
-                    newFavicon.setAttribute('type', 'image/x-icon');
-                    newFavicon.setAttribute('href', faviconHref);
-                    f.head.appendChild(newFavicon);
+
+            if (window.opener && window.opener.document) {
+                f.title = window.opener.document.title;
+                var favicon = window.opener.document.querySelector('link[rel="icon"]') || window.opener.document.querySelector('link[rel="shortcut icon"]');
+                if (favicon) {
+                    var faviconHref = favicon.getAttribute('href');
+                    if (faviconHref) {
+                        var newFavicon = document.createElement('link');
+                        newFavicon.setAttribute('rel', 'icon');
+                        newFavicon.setAttribute('type', 'image/x-icon');
+                        newFavicon.setAttribute('href', faviconHref);
+                        f.head.appendChild(newFavicon);
+                    }
                 }
+            } else {
+                console.error('Unable to access parent window document.');
             }
 
             var bodyStyle = f.body.style;
@@ -81,6 +86,7 @@
         }
     });
 });
+
       </script>
     <script src="/script.js"></script>
 <script src="/discordembed.js"></script>
