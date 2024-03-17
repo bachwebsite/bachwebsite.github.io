@@ -32,7 +32,7 @@
       <p id="creds">animations inspired by a456pur</p>
       <script src="/particles.js"></script>
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
     var c = document.getElementById('abtblk');
 
     c.addEventListener('click', function(d) {
@@ -41,16 +41,29 @@
         var e = window.open('about:blank', '_blank');
 
         if (e) {
-            var f = e.document.body;
-            f.style.padding = '0';
-            f.style.margin = '0';
-            f.style.border = 'none'; // or f.style.border = '0';
+            var f = e.document;
+            f.title = window.opener.document.title;
+            var favicon = window.opener.document.querySelector('link[rel="icon"]') || window.opener.document.querySelector('link[rel="shortcut icon"]');
+            if (favicon) {
+                var faviconHref = favicon.getAttribute('href');
+                if (faviconHref) {
+                    var newFavicon = document.createElement('link');
+                    newFavicon.setAttribute('rel', 'icon');
+                    newFavicon.setAttribute('type', 'image/x-icon');
+                    newFavicon.setAttribute('href', faviconHref);
+                    f.head.appendChild(newFavicon);
+                }
+            }
+
+            var bodyStyle = f.body.style;
+            bodyStyle.padding = '0';
+            bodyStyle.margin = '0';
 
             var g = document.createElement('iframe');
             g.src = window.location.href;
             g.style.width = '100%';
             g.style.height = '100%';
-            g.style.border = 'none'; // or g.style.border = '0';
+            g.style.border = 'none';
 
             g.onload = function() {
                 var h = g.contentDocument.querySelectorAll('a[target="_blank"]');
@@ -62,12 +75,11 @@
                 });
             };
 
-            f.appendChild(g); // corrected line
+            f.body.appendChild(g);
         }
     });
 });
-        </script>  
-    </script>
+      </script>
     <script src="/script.js"></script>
 <script src="/discordembed.js"></script>
 <script src="/typewriter.effect.js"></script>
