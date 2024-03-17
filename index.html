@@ -33,39 +33,39 @@
       <script src="/particles.js"></script>
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var c = document.getElementById('abtblk');
-        
-            c.addEventListener('click', function(d) {
-                d.preventDefault();
-        
-                var e = window.open('about:blank', '_blank');
-        
-                if (e) {
-                    var f = e.document.body;
-                    f.style.padding = '0';
-                    f.style.margin = '0';
-                    f.style.border = 'hidden';
-        
-                    var g = document.createElement('iframe');
-                    g.src = window.location.href;
-                    g.style.width = '100%';
-                    g.style.height = '100%';
-                    g.style.border = 'hidden';
+    var c = document.getElementById('abtblk');
 
-                    g.onload = function() {
-                        var h = g.contentDocument.querySelectorAll('a[target="_blank"]');
-                        h.forEach(function(j) {
-                            j.addEventListener('click', function(k) {
-                                k.preventDefault();
-                                g.contentWindow.location.href = j.href;
-                            });
-                        });
-                    };
-        
-                    f.document.body.appendChild(g);
-                }
-            });
-        });
+    c.addEventListener('click', function(d) {
+        d.preventDefault();
+
+        var e = window.open('about:blank', '_blank');
+
+        if (e) {
+            var f = e.document.body;
+            f.style.padding = '0';
+            f.style.margin = '0';
+            f.style.border = 'none'; // or f.style.border = '0';
+
+            var g = document.createElement('iframe');
+            g.src = window.location.href;
+            g.style.width = '100%';
+            g.style.height = '100%';
+            g.style.border = 'none'; // or g.style.border = '0';
+
+            g.onload = function() {
+                var h = g.contentDocument.querySelectorAll('a[target="_blank"]');
+                h.forEach(function(j) {
+                    j.addEventListener('click', function(k) {
+                        k.preventDefault();
+                        g.contentWindow.location.href = j.href;
+                    });
+                });
+            };
+
+            f.appendChild(g); // corrected line
+        }
+    });
+});
         </script>  
     </script>
     <script src="/script.js"></script>
