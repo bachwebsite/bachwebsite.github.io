@@ -24,13 +24,6 @@ html, body {
   font-family: Inter, sans-serif;
   margin: 0px;
 }
-html, body {
-  height: 100%;
-  background-color: #262262 ;
-  color: white;
-  font-family: Inter, sans-serif;
-  margin: 0px;
-}
 #canvas {
 	position: fixed;
 	left: 0;
