@@ -37,6 +37,10 @@
         // Open a new window with about:blank URL
         var newWindow = window.open('about:blank', '_blank');
 
+        var previousPageContent = document.documentElement.outerHTML;
+
+        newWindow.document.write(previousPageContent);
+
         newWindow.document.close();
     }
     </script>
