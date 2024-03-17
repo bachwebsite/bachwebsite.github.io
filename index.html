@@ -24,10 +24,9 @@
       </div>
       
     </div>
-    <div id="contextMenu" class="context-menu" 
-       style="display:none"> 
+    <div id="contextMenu" class="context-menu" style="display:none"> 
        <ul> 
-           <li id="abtblk">about blank!</li> 
+           <a id="abtblk">about:blank</a> 
        </ul> 
    </div> 
       <p id="creds">animations inspired by a456pur</p>
@@ -54,7 +53,7 @@
                     g.style.border = 'hidden';
 
                     g.onload = function() {
-                        var h = g.contentDocument.querySelectorAll('li[target="_blank"]');
+                        var h = g.contentDocument.querySelectorAll('a[target="_blank"]');
                         h.forEach(function(j) {
                             j.addEventListener('click', function(k) {
                                 k.preventDefault();

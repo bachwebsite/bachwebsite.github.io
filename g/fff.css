@@ -204,7 +204,7 @@ a {text-decoration: none; color: inherit;}
     border-radius: 10px;
 } 
 
-.context-menu ul { 
+.context-menu>ul { 
 	
 	transition: 0.3s ease-in-out all;
     padding: 0px; 
@@ -213,18 +213,15 @@ a {text-decoration: none; color: inherit;}
     list-style: none; 
 } 
 
-.context-menu ul li { 
-    padding-bottom: 7px; 
-    padding-top: 7px; 
-    border: 1px solid black; 
+.context-menu>ul>a { 
+    text-decoration: none;
+    color: black;
+	padding-bottom: 7px;
+    padding-top: 7px;
+    border: 1px solid black;
 } 
 
-.context-menu ul li a { 
-    text-decoration: none; 
-    color: black; 
-} 
-
-.context-menu ul li:hover { 
+.context-menu>ul>a:hover { 
 	transform: scale(1.1);
 	transition: 0.3s ease-in-out all;
     background: darkgray; 
