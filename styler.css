@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jacquarda+Bastarda+9&family=Manrope:wght@200..800&family=Quicksand:wght@300..700&display=swap');
-html, body {
+body {
     animation: znimation 2s forwards;
+    scrollbar-width: none;
 }
 .container {
   text-align: center;
@@ -17,9 +18,16 @@ div {
   display: block;
 }
 html, body {
-	scrollbar-width: none;
   height: 100%;
   background-color: linear-gradient(#716ccb, #3c369b) !important;
+  color: white;
+  font-family: Inter, sans-serif;
+  margin: 0px;
+}
+html, body {
+  height: 100%;
+  background-color: #262262 ;
+  color: white;
   font-family: Inter, sans-serif;
   margin: 0px;
 }
@@ -218,12 +226,10 @@ p, h1, h2, h3, h4, h5, h6, span, hr {
 @keyframes znimation {
     0% {
         opacity: 0;
-		background-color: #000000;
-        transform: translateY(25%);
+        transform: translateY(-25%);
     }
     100% {
         opacity: 1;
-		background-color: linear-gradient(#716ccb, #3c369b) !important;
         transform: translateY(0%);
     }
 }
