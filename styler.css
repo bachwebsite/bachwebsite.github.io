@@ -231,6 +231,7 @@ p, h1, h2, h3, h4, h5, h6, span, hr {
     }
     100% {
         opacity: 1;
+		background-color: linear-gradient(#716ccb, #3c369b) !important;
         transform: translateY(0%);
     }
 }
