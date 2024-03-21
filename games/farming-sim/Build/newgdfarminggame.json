@@ -1,0 +1,13 @@
+{
+"companyName": "crazygame",
+"productName": "new Farming game",
+"dataUrl": "newgdfarminggame.data.unityweb",
+"asmCodeUrl": "newgdfarminggame.asm.code.unityweb",
+"asmMemoryUrl": "newgdfarminggame.asm.memory.unityweb",
+"asmFrameworkUrl": "newgdfarminggame.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
