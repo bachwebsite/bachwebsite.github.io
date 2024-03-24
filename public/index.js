@@ -50,7 +50,7 @@ form.addEventListener("submit", async (event) => {
 async function registerSW() {
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('/service-worker.js');
+      await navigator.serviceWorker.register('/public/uv/sw.js');
       console.log('Service worker registered successfully');
     } catch (error) {
       throw new Error('Failed to register service worker: ' + error.message);
