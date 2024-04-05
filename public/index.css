@@ -28,16 +28,6 @@ body {
   margin: 0px 16px;
 }
 
-#uv-frame {
-  border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #111;
-}
-
 #uv-error {
   color: #ff6666 !important;
   white-space: pre-wrap;
@@ -84,20 +74,13 @@ body {
 }
 
 footer {
-  margin: 0 5vw;
   margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  line-height: 30px;
-  margin-bottom: 20px;
-}
-
-footer > div {
+  width: 93%;
+  align-self: center;
+  height: 80px;
   display: flex;
   justify-content: left;
   align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
 }
 
 footer a,
