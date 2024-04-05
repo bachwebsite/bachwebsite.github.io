@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clever | Log in</title>
+   <link rel="icon" href="https://assets.clever.com/oauth/7a604dd0675da79eea548b15dd548c47bfa34cab/favicon.ico" />
+  <link rel="shortcut icon" href="https://assets.clever.com/oauth/7a604dd0675da79eea548b15dd548c47bfa34cab/favicon.ico" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://kit.fontawesome.com/a70619ef6c.js" crossorigin="anonymous"></script>
+<style>
+  .image {
+  border-radius: 20px;
+}
+  .logo {
+     height: px;
+    transition: 0.8s;
+  }
+  .logo:hover {
+    transform: rotate(-1080deg)
+  }
+    .button {
+  font-family: 'Inter', sans-serif;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 1px 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s,
+    color 0.2s, transform .4s, box-shadow 1s;
+  margin: 15px;
+  display: inline-block;
+}
+a.link:hover {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: transparent;
+  transform: scale(1.1);
+  color: white;
+  border: none;
+  padding: 1px 1px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 0 1vw purple;
+  margin: 15px;
+}
+  
+  </style>
+</head>
+<body>
+  <div align="center">
+    <img src="/favicon.png" style=" width: 200px; height: auto; margin-left: auto;margin-right: auto;">
+           <form id="uv-form">
+            <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+            <input id="uv-address" type="text" placeholder="Do whatever" class="form__input"/>
+          </form>
+          <div class="desc left-margin">
+            <p id="uv-error"></p>
+            <pre id="uv-error-code"></pre>
+          </div>
+      </div>
+    <br>
+  <div align="center" id="quick-search">
+       <a class='link button' href='#' onclick="location.href = __uv$config.prefix + __uv$config.encodeUrl('https://play.geforcenow.com/mall/#/loginwall/');"><img height="175"
+        src="https://yt3.googleusercontent.com/ytc/AIdro_mV87FmpQOb5q6x_DrfhB2_pOeiRQhVT7lqDN5cU5c5G13N=s900-c-k-c0x00ffffff-no-rj" class="image"
+        width="175"><span class="span"
+        style="padding:3px;margin:auto;display:block;width:170px;height:25px;line-height:25px;overflow:hidden;text-align:center;white-space:nowrap">GeForce NOW (Fortnite, COD, etc.)</span></a>
+    <a class='link button' href='#' onclick="location.href = __uv$config.prefix + __uv$config.encodeUrl('https://youtube.com');"><img height="175"
+        src="yt.png" class="image"
+        width="175"><span class="span"
+        style="padding:3px;margin:auto;display:block;width:170px;height:25px;line-height:25px;overflow:hidden;text-align:center;white-space:nowrap">Youtube</span></a>
+    <a class='link button' href='#' onclick="location.href = __uv$config.prefix + __uv$config.encodeUrl('https://tiktok.com');"><img height="175" src="https://cdn.now.gg/apps-content/common/img/favicon.ico" class="image" width="175"><span class="span"
+        style="padding:3px;margin:auto;display:block;width:170px;height:25px;line-height:25px;overflow:hidden;text-align:center;white-space:nowrap">Now.GG (Roblox, etc.)</span></a>
+     <a class='link button' href='#' onclick="location.href = __uv$config.prefix + __uv$config.encodeUrl('https://chat.chatgptdemo.net');"><img height="175"
+        src="https://cdn.oaistatic.com/_next/static/media/apple-touch-icon.59f2e898.png" class="image"
+        width="175"><span class="span"
+        style="padding:3px;margin:auto;display:block;width:170px;height:25px;line-height:25px;overflow:hidden;text-align:center;white-space:nowrap"alt="google">ChatGPT</span></a>
+     <a class='link button' href='#' onclick="location.href = __uv$config.prefix + __uv$config.encodeUrl('https://soap2day.rs/');"><img height="175"
+        src="https://img.soap2day.rs/xxrz/400x400/100/68/b2/68b2f239a3a4c41ab378a534da68e4a0/68b2f239a3a4c41ab378a534da68e4a0.png" class="image"
+        width="175"><span class="span"
+        style="padding:3px;margin:auto;display:block;width:170px;height:25px;line-height:25px;overflow:hidden;text-align:center;white-space:nowrap"alt="google">Soap2Day (Free Movies)</span></a>
+    </div>
+</body>
+          <script src="/s/uv/uv.bundle.js" defer></script>
+      <script src="/s/uv/uv.config.js" defer></script>
+      <script src="/s/register-sw.js" defer></script>
+      <script src="/s/search.js" defer></script>
+      <script src="/s/index.js" defer></script>
+      <script src="/s/error.js" defer></script>
+  <script src="/js/ab.js"></script>
+</html>
