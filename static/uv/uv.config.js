@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/static/skibity/',
+    prefix: '/static/astro/',
     bare:'https://math-english-sci.vercel.app/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
