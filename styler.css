@@ -18,8 +18,8 @@ div {
   display: block;
 }
 img.badge {
-	width: 40px;
-	height: 15px;
+	width: 100px;
+	height: 40px;
 	box-shadow: #090320;
 }
 html, body {
