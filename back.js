@@ -1,5 +1,5 @@
-const a = document.createElement("button");
-a.innerText = "↩";
+const a = document.createElement("img");
+a.src = "/back.png";
 
 a.addEventListener("click", () => {
   window.location.href = "/";
