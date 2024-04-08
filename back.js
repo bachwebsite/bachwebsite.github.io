@@ -7,9 +7,10 @@ a.addEventListener("click", () => {
 
 a.style.position = "fixed";
 a.style.top = "10px";
-a.style.width = "30px";
-a.style.height = "30px";
+a.style.width = "60px";
+a.style.height = "60px";
 a.style.borderRadius = "20%";
 a.style.left = "10px";
+a.style.cursor = "pointer";
 
 document.body.appendChild(a);
