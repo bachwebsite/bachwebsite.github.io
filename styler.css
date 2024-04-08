@@ -21,6 +21,7 @@ img.badge {
 	width: 100px;
 	height: 40px;
 	box-shadow: #262262  5px 5px 10px;
+	border-radius: 5px;
 }
 html, body {
   height: 100%;
