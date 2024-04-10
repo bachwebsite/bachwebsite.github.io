@@ -18,12 +18,14 @@ const error = document.getElementById("uv-error");
 /**
  * @type {HTMLPreElement}
  */
+import { createBareServer } from '@tomphttp/bare-server-node'
 const errorCode = document.getElementById("uv-error-code");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
+    const bareServer = createBareServer('/bare/');
     await registerSW();
   } catch (err) {
     error.textContent = "Failed to register service worker.";
