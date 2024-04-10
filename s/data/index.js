@@ -34,6 +34,9 @@ function newTab() {
     tab.classList.add("__active");
     inputMain.innerText = iframe.src;
   });
+  if (true) {
+    inputMain.innerText = iframe.src;
+  }
   tabContent.appendChild(tabTitle);
 
   const plus = document.createElement("div");
