@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/b/',
-    bare:'https://dm-unbl0cker-bare-server.vercel.app/',
+    bare:'/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
