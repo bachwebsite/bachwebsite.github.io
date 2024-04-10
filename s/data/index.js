@@ -9,6 +9,9 @@ function newTab() {
   iframe.classList.add("__iframe");
   iframe.src = "/static/";
 
+  const inputMain = document.createElement("div");
+  inputMain.classList.add("__input_main");
+
   tab.appendChild(tabContent);
 
   const tabs = document.querySelector(".__tabs");
@@ -29,11 +32,7 @@ function newTab() {
       activeTabs[i].classList.remove("__active");
     }
     tab.classList.add("__active");
-    if (tab.classList.contains("__active")) {
-      iframe.src = "/static/";
-    } else if (tab.classList.contains("__inactive")) {
-      iframe.remove();
-    }
+    inputMain.innerText = iframe.src;
   });
   tabContent.appendChild(tabTitle);
 
@@ -51,6 +50,8 @@ function newTab() {
     iframe.remove();
   });
   tabContent.appendChild(x);
+
+  tabContent.appendChild(inputMain);
 
   document.body.appendChild(iframe);
 }
