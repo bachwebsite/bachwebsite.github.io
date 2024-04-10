@@ -3,6 +3,8 @@ body {
 }
 
 .__input_main {
+  height: 20px;
+  background: #999999;
   width: 100%;
 }
 .__wrapper {
