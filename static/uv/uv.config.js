@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/static/tutors/',
+    prefix: '/static/b/',
     bare:'https://dm-unbl0cker-bare-server.vercel.app/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
