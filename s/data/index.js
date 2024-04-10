@@ -51,7 +51,7 @@ function newTab() {
   });
   tabContent.appendChild(x);
 
-  tabContent.appendChild(inputMain);
+  document.body.appendChild(inputMain);
 
   document.body.appendChild(iframe);
 }
