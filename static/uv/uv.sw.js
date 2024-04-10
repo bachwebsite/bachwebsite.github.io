@@ -1,789 +1,1129 @@
-importScripts('/static/uv/uv.bundle.js');
-importScripts('/static/uv/uv.config.js');
+if (!self.__uv) {
+    __uvHook(self, self.__uv$config, self.__uv$config.bare);
+};
 
-class UVServiceWorker extends EventEmitter {     
-    constructor(config = __uv$config) {
-        super();
-        if (!config.bare) config.bare = '/bare/';
-        this.addresses = typeof config.bare === 'string' ? [ new URL(config.bare, location) ] : config.bare.map(str => new URL(str, location));
-        this.headers = {
-            csp: [
-                'cross-origin-embedder-policy',
-                'cross-origin-opener-policy',
-                'cross-origin-resource-policy',
-                'content-security-policy',
-                'content-security-policy-report-only',
-                'expect-ct',
-                'feature-policy',
-                'origin-isolation',
-                'strict-transport-security',
-                'upgrade-insecure-requests',
-                'x-content-type-options',
-                'x-download-options',
-                'x-frame-options',
-                'x-permitted-cross-domain-policies',
-                'x-powered-by',
-                'x-xss-protection',
-            ],
-            forward: [
-                'accept-encoding', 
-                'connection',
-                'content-length',
-            ],
-        };
-        this.method = {
-            empty: [
-                'GET',
-                'HEAD'
-            ]
-        };
-        this.statusCode = {
-            empty: [ 
-                204,
-                304,
-            ],
-        };  
-        this.config = config;
-        this.browser = Ultraviolet.Bowser.getParser(self.navigator.userAgent).getBrowserName();
+async function __uvHook(window, config = {}, bare = '/bare/') {
+    if ('__uv' in window && window.__uv instanceof Ultraviolet) return false;
 
-        if (this.browser === 'Firefox') {
-            this.headers.forward.push('user-agent');
-            this.headers.forward.push('content-type');
-        };
+    if (window.document && !!window.window) {
+        window.document.querySelectorAll("script[__uv-script]").forEach(node => node.remove())
     };
-    async fetch({ request }) {
-        if (!request.url.startsWith(location.origin + (this.config.prefix || '/service/'))) {
-            return fetch(request);
+
+    const worker = !window.window;
+    const master = '__uv';
+    const methodPrefix = '__uv$';
+    const __uv = new Ultraviolet({
+        ...config,
+        window,
+    });
+
+    if (typeof config.construct === 'function') {
+        config.construct(__uv, worker ? 'worker' : 'window');
+    };
+
+    const { client } = __uv;
+    const {
+        HTMLMediaElement,
+        HTMLScriptElement,
+        HTMLAudioElement,
+        HTMLVideoElement,
+        HTMLInputElement,
+        HTMLEmbedElement,
+        HTMLTrackElement,
+        HTMLAnchorElement,
+        HTMLIFrameElement,
+        HTMLAreaElement,
+        HTMLLinkElement,
+        HTMLBaseElement,
+        HTMLFormElement,
+        HTMLImageElement,
+        HTMLSourceElement,
+    } = window;
+
+    client.nativeMethods.defineProperty(window, '__uv', {
+        value: __uv,
+        enumerable: false,
+    });
+
+
+    __uv.meta.origin = location.origin;
+    __uv.location = client.location.emulate(
+        (href) => {
+            if (href === 'about:srcdoc') return new URL(href);
+            if (href.startsWith('blob:')) href = href.slice('blob:'.length);
+            return new URL(__uv.sourceUrl(href));
+        },
+        (href) => {
+            return __uv.rewriteUrl(href);
+        },
+    );
+
+    __uv.cookieStr = window.__uv$cookies || '';
+    __uv.meta.url = __uv.location;
+    __uv.domain = __uv.meta.url.host;
+    __uv.blobUrls = new window.Map();
+    __uv.referrer = '';
+    __uv.cookies = [];
+    __uv.localStorageObj = {};
+    __uv.sessionStorageObj = {};
+
+    try {
+        __uv.bare = new URL(bare, window.location.href);
+    } catch(e) {
+        __uv.bare = window.parent.__uv.bare;
+    };
+
+    if (__uv.location.href === 'about:srcdoc') {
+        __uv.meta = window.parent.__uv.meta;
+    };
+
+    if (window.EventTarget) {
+        __uv.addEventListener = window.EventTarget.prototype.addEventListener;
+        __uv.removeListener = window.EventTarget.prototype.removeListener;
+        __uv.dispatchEvent = window.EventTarget.prototype.dispatchEvent;
+    };
+
+    // Storage wrappers
+    client.nativeMethods.defineProperty(client.storage.storeProto, '__uv$storageObj', {
+        get() {
+            if (this === client.storage.sessionStorage) return __uv.sessionStorageObj;
+            if (this === client.storage.localStorage) return __uv.localStorageObj;
+        },
+        enumerable: false,
+    });
+
+    if (window.localStorage) {
+        for (const key in window.localStorage) {
+            if (key.startsWith(methodPrefix + __uv.location.origin + '@')) {
+                __uv.localStorageObj[key.slice((methodPrefix + __uv.location.origin + '@').length)] = window.localStorage.getItem(key);
+            };
         };
-        try {
 
-            const ultraviolet = new Ultraviolet(this.config);
+        __uv.lsWrap = client.storage.emulate(client.storage.localStorage, __uv.localStorageObj);
+    };
 
-            if (typeof this.config.construct === 'function') {
-                this.config.construct(ultraviolet, 'service');
+    if (window.sessionStorage) {
+        for (const key in window.sessionStorage) {
+            if (key.startsWith(methodPrefix + __uv.location.origin + '@')) {
+                __uv.sessionStorageObj[key.slice((methodPrefix + __uv.location.origin + '@').length)] = window.sessionStorage.getItem(key);
+            };
+        };
+
+        __uv.ssWrap = client.storage.emulate(client.storage.sessionStorage, __uv.sessionStorageObj);
+    };
+
+
+
+    let rawBase = window.document ? client.node.baseURI.get.call(window.document) : window.location.href;
+    let base = __uv.sourceUrl(rawBase);
+
+    client.nativeMethods.defineProperty(__uv.meta, 'base', {
+        get() {
+            if (!window.document) return __uv.meta.url.href;
+
+            if (client.node.baseURI.get.call(window.document) !== rawBase) {
+                rawBase = client.node.baseURI.get.call(window.document);
+                base = __uv.sourceUrl(rawBase);
             };
 
-            const db = await ultraviolet.cookie.db();
-
-            ultraviolet.meta.origin = location.origin;
-            ultraviolet.meta.base = ultraviolet.meta.url = new URL(ultraviolet.sourceUrl(request.url));
-
-            const requestCtx = new RequestContext(
-                request, 
-                this, 
-                ultraviolet, 
-                !this.method.empty.includes(request.method.toUpperCase()) ? await request.blob() : null
-            );
-
-            if (ultraviolet.meta.url.protocol === 'blob:') {
-                requestCtx.blob = true;
-                requestCtx.base = requestCtx.url = new URL(requestCtx.url.pathname);
-            };
-
-            if (request.referrer && request.referrer.startsWith(location.origin)) {
-                const referer = new URL(ultraviolet.sourceUrl(request.referrer));
-
-                if (requestCtx.headers.origin || ultraviolet.meta.url.origin !== referer.origin && request.mode === 'cors') {
-                    requestCtx.headers.origin = referer.origin;
-                };
-
-                requestCtx.headers.referer = referer.href;
-            };
-
-            const cookies = await ultraviolet.cookie.getCookies(db) || [];
-            const cookieStr = ultraviolet.cookie.serialize(cookies, ultraviolet.meta, false);
-
-            if (this.browser === 'Firefox' && !(request.destination === 'iframe' || request.destination === 'document')) {
-                requestCtx.forward.shift();
-            };
-
-            if (cookieStr) requestCtx.headers.cookie = cookieStr;
-            requestCtx.headers.Host = requestCtx.url.host;
+            return base;
+        },
+    });
 
 
-            const reqEvent = new HookEvent(requestCtx, null, null);
-            this.emit('request', reqEvent);
+    __uv.methods = {
+        setSource: methodPrefix + 'setSource',
+        source: methodPrefix + 'source',
+        location: methodPrefix + 'location',
+        function: methodPrefix + 'function',
+        string: methodPrefix + 'string',
+        eval: methodPrefix + 'eval',
+        parent: methodPrefix + 'parent',
+        top: methodPrefix + 'top',
+    };
 
-            if (reqEvent.intercepted) return reqEvent.returnValue;
+    __uv.filterKeys = [
+        master,
+        __uv.methods.setSource,
+        __uv.methods.source,
+        __uv.methods.location,
+        __uv.methods.function,
+        __uv.methods.string,
+        __uv.methods.eval,
+        __uv.methods.parent,
+        __uv.methods.top,
+        methodPrefix + 'protocol',
+        methodPrefix + 'storageObj',
+        methodPrefix + 'url',
+        methodPrefix + 'modifiedStyle',
+        methodPrefix + 'config',
+        methodPrefix + 'dispatched',
+        'Ultraviolet',
+        '__uvHook',
+    ];
 
-            const response = await fetch(requestCtx.send);
 
-            if (response.status === 500) {
-                return Promise.reject('');
-            };
+    client.on('wrap', (target, wrapped) => {
+        client.nativeMethods.defineProperty(wrapped, 'name', client.nativeMethods.getOwnPropertyDescriptor(target, 'name'));
+        client.nativeMethods.defineProperty(wrapped, 'length', client.nativeMethods.getOwnPropertyDescriptor(target, 'length'));
 
-            const responseCtx = new ResponseContext(requestCtx, response, this);
-            const resEvent = new HookEvent(responseCtx, null, null);
+        client.nativeMethods.defineProperty(wrapped, __uv.methods.string, {
+            enumerable: false,
+            value: client.nativeMethods.fnToString.call(target),
+        });
 
-            this.emit('beforemod', resEvent);
-            if (resEvent.intercepted) return resEvent.returnValue;
+        client.nativeMethods.defineProperty(wrapped, __uv.methods.function, {
+            enumerable: false,
+            value: target,
+        });
+    });
 
-            for (const name of this.headers.csp) {
-                if (responseCtx.headers[name]) delete responseCtx.headers[name];
-            }; 
-            
-            if (responseCtx.headers.location) {
-                responseCtx.headers.location = ultraviolet.rewriteUrl(responseCtx.headers.location);
-            };
+    client.fetch.on('request', event => {
+        event.data.input = __uv.rewriteUrl(event.data.input);
+    });
 
-            if (responseCtx.headers['set-cookie']) {
-                Promise.resolve(ultraviolet.cookie.setCookies(responseCtx.headers['set-cookie'], db, ultraviolet.meta)).then(() => {
-                    self.clients.matchAll().then(function (clients){
-                        clients.forEach(function(client){
-                            client.postMessage({
-                                msg: 'updateCookies',
-                                url: ultraviolet.meta.url.href,
-                            });
-                        });
-                    });
+    client.fetch.on('requestUrl', event => {
+        event.data.value = __uv.sourceUrl(event.data.value);
+    });
+
+    client.fetch.on('responseUrl', event => {
+        event.data.value = __uv.sourceUrl(event.data.value);
+    });
+
+    // XMLHttpRequest
+    client.xhr.on('open', event => {
+        event.data.input = __uv.rewriteUrl(event.data.input);
+    });
+
+    client.xhr.on('responseUrl', event => {
+        event.data.value = __uv.sourceUrl(event.data.value);
+    });
+
+
+    // Workers
+    client.workers.on('worker', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+    client.workers.on('addModule', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+    client.workers.on('importScripts', event => {
+        for (const i in event.data.scripts) {
+            event.data.scripts[i] = __uv.rewriteUrl(event.data.scripts[i]);
+        };
+    });
+
+    client.workers.on('postMessage', event => {
+        let to = event.data.origin;
+
+        event.data.origin = '*';
+        event.data.message = {
+            __data: event.data.message,
+            __origin: __uv.meta.url.origin,
+            __to: to,
+        };
+    });
+
+    // Navigator
+    client.navigator.on('sendBeacon', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+    // Cookies
+    client.document.on('getCookie', event => {
+        event.data.value = __uv.cookieStr;
+    });
+
+    client.document.on('setCookie', event => {
+        Promise.resolve(__uv.cookie.setCookies(event.data.value, __uv.db, __uv.meta)).then(() => {
+            __uv.cookie.db().then(db => {
+                __uv.cookie.getCookies(db).then(cookies => {
+                    __uv.cookieStr = __uv.cookie.serialize(cookies, __uv.meta, true);
                 });
-                delete responseCtx.headers['set-cookie'];
+            });
+        });
+        const cookie = __uv.cookie.setCookie(event.data.value)[0];
+
+        if (!cookie.path) cookie.path = '/';
+        if (!cookie.domain) cookie.domain = __uv.meta.url.hostname;
+
+        if (__uv.cookie.validateCookie(cookie, __uv.meta, true)) {
+            if (__uv.cookieStr.length) __uv.cookieStr += '; ';
+            __uv.cookieStr += `${cookie.name}=${cookie.value}`;
+        };
+
+        event.respondWith(event.data.value);
+    });
+
+    // HTML
+    client.element.on('setInnerHTML', event => {
+        switch (event.that.tagName) {
+            case 'SCRIPT':
+                event.data.value = __uv.js.rewrite(event.data.value);
+                break;
+            case 'STYLE':
+                event.data.value = __uv.rewriteCSS(event.data.value);
+                break;
+            default:
+                event.data.value = __uv.rewriteHtml(event.data.value);
+        };
+    });
+
+    client.element.on('getInnerHTML', event => {
+        switch (event.that.tagName) {
+            case 'SCRIPT':
+                event.data.value = __uv.js.source(event.data.value);
+                break;
+            default:
+                event.data.value = __uv.sourceHtml(event.data.value);
+        };
+    });
+
+    client.element.on('setOuterHTML', event => {
+        event.data.value = __uv.rewriteHtml(event.data.value, { document: event.that.tagName === 'HTML' });
+    });
+
+    client.element.on('getOuterHTML', event => {
+        switch (event.that.tagName) {
+            case 'HEAD':
+                event.data.value = __uv.sourceHtml(
+                    event.data.value.replace(/<head(.*)>(.*)<\/head>/s, '<op-head$1>$2</op-head>')
+                ).replace(/<op-head(.*)>(.*)<\/op-head>/s, '<head$1>$2</head>');
+                break;
+            case 'BODY':
+                event.data.value = __uv.sourceHtml(
+                    event.data.value.replace(/<body(.*)>(.*)<\/body>/s, '<op-body$1>$2</op-body>')
+                ).replace(/<op-body(.*)>(.*)<\/op-body>/s, '<body$1>$2</body>');
+                break;
+            default:
+                event.data.value = __uv.sourceHtml(event.data.value, { document: event.that.tagName === 'HTML' });
+                break;
+        };
+
+        //event.data.value = __uv.sourceHtml(event.data.value, { document: event.that.tagName === 'HTML' });
+    });
+
+    client.document.on('write', event => {
+        if (!event.data.html.length) return false;
+        event.data.html = [__uv.rewriteHtml(event.data.html.join(''))];
+    });
+
+    client.document.on('writeln', event => {
+        if (!event.data.html.length) return false;
+        event.data.html = [__uv.rewriteHtml(event.data.html.join(''))];
+    });
+
+    client.element.on('insertAdjacentHTML', event => {
+        event.data.html = __uv.rewriteHtml(event.data.html);
+    });
+
+    // EventSource
+
+    client.eventSource.on('construct', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+
+    client.eventSource.on('url', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+    // History
+    client.history.on('replaceState', event => {
+        if (event.data.url) event.data.url = __uv.rewriteUrl(event.data.url, '__uv' in event.that ? event.that.__uv.meta : __uv.meta);
+    });
+    client.history.on('pushState', event => {
+        if (event.data.url) event.data.url = __uv.rewriteUrl(event.data.url, '__uv' in event.that ? event.that.__uv.meta : __uv.meta);
+    });
+
+    // Element get set attribute methods
+    client.element.on('getAttribute', event => {
+        if (client.element.hasAttribute.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name)) {
+            event.respondWith(
+                event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name)
+            );
+        };
+    });
+
+    // Message
+    client.message.on('postMessage', event => {
+        let to = event.data.origin;
+        let call = __uv.call;
+
+
+        if (event.that) {
+            call = event.that.__uv$source.call;
+        };
+
+        event.data.origin = '*';
+        event.data.message = {
+            __data: event.data.message,
+            __origin: (event.that || event.target).__uv$source.location.origin,
+            __to: to,
+        };
+
+        event.respondWith(
+            worker ?
+            call(event.target, [event.data.message, event.data.transfer], event.that) :
+            call(event.target, [event.data.message, event.data.origin, event.data.transfer], event.that)
+        );
+
+    });
+
+    client.message.on('data', event => {
+        const { value: data } = event.data;
+        if (typeof data === 'object' && '__data' in data && '__origin' in data) {
+            event.respondWith(data.__data);
+        };
+    });
+
+    client.message.on('origin', event => {
+        const data = client.message.messageData.get.call(event.that);
+        if (typeof data === 'object' && data.__data && data.__origin) {
+            event.respondWith(data.__origin);
+        };
+    });
+
+    client.overrideDescriptor(window, 'origin', {
+        get: (target, that) => {
+            return __uv.location.origin;
+        },
+    });
+
+    client.node.on('baseURI', event => {
+        if (event.data.value.startsWith(window.location.origin)) event.data.value = __uv.sourceUrl(event.data.value);
+    });
+
+    client.element.on('setAttribute', event => {
+        if (event.that instanceof HTMLMediaElement && event.data.name === 'src' && event.data.value.startsWith('blob:')) {
+            event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.blobUrls.get(event.data.value);
+            return;
+        };
+
+        if (__uv.attrs.isUrl(event.data.name)) {
+            event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteUrl(event.data.value);
+        };
+
+        if (__uv.attrs.isStyle(event.data.name)) {
+            event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteCSS(event.data.value, { context: 'declarationList' });
+        };
+
+        if (__uv.attrs.isHtml(event.data.name)) {
+            event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteHtml(event.data.value, {...__uv.meta, document: true, injectHead:__uv.createHtmlInject(__uv.handlerScript, __uv.bundleScript, __uv.configScript, __uv.cookieStr, window.location.href) });
+        };
+
+        if (__uv.attrs.isSrcset(event.data.name)) {
+            event.target.call(event.that, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.html.wrapSrcset(event.data.value);
+        };
+
+        if (__uv.attrs.isForbidden(event.data.name)) {
+            event.data.name = __uv.attributePrefix + '-attr-' + event.data.name;
+        };
+    });
+
+    client.element.on('audio', event => {
+        event.data.url = __uv.rewriteUrl(event.data.url);
+    });
+
+    // Element Property Attributes
+    client.element.hookProperty([HTMLAnchorElement, HTMLAreaElement, HTMLLinkElement, HTMLBaseElement], 'href', {
+        get: (target, that) => {
+            return __uv.sourceUrl(
+                target.call(that)
+            );
+        },
+        set: (target, that, [val]) => {
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-href', val)
+            target.call(that, __uv.rewriteUrl(val));
+        },
+    }); 
+
+    client.element.hookProperty([HTMLScriptElement, HTMLAudioElement, HTMLVideoElement,  HTMLMediaElement, HTMLImageElement, HTMLInputElement, HTMLEmbedElement, HTMLIFrameElement, HTMLTrackElement, HTMLSourceElement], 'src', {
+        get: (target, that) => {
+            return __uv.sourceUrl(
+                target.call(that)
+            );
+        },
+        set: (target, that, [val]) => {
+            if (new String(val).toString().trim().startsWith('blob:') && that instanceof HTMLMediaElement) {
+                client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-src', val)
+                return target.call(that, __uv.blobUrls.get(val) || val);
             };
 
-            if (responseCtx.body) {
-                switch(request.destination) {
-                    case 'script':
-                    case 'worker':
-                        responseCtx.body = `if (!self.__uv && self.importScripts) importScripts('${__uv$config.bundle}', '${__uv$config.config}', '${__uv$config.handler}');\n`;
-                        responseCtx.body += ultraviolet.js.rewrite(
-                            await response.text()
-                        );
-                        break;
-                    case 'style':
-                        responseCtx.body = ultraviolet.rewriteCSS(
-                            await response.text()
-                        ); 
-                        break;
-                case 'iframe':
-                case 'document':
-                        if (isHtml(ultraviolet.meta.url, (responseCtx.headers['content-type'] || ''))) {
-                            responseCtx.body = ultraviolet.rewriteHtml(
-                                await response.text(), 
-                                { 
-                                    document: true ,
-                                    injectHead: ultraviolet.createHtmlInject(
-                                        this.config.handler, 
-                                        this.config.bundle, 
-                                        this.config.config,
-                                        ultraviolet.cookie.serialize(cookies, ultraviolet.meta, true), 
-                                        request.referrer
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-src', val)
+            target.call(that, __uv.rewriteUrl(val));
+        },
+    });
+
+    client.element.hookProperty([HTMLFormElement], 'action', {
+        get: (target, that) => {
+            return __uv.sourceUrl(
+                target.call(that)
+            );
+        },
+        set: (target, that, [val]) => {
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-action', val)
+            target.call(that, __uv.rewriteUrl(val));
+        },
+    });
+
+    client.element.hookProperty([HTMLImageElement], 'srcset', {
+        get: (target, that) => {
+            return client.element.getAttribute.call(that, __uv.attributePrefix + '-attr-srcset') || target.call(that);
+        },
+        set: (target, that, [val]) => {
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-srcset', val)
+            target.call(that, __uv.html.wrapSrcset(val));
+        },
+    });
+
+    client.element.hookProperty(HTMLScriptElement, 'integrity', {
+        get: (target, that) => {
+            return client.element.getAttribute.call(that, __uv.attributePrefix + '-attr-integrity');
+        },
+        set: (target, that, [val]) => {
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-integrity', val);
+        },
+    });
+
+    client.element.hookProperty(HTMLIFrameElement, 'sandbox', {
+        get: (target, that) => {
+            return client.element.getAttribute.call(that, __uv.attributePrefix + '-attr-sandbox') || target.call(that);
+        },
+        set: (target, that, [val]) => {
+            client.element.setAttribute.call(that, __uv.attributePrefix + '-attr-sandbox', val);
+        },
+    });
+
+    client.element.hookProperty(HTMLIFrameElement, 'contentWindow', {
+        get: (target, that) => {
+            const win = target.call(that);
+            try {
+                if (!win.__uv) __uvHook(win, config, bare);
+                return win;
+            } catch (e) {
+                return win;
+            };
+        },
+    });
+
+    client.element.hookProperty(HTMLIFrameElement, 'contentDocument', {
+        get: (target, that) => {
+            const doc = target.call(that);
+            try {
+                const win = doc.defaultView
+                if (!win.__uv) __uvHook(win, config, bare);
+                return doc;
+            } catch (e) {
+                return win;
+            };
+        },
+    });
+
+    client.element.hookProperty(HTMLIFrameElement, 'srcdoc', {
+        get: (target, that) => {
+            return client.element.getAttribute.call(that, __uv.attributePrefix + '-attr-srcdoc') || target.call(that);
+        },
+        set: (target, that, [val]) => {
+            target.call(that, __uv.rewriteHtml(val, {
+                document: true,
+                injectHead: __uv.createHtmlInject(__uv.handlerScript, __uv.bundleScript, __uv.configScript, __uv.cookieStr, window.location.href)
+            }))
+        },
+    });
+
+    client.node.on('getTextContent', event => {
+        if (event.that.tagName === 'SCRIPT') {
+            event.data.value = __uv.js.source(event.data.value);
+        };
+    });
+
+    client.node.on('setTextContent', event => {
+        if (event.that.tagName === 'SCRIPT') {
+            event.data.value = __uv.js.rewrite(event.data.value);
+        };
+    });
+
+    // Until proper rewriting is implemented for service workers.
+    // Not sure atm how to implement it with the already built in service worker
+    if ('serviceWorker' in window.navigator) {
+        delete window.Navigator.prototype.serviceWorker;
+    };
+
+    // Document
+    client.document.on('getDomain', event => {
+        event.data.value = __uv.domain;
+    });
+    client.document.on('setDomain', event => {
+        if (!event.data.value.toString().endsWith(__uv.meta.url.hostname.split('.').slice(-2).join('.'))) return event.respondWith('');
+        event.respondWith(__uv.domain = event.data.value);
+    })
+
+    client.document.on('url', event => {
+        event.data.value = __uv.location.href;
+    });
+
+    client.document.on('documentURI', event => {
+        event.data.value = __uv.location.href;
+    });
+
+    client.document.on('referrer', event => {
+        event.data.value = __uv.referrer || __uv.sourceUrl(event.data.value);
+    });
+
+    client.document.on('parseFromString', event => {
+        if (event.data.type !== 'text/html') return false;
+        event.data.string = __uv.rewriteHtml(event.data.string, {...__uv.meta, document: true, });
+    });
+
+    // Attribute (node.attributes)
+    client.attribute.on('getValue', event => {
+        if (client.element.hasAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name)) {
+            event.data.value = client.element.getAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name);
+        };
+    });
+
+    client.attribute.on('setValue', event => {
+        if (__uv.attrs.isUrl(event.data.name)) {
+            client.element.setAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteUrl(event.data.value);
+        };
+
+        if (__uv.attrs.isStyle(event.data.name)) {
+            client.element.setAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteCSS(event.data.value, { context: 'declarationList' });
+        };
+
+        if (__uv.attrs.isHtml(event.data.name)) {
+            client.element.setAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.rewriteHtml(event.data.value, {...__uv.meta, document: true, injectHead:__uv.createHtmlInject(__uv.handlerScript, __uv.bundleScript, __uv.configScript, __uv.cookieStr, window.location.href) });
+        };
+
+        if (__uv.attrs.isSrcset(event.data.name)) {
+            client.element.setAttribute.call(event.that.ownerElement, __uv.attributePrefix + '-attr-' + event.data.name, event.data.value);
+            event.data.value = __uv.html.wrapSrcset(event.data.value);
+        };
+
+    });
+
+    // URL
+    client.url.on('createObjectURL', event => {
+        let url = event.target.call(event.that, event.data.object);
+        if (url.startsWith('blob:' + location.origin)) {
+            let newUrl = 'blob:' + (__uv.meta.url.href !== 'about:blank' ?  __uv.meta.url.origin : window.parent.__uv.meta.url.origin) + url.slice('blob:'.length + location.origin.length);
+            __uv.blobUrls.set(newUrl, url);
+            event.respondWith(newUrl);
+        } else {
+            event.respondWith(url);
+        };
+    });
+
+    client.url.on('revokeObjectURL', event => {
+        if (__uv.blobUrls.has(event.data.url)) {
+            const old = event.data.url;
+            event.data.url = __uv.blobUrls.get(event.data.url);
+            __uv.blobUrls.delete(old);
+        };
+    });
+
+    client.storage.on('get', event => {
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('set', event => {
+        if (event.that.__uv$storageObj) {
+            event.that.__uv$storageObj[event.data.name] = event.data.value;
+        };
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('delete', event => {
+        if (event.that.__uv$storageObj) {
+            delete event.that.__uv$storageObj[event.data.name];
+        };
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('getItem', event => {
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('setItem', event => {
+        if (event.that.__uv$storageObj) {
+            event.that.__uv$storageObj[event.data.name] = event.data.value;
+        };
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('removeItem', event => {
+        if (event.that.__uv$storageObj) {
+            delete event.that.__uv$storageObj[event.data.name];
+        };
+        event.data.name = methodPrefix + __uv.meta.url.origin + '@' + event.data.name;
+    });
+
+    client.storage.on('clear', event => {
+        if (event.that.__uv$storageObj) {
+            for (const key of client.nativeMethods.keys.call(null, event.that.__uv$storageObj)) {
+                delete event.that.__uv$storageObj[key];
+                client.storage.removeItem.call(event.that, methodPrefix + __uv.meta.url.origin + '@' + key);
+                event.respondWith();
+            };
+        };
+    });
+
+    client.storage.on('length', event => {
+        if (event.that.__uv$storageObj) {
+            event.respondWith(client.nativeMethods.keys.call(null, event.that.__uv$storageObj).length);
+        };
+    });
+
+    client.storage.on('key', event => {
+        if (event.that.__uv$storageObj) {
+            event.respondWith(
+                (client.nativeMethods.keys.call(null, event.that.__uv$storageObj)[event.data.index] || null)
+            );
+        };
+    });
+
+    client.websocket.on('websocket', async event => {
+        let url;
+        try {
+            url = new URL(event.data.url);
+        } catch(e) {
+            return;
+        };
+
+        const headers = {
+            Host: url.host,
+            Origin: __uv.meta.url.origin,
+            Pragma: 'no-cache',
+            'Cache-Control': 'no-cache',
+            Upgrade: 'websocket',
+            'User-Agent': window.navigator.userAgent,
+            'Connection': 'Upgrade',
+        };
+
+        const cookies = __uv.cookie.serialize(__uv.cookies, { url }, false);
+
+        if (cookies) headers.Cookie = cookies;
+        const protocols = [...event.data.protocols];
+
+        const remote = {
+            protocol: url.protocol,
+            host: url.hostname,
+            port: url.port || (url.protocol === 'wss:' ? '443' : '80'),
+            path: url.pathname + url.search,
+        };
+
+        if (protocols.length) headers['Sec-WebSocket-Protocol'] = protocols.join(', ');
+
+        event.data.url =  (__uv.bare.protocol === 'https:' ? 'wss://' : 'ws://') + __uv.bare.host + __uv.bare.pathname + 'v1/';
+        event.data.protocols = [
+            'bare',
+            __uv.encodeProtocol(JSON.stringify({
+                remote,
+                headers,
+                forward_headers: [
+                    'accept',
+                    'accept-encoding',
+                    'accept-language',
+                    'sec-websocket-extensions',
+                    'sec-websocket-key',
+                    'sec-websocket-version',
+                ],
+            })),
+        ];
+
+        const ws = new event.target(event.data.url, event.data.protocols);
+
+        client.nativeMethods.defineProperty(ws, methodPrefix + 'url', {
+            enumerable: false,
+            value: url.href,
+        });
+
+        event.respondWith(
+            ws
+        );
+    });
+
+    client.websocket.on('url', event => {
+        if ('__uv$url' in event.that) {
+            event.data.value = event.that.__uv$url;
+        };
+    });
+
+    client.websocket.on('protocol', event => {
+        if ('__uv$protocol' in event.that) {
+            event.data.value = event.that.__uv$protocol;
+        };
+    });
+
+    client.function.on('function', event => {
+        event.data.script = __uv.rewriteJS(event.data.script);
+    });
+
+    client.function.on('toString', event => {
+        if (__uv.methods.string in event.that) event.respondWith(event.that[__uv.methods.string]);
+    });
+
+    client.object.on('getOwnPropertyNames', event => {
+        event.data.names = event.data.names.filter(element => !(__uv.filterKeys.includes(element)));
+    });
+
+    client.object.on('getOwnPropertyDescriptors', event => {
+        for (const forbidden of __uv.filterKeys) {
+            delete event.data.descriptors[forbidden];
+        };
+
+    });
+
+    client.style.on('setProperty', event => {
+        if (client.style.dashedUrlProps.includes(event.data.property)) {
+            event.data.value = __uv.rewriteCSS(event.data.value, {
+                context: 'value',
+                ...__uv.meta
+            })
+        };
+    });
+
+    client.style.on('getPropertyValue', event => {
+        if (client.style.dashedUrlProps.includes(event.data.property)) {
+            event.respondWith(
+                __uv.sourceCSS(
+                    event.target.call(event.that, event.data.property),
+                    {
+                        context: 'value',
+                        ...__uv.meta
+                    }
+                )
+            );
+        };
+    });
+
+    if ('CSS2Properties' in window) {
+        for (const key of client.style.urlProps) {
+            client.overrideDescriptor(window.CSS2Properties.prototype, key, {
+                get: (target, that) => {
+                    return __uv.sourceCSS(
+                        target.call(that),
+                        {
+                            context: 'value',
+                            ...__uv.meta
+                        }
+                    )
+                },
+                set: (target, that, val) => {
+                    target.call(
+                        that,
+                        __uv.rewriteCSS(val, {
+                            context: 'value',
+                            ...__uv.meta
+                        })
+                    );
+                }
+            });
+        };
+    } else if ('HTMLElement' in window) {
+
+        client.overrideDescriptor(
+            window.HTMLElement.prototype,
+            'style',
+            {
+                get: (target, that) => {
+                    const value = target.call(that);
+                    if (!value[methodPrefix + 'modifiedStyle']) {
+
+                        for (const key of client.style.urlProps) {
+                            client.nativeMethods.defineProperty(value, key, {
+                                enumerable: true,
+                                configurable: true,
+                                get() {
+                                    const value = client.style.getPropertyValue.call(this, key) || '';
+                                    return __uv.sourceCSS(
+                                        value,
+                                        {
+                                            context: 'value',
+                                            ...__uv.meta
+                                        }
+                                    )
+                                },
+                                set(val) {
+                                    client.style.setProperty.call(this, 
+                                        (client.style.propToDashed[key] || key),
+                                        __uv.rewriteCSS(val, {
+                                            context: 'value',
+                                            ...__uv.meta
+                                        })    
                                     )
                                 }
-                            );      
+                            });
+                            client.nativeMethods.defineProperty(value, methodPrefix + 'modifiedStyle', {
+                                enumerable: false,
+                                value: true
+                            });
                         };
-                };
-            };
-
-            if (requestCtx.headers.accept === 'text/event-stream') {
-                responseCtx.headers['content-type'] = 'text/event-stream';
-            };
-
-            this.emit('response', resEvent);
-            if (resEvent.intercepted) return resEvent.returnValue;
-
-            return new Response(responseCtx.body, {
-                headers: responseCtx.headers,
-                status: responseCtx.status,
-                statusText: responseCtx.statusText,
-            });
-
-        } catch(err) {
-            return new Response(err.toString(), {
-                status: 500,
-            });
-        };
+                    };
+                    return value;
+                }
+            }
+        );
     };
-    getBarerResponse(response) {
-        const headers = {};
-        const raw = JSON.parse(response.headers.get('x-bare-headers'));
 
-        for (const key in raw) {
-            headers[key.toLowerCase()] = raw[key];
-        };
+    client.style.on('setCssText', event => {
+        event.data.value = __uv.rewriteCSS(event.data.value, {
+            context: 'declarationList',
+            ...__uv.meta
+        });
+    });
 
-        return {
-            headers,
-            status: +response.headers.get('x-bare-status'),
-            statusText: response.headers.get('x-bare-status-text'),
-            body: !this.statusCode.empty.includes(+response.headers.get('x-bare-status')) ? response.body : null,
-        };
-    };
-    get address() {
-        return this.addresses[Math.floor(Math.random() * this.addresses.length)];
-    };
-    static Ultraviolet = Ultraviolet;
-};
+    client.style.on('getCssText', event => {
+        event.data.value = __uv.sourceCSS(event.data.value, {
+            context: 'declarationList',
+            ...__uv.meta
+        });
+    });
 
-self.UVServiceWorker = UVServiceWorker;
-
-
-class ResponseContext {
-    constructor(request, response, worker) {
-        const { headers, status, statusText, body } = !request.blob ? worker.getBarerResponse(response) : {
-            status: response.status, 
-            statusText: response.statusText,
-            headers: Object.fromEntries([...response.headers.entries()]),
-            body: response.body,
-        };
-        this.request = request;
-        this.raw = response;
-        this.ultraviolet = request.ultraviolet;
-        this.headers = headers;
-        this.status = status;
-        this.statusText = statusText;
-        this.body = body;
-    };
-    get url() {
-        return this.request.url;
-    }
-    get base() {
-        return this.request.base;
-    };
-    set base(val) {
-        this.request.base = val;
-    };
-};
-
-class RequestContext {
-    constructor(request, worker, ultraviolet, body = null) {
-        this.ultraviolet = ultraviolet;
-        this.request = request;
-        this.headers = Object.fromEntries([...request.headers.entries()]);
-        this.method = request.method;
-        this.forward = [...worker.headers.forward];
-        this.address = worker.address;
-        this.body = body || null;
-        this.redirect = request.redirect;
-        this.credentials = 'omit';
-        this.mode = request.mode === 'cors' ? request.mode : 'same-origin';
-        this.blob = false;
-    };
-    get send() {
-        return new Request((!this.blob ? this.address.href + 'v1/' : 'blob:' + location.origin + this.url.pathname), {
-            method: this.method,
-            headers: {
-                'x-bare-protocol': this.url.protocol,
-                'x-bare-host': this.url.hostname,
-                'x-bare-path': this.url.pathname + this.url.search,
-                'x-bare-port': this.url.port || (this.url.protocol === 'https:' ? '443' : '80'),
-                'x-bare-headers': JSON.stringify(this.headers),
-                'x-bare-forward-headers': JSON.stringify(this.forward),
-            },
-            redirect: this.redirect,
-            credentials: this.credentials,
-            mode: location.origin !== this.address.origin ? 'cors' : this.mode,
-            body: this.body
+    // Proper hash emulation.
+    if (!!window.window) {
+        __uv.addEventListener.call(window, 'hashchange', event => {
+            if (event.__uv$dispatched) return false;
+            event.stopImmediatePropagation();
+            const hash = window.location.hash;
+            client.history.replaceState.call(window.history, '', '', event.oldURL);
+            __uv.location.hash = hash;
         });
     };
-    get url() {
-        return this.ultraviolet.meta.url;
-    };
-    set url(val) {
-        this.ultraviolet.meta.url = val;
-    };
-    get base() {
-        return this.ultraviolet.meta.base;
-    };
-    set base(val) {
-        this.ultraviolet.meta.base = val;
-    };
-}
 
-function isHtml(url, contentType = '') {
-    return (Ultraviolet.mime.contentType((contentType  || url.pathname)) || 'text/html').split(';')[0] === 'text/html';
-};
+    client.location.on('hashchange', (oldUrl, newUrl, ctx) => {
+        if (ctx.HashChangeEvent && client.history.replaceState) {
+            client.history.replaceState.call(window.history, '', '', __uv.rewriteUrl(newUrl));
 
-class HookEvent {
-    #intercepted;
-    #returnValue;
-    constructor(data = {}, target = null, that = null) {
-        this.#intercepted = false;
-        this.#returnValue = null;
-        this.data = data;
-        this.target = target;
-        this.that = that;
-    };
-    get intercepted() {
-        return this.#intercepted;
-    };
-    get returnValue() {
-        return this.#returnValue;
-    };
-    respondWith(input) {
-        this.#returnValue = input;
-        this.#intercepted = true;
-    };
-};  
+            const event = new ctx.HashChangeEvent('hashchange', { newURL: newUrl, oldURL: oldUrl });
 
-var R = typeof Reflect === 'object' ? Reflect : null
-var ReflectApply = R && typeof R.apply === 'function'
-  ? R.apply
-  : function ReflectApply(target, receiver, args) {
-    return Function.prototype.apply.call(target, receiver, args);
-  }
+            client.nativeMethods.defineProperty(event, methodPrefix + 'dispatched', {
+                value: true,
+                enumerable: false,
+            }); 
 
-var ReflectOwnKeys
-if (R && typeof R.ownKeys === 'function') {
-  ReflectOwnKeys = R.ownKeys
-} else if (Object.getOwnPropertySymbols) {
-  ReflectOwnKeys = function ReflectOwnKeys(target) {
-    return Object.getOwnPropertyNames(target)
-      .concat(Object.getOwnPropertySymbols(target));
-  };
-} else {
-  ReflectOwnKeys = function ReflectOwnKeys(target) {
-    return Object.getOwnPropertyNames(target);
-  };
-}
-
-function ProcessEmitWarning(warning) {
-  if (console && console.warn) console.warn(warning);
-}
-
-var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
-  return value !== value;
-}
-
-function EventEmitter() {
-  EventEmitter.init.call(this);
-}
-
-// Backwards-compat with node 0.10.x
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype._events = undefined;
-EventEmitter.prototype._eventsCount = 0;
-EventEmitter.prototype._maxListeners = undefined;
-
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
-var defaultMaxListeners = 10;
-
-function checkListener(listener) {
-  if (typeof listener !== 'function') {
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-  }
-}
-
-Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
-  enumerable: true,
-  get: function() {
-    return defaultMaxListeners;
-  },
-  set: function(arg) {
-    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
-      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
-    }
-    defaultMaxListeners = arg;
-  }
-});
-
-EventEmitter.init = function() {
-
-  if (this._events === undefined ||
-      this._events === Object.getPrototypeOf(this)._events) {
-    this._events = Object.create(null);
-    this._eventsCount = 0;
-  }
-
-  this._maxListeners = this._maxListeners || undefined;
-};
-
-// Obviously not all Emitters should be limited to 10. This function allows
-// that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
-  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
-    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
-  }
-  this._maxListeners = n;
-  return this;
-};
-
-function _getMaxListeners(that) {
-  if (that._maxListeners === undefined)
-    return EventEmitter.defaultMaxListeners;
-  return that._maxListeners;
-}
-
-EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
-  return _getMaxListeners(this);
-};
-
-EventEmitter.prototype.emit = function emit(type) {
-  var args = [];
-  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
-  var doError = (type === 'error');
-
-  var events = this._events;
-  if (events !== undefined)
-    doError = (doError && events.error === undefined);
-  else if (!doError)
-    return false;
-
-  // If there is no 'error' event listener then throw.
-  if (doError) {
-    var er;
-    if (args.length > 0)
-      er = args[0];
-    if (er instanceof Error) {
-      // Note: The comments on the `throw` lines are intentional, they show
-      // up in Node's output if this results in an unhandled exception.
-      throw er; // Unhandled 'error' event
-    }
-    // At least give some kind of context to the user
-    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
-    err.context = er;
-    throw err; // Unhandled 'error' event
-  }
-
-  var handler = events[type];
-
-  if (handler === undefined)
-    return false;
-
-  if (typeof handler === 'function') {
-    ReflectApply(handler, this, args);
-  } else {
-    var len = handler.length;
-    var listeners = arrayClone(handler, len);
-    for (var i = 0; i < len; ++i)
-      ReflectApply(listeners[i], this, args);
-  }
-
-  return true;
-};
-
-function _addListener(target, type, listener, prepend) {
-  var m;
-  var events;
-  var existing;
-
-  checkListener(listener);
-
-  events = target._events;
-  if (events === undefined) {
-    events = target._events = Object.create(null);
-    target._eventsCount = 0;
-  } else {
-    // To avoid recursion in the case that type === "newListener"! Before
-    // adding it to the listeners, first emit "newListener".
-    if (events.newListener !== undefined) {
-      target.emit('newListener', type,
-                  listener.listener ? listener.listener : listener);
-
-      // Re-assign `events` because a newListener handler could have caused the
-      // this._events to be assigned to a new object
-      events = target._events;
-    }
-    existing = events[type];
-  }
-
-  if (existing === undefined) {
-    // Optimize the case of one listener. Don't need the extra array object.
-    existing = events[type] = listener;
-    ++target._eventsCount;
-  } else {
-    if (typeof existing === 'function') {
-      // Adding the second element, need to change to array.
-      existing = events[type] =
-        prepend ? [listener, existing] : [existing, listener];
-      // If we've already got an array, just append.
-    } else if (prepend) {
-      existing.unshift(listener);
-    } else {
-      existing.push(listener);
-    }
-
-    // Check for listener leak
-    m = _getMaxListeners(target);
-    if (m > 0 && existing.length > m && !existing.warned) {
-      existing.warned = true;
-      // No error code for this since it is a Warning
-      // eslint-disable-next-line no-restricted-syntax
-      var w = new Error('Possible EventEmitter memory leak detected. ' +
-                          existing.length + ' ' + String(type) + ' listeners ' +
-                          'added. Use emitter.setMaxListeners() to ' +
-                          'increase limit');
-      w.name = 'MaxListenersExceededWarning';
-      w.emitter = target;
-      w.type = type;
-      w.count = existing.length;
-      ProcessEmitWarning(w);
-    }
-  }
-
-  return target;
-}
-
-EventEmitter.prototype.addListener = function addListener(type, listener) {
-  return _addListener(this, type, listener, false);
-};
-
-EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.prependListener =
-    function prependListener(type, listener) {
-      return _addListener(this, type, listener, true);
-    };
-
-function onceWrapper() {
-  if (!this.fired) {
-    this.target.removeListener(this.type, this.wrapFn);
-    this.fired = true;
-    if (arguments.length === 0)
-      return this.listener.call(this.target);
-    return this.listener.apply(this.target, arguments);
-  }
-}
-
-function _onceWrap(target, type, listener) {
-  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
-  var wrapped = onceWrapper.bind(state);
-  wrapped.listener = listener;
-  state.wrapFn = wrapped;
-  return wrapped;
-}
-
-EventEmitter.prototype.once = function once(type, listener) {
-  checkListener(listener);
-  this.on(type, _onceWrap(this, type, listener));
-  return this;
-};
-
-EventEmitter.prototype.prependOnceListener =
-    function prependOnceListener(type, listener) {
-      checkListener(listener);
-      this.prependListener(type, _onceWrap(this, type, listener));
-      return this;
-    };
-
-// Emits a 'removeListener' event if and only if the listener was removed.
-EventEmitter.prototype.removeListener =
-    function removeListener(type, listener) {
-      var list, events, position, i, originalListener;
-
-      checkListener(listener);
-
-      events = this._events;
-      if (events === undefined)
-        return this;
-
-      list = events[type];
-      if (list === undefined)
-        return this;
-
-      if (list === listener || list.listener === listener) {
-        if (--this._eventsCount === 0)
-          this._events = Object.create(null);
-        else {
-          delete events[type];
-          if (events.removeListener)
-            this.emit('removeListener', type, list.listener || listener);
-        }
-      } else if (typeof list !== 'function') {
-        position = -1;
-
-        for (i = list.length - 1; i >= 0; i--) {
-          if (list[i] === listener || list[i].listener === listener) {
-            originalListener = list[i].listener;
-            position = i;
-            break;
-          }
-        }
-
-        if (position < 0)
-          return this;
-
-        if (position === 0)
-          list.shift();
-        else {
-          spliceOne(list, position);
-        }
-
-        if (list.length === 1)
-          events[type] = list[0];
-
-        if (events.removeListener !== undefined)
-          this.emit('removeListener', type, originalListener || listener);
-      }
-
-      return this;
-    };
-
-EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
-
-EventEmitter.prototype.removeAllListeners =
-    function removeAllListeners(type) {
-      var listeners, events, i;
-
-      events = this._events;
-      if (events === undefined)
-        return this;
-
-      // not listening for removeListener, no need to emit
-      if (events.removeListener === undefined) {
-        if (arguments.length === 0) {
-          this._events = Object.create(null);
-          this._eventsCount = 0;
-        } else if (events[type] !== undefined) {
-          if (--this._eventsCount === 0)
-            this._events = Object.create(null);
-          else
-            delete events[type];
-        }
-        return this;
-      }
-
-      // emit removeListener for all listeners on all events
-      if (arguments.length === 0) {
-        var keys = Object.keys(events);
-        var key;
-        for (i = 0; i < keys.length; ++i) {
-          key = keys[i];
-          if (key === 'removeListener') continue;
-          this.removeAllListeners(key);
-        }
-        this.removeAllListeners('removeListener');
-        this._events = Object.create(null);
-        this._eventsCount = 0;
-        return this;
-      }
-
-      listeners = events[type];
-
-      if (typeof listeners === 'function') {
-        this.removeListener(type, listeners);
-      } else if (listeners !== undefined) {
-        // LIFO order
-        for (i = listeners.length - 1; i >= 0; i--) {
-          this.removeListener(type, listeners[i]);
-        }
-      }
-
-      return this;
-    };
-
-function _listeners(target, type, unwrap) {
-  var events = target._events;
-
-  if (events === undefined)
-    return [];
-
-  var evlistener = events[type];
-  if (evlistener === undefined)
-    return [];
-
-  if (typeof evlistener === 'function')
-    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
-
-  return unwrap ?
-    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
-}
-
-EventEmitter.prototype.listeners = function listeners(type) {
-  return _listeners(this, type, true);
-};
-
-EventEmitter.prototype.rawListeners = function rawListeners(type) {
-  return _listeners(this, type, false);
-};
-
-EventEmitter.listenerCount = function(emitter, type) {
-  if (typeof emitter.listenerCount === 'function') {
-    return emitter.listenerCount(type);
-  } else {
-    return listenerCount.call(emitter, type);
-  }
-};
-
-EventEmitter.prototype.listenerCount = listenerCount;
-function listenerCount(type) {
-  var events = this._events;
-
-  if (events !== undefined) {
-    var evlistener = events[type];
-
-    if (typeof evlistener === 'function') {
-      return 1;
-    } else if (evlistener !== undefined) {
-      return evlistener.length;
-    }
-  }
-
-  return 0;
-}
-
-EventEmitter.prototype.eventNames = function eventNames() {
-  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
-};
-
-function arrayClone(arr, n) {
-  var copy = new Array(n);
-  for (var i = 0; i < n; ++i)
-    copy[i] = arr[i];
-  return copy;
-}
-
-function spliceOne(list, index) {
-  for (; index + 1 < list.length; index++)
-    list[index] = list[index + 1];
-  list.pop();
-}
-
-function unwrapListeners(arr) {
-  var ret = new Array(arr.length);
-  for (var i = 0; i < ret.length; ++i) {
-    ret[i] = arr[i].listener || arr[i];
-  }
-  return ret;
-}
-
-function once(emitter, name) {
-  return new Promise(function (resolve, reject) {
-    function errorListener(err) {
-      emitter.removeListener(name, resolver);
-      reject(err);
-    }
-
-    function resolver() {
-      if (typeof emitter.removeListener === 'function') {
-        emitter.removeListener('error', errorListener);
-      }
-      resolve([].slice.call(arguments));
-    };
-
-    eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
-    if (name !== 'error') {
-      addErrorHandlerIfEventEmitter(emitter, errorListener, { once: true });
-    }
-  });
-}
-
-function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
-  if (typeof emitter.on === 'function') {
-    eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
-  }
-}
-
-function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
-  if (typeof emitter.on === 'function') {
-    if (flags.once) {
-      emitter.once(name, listener);
-    } else {
-      emitter.on(name, listener);
-    }
-  } else if (typeof emitter.addEventListener === 'function') {
-    // EventTarget does not have `error` event semantics like Node
-    // EventEmitters, we do not listen for `error` events here.
-    emitter.addEventListener(name, function wrapListener(arg) {
-      // IE does not have builtin `{ once: true }` support so we
-      // have to do it manually.
-      if (flags.once) {
-        emitter.removeEventListener(name, wrapListener);
-      }
-      listener(arg);
+            __uv.dispatchEvent.call(window, event);
+        };
     });
-  } else {
-    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof emitter);
-  }
-}
+
+    // Hooking functions & descriptors
+    client.fetch.overrideRequest();
+    client.fetch.overrideUrl();
+    client.xhr.overrideOpen();
+    client.xhr.overrideResponseUrl();
+    client.element.overrideHtml();
+    client.element.overrideAttribute();
+    client.element.overrideInsertAdjacentHTML();
+    client.element.overrideAudio();
+    // client.element.overrideQuerySelector();
+    client.node.overrideBaseURI();
+    client.node.overrideTextContent();
+    client.attribute.overrideNameValue();
+    client.document.overrideDomain();
+    client.document.overrideURL();
+    client.document.overrideDocumentURI();
+    client.document.overrideWrite();
+    client.document.overrideReferrer();
+    client.document.overrideParseFromString();
+    client.storage.overrideMethods();
+    client.storage.overrideLength();
+    //client.document.overrideQuerySelector();
+    client.object.overrideGetPropertyNames();
+    client.object.overrideGetOwnPropertyDescriptors();
+    client.history.overridePushState();
+    client.history.overrideReplaceState();
+    client.eventSource.overrideConstruct();
+    client.eventSource.overrideUrl();
+    client.websocket.overrideWebSocket();
+    client.websocket.overrideProtocol();
+    client.websocket.overrideUrl();
+    client.url.overrideObjectURL();
+    client.document.overrideCookie();
+    client.message.overridePostMessage();
+    client.message.overrideMessageOrigin();
+    client.message.overrideMessageData();
+    client.workers.overrideWorker();
+    client.workers.overrideAddModule();
+    client.workers.overrideImportScripts();
+    client.workers.overridePostMessage();
+    client.style.overrideSetGetProperty();
+    client.style.overrideCssText();
+    client.navigator.overrideSendBeacon();
+    client.function.overrideFunction();
+    client.function.overrideToString();
+    client.location.overrideWorkerLocation(
+        (href) => {
+            return new URL(__uv.sourceUrl(href));
+        }
+    );
+
+    client.overrideDescriptor(window, 'localStorage', {
+        get: (target, that) => {
+            return (that || window).__uv.lsWrap;
+        },
+    });
+    client.overrideDescriptor(window, 'sessionStorage', {
+        get: (target, that) => {
+            return (that || window).__uv.ssWrap;
+        },
+    });
+
+
+    client.override(window, 'open', (target, that, args) => {
+        if (!args.length) return target.apply(that, args);
+        let [url] = args;
+
+        url = __uv.rewriteUrl(url);
+
+        return target.call(that, url);
+    });
+
+    __uv.$wrap = function(name) {
+        if (name === 'location') return __uv.methods.location;
+        if (name === 'eval') return __uv.methods.eval;
+        return name;
+    };
+
+
+    __uv.$get = function(that) {
+        if (that === window.location) return __uv.location;
+        if (that === window.eval) return __uv.eval;
+        if (that === window.parent) {
+            return window.__uv$parent;
+        };
+        if (that === window.top) {
+            return window.__uv$top;
+        };
+        return that;
+    };
+
+    __uv.eval = client.wrap(window, 'eval', (target, that, args) => {
+        if (!args.length || typeof args[0] !== 'string') return target.apply(that, args);
+        let [script] = args;
+
+        script = __uv.rewriteJS(script);
+        return target.call(that, script);
+    });
+
+    __uv.call = function(target, args, that) {
+        return that ? target.apply(that, args) : target(...args);
+    };
+
+    __uv.call$ = function(obj, prop, args = []) {
+        return obj[prop].apply(obj, args);
+    };
+
+    client.nativeMethods.defineProperty(window.Object.prototype, master, {
+        get: () => {
+            return __uv;
+        },
+        enumerable: false
+    });
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.setSource, {
+        value: function(source) {
+            if (!client.nativeMethods.isExtensible(this)) return this;
+
+            client.nativeMethods.defineProperty(this, __uv.methods.source, {
+                value: source,
+                writable: true,
+                enumerable: false
+            });
+
+            return this;
+        },
+        enumerable: false,
+    });
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.source, {
+        value: __uv,
+        writable: true,
+        enumerable: false
+    });
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.location, {
+        configurable: true,
+        get() {
+            return (this === window.document || this === window) ? __uv.location : this.location;
+        },
+        set(val) {
+            if (this === window.document || this === window) {
+                __uv.location.href = val;
+            } else {
+                this.location = val;
+            };
+        },
+    });
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.parent, {
+        configurable: true,
+        get() {
+            const val = this.parent;
+
+            if (this === window) {
+                try {
+                    return '__uv' in val ? val : this;
+                } catch (e) {
+                    return this;
+                };
+            };
+            return val;
+        },
+        set(val) {
+            this.parent = val;
+        },
+    });
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.top, {
+        configurable: true,
+        get() {
+            const val = this.top;
+
+            if (this === window) {
+                if (val === this.parent) return this[__uv.methods.parent];
+                try {
+                    if (!('__uv' in val)) {
+                        let current = this;
+
+                        while (current.parent !== val) {
+                            current = current.parent
+                        };
+
+                        return '__uv' in current ? current : this;
+
+                    } else {
+                        return val;
+                    };
+                } catch (e) {
+                    return this;
+                };
+            };
+            return val;
+        },
+        set(val) {
+            this.top = val;
+        },
+    });
+
+
+    client.nativeMethods.defineProperty(window.Object.prototype, __uv.methods.eval, {
+        configurable: true,
+        get() {
+            return this === window ? __uv.eval : this.eval;
+        },
+        set(val) {
+            this.eval = val;
+        },
+    });
+};
