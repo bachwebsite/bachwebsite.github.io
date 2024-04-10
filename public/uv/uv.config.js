@@ -1,8 +1,8 @@
 // This file overwrites the stock UV config.js
 
 self.__uv$config = {
-  prefix: "/uv/service/",
-  bare: "/bare/",
+  prefix: "/public/uv/service/",
+  bare: "https://dm-unbl0cker-bare-server.vercel.app/",
   encodeUrl: Ultraviolet.codec.xor.encode,
   decodeUrl: Ultraviolet.codec.xor.decode,
   handler: "/uv/uv.handler.js",
