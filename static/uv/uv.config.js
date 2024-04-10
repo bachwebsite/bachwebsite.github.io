@@ -1,6 +1,6 @@
 self.__uv$config = {
-    prefix: '/static/b/',
-    bare: 'https://math-english-sci.vercel.app',
+    prefix: '/static/tutors/',
+    bare:'https://dm-unbl0cker-bare-server.vercel.app/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
