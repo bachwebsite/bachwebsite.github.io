@@ -32,11 +32,7 @@ function newTab() {
       activeTabs[i].classList.remove("__active");
     }
     tab.classList.add("__active");
-    inputMain.innerText = iframe.src;
   });
-  if (true) {
-    inputMain.innerText = iframe.src;
-  }
   tabContent.appendChild(tabTitle);
 
   const plus = document.createElement("div");
@@ -57,6 +53,10 @@ function newTab() {
   document.body.appendChild(inputMain);
 
   document.body.appendChild(iframe);
+
+  setInterval(function () {
+    inputMain.innerText = iframe.src;
+  }, 1000);
 }
 
 window.onload = function () {
