@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/,/~/',
-    bare:'https://dm-unbl0cker-bare-server.vercel.app/',
+    bare:'https://breakium.pw/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/,/uv/uv.handler.js',
