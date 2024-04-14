@@ -184,7 +184,6 @@ html, body {
 	transform: scale(1.1);
 	background: -webkit-linear-gradient(top, #17153c, #090320);
     box-shadow: -webkit-linear-gradient(top, #17153c, #090320);
-	color: #716ccb;
 }
 .sml {
     width: 50px;
