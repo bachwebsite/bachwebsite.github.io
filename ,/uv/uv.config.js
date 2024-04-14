@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/,/~/',
-    bare:'https://breakium.pw/',
+    bare:'http://bare.mza.com.ar',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/,/uv/uv.handler.js',
