@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/,/~/',
-    bare:'http://bare.mza.com.ar',
+    bare:'/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/,/uv/uv.handler.js',
